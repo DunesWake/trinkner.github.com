@@ -79,10 +79,11 @@ body{
     padding-bottom: 0px;
     text-decoration: none; 
 }
-
+/*         height: 650px;
+*/
 #content img{
     	clear:both;
-        height: 650px;
+        height: 900px;
     	float:left;
     padding-bottom: 21px;
 }
