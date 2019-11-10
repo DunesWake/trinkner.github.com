@@ -11,13 +11,6 @@ body{
 
 }
 
-/* For Mobile */
-@media screen and (max-width: 540px) {
-    .view {
-        width: 400px;
-    }
-}
-
 #body a{
     color:#333;
 }
@@ -38,7 +31,7 @@ body{
 
 #header ul{
     margin-left: none;
-    padding-bottom: 30px;
+    padding-bottom: 189px;
     clear:both;
     height:32px;
     float:left;
@@ -89,7 +82,7 @@ body{
 
 #content img{
     	clear:both;
-        height: 705px;
+        height: 900px;
     	float:left;
     padding-bottom: 21px;
 }
