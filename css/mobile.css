@@ -108,7 +108,7 @@ body{
 #content a{
     text-decoration: none;
     float:left;
-    max-width: 480px;
+    width: 480px;
 
 }
 
