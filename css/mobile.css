@@ -88,9 +88,12 @@ body{
 }
 
 #content img{
-    	clear:both;
-        height: 537px;
-    	float:left;
+    max-width: 100%;
+    max-height: 100vh;
+    height: 705px;
+
+    height: auto;
+    display: block;
     padding-bottom: 21px;
 }
 
