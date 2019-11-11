@@ -86,6 +86,11 @@ body{
     padding-bottom: 0px;
     text-decoration: none; 
 }
+#c img{
+    	clear:both;
+        height: 705px;
+    	float:left;
+}
 
 #content img{
     	clear:both;

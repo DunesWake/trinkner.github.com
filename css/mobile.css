@@ -86,6 +86,15 @@ body{
     text-decoration: none; 
 }
 
+#c img{
+    	 max-width: 100%;
+    max-height: 100vh;
+    height: 705px;
+
+    height: auto;
+    display: block;
+}
+
 #content img{
     max-width: 100%;
     max-height: 100vh;
@@ -98,6 +107,7 @@ body{
 
 #content a{
     text-decoration: none;
+    float:left;
 }
 
 #contact w{
