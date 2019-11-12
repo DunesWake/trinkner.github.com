@@ -6,7 +6,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 
 body{
-    font:10px "Courier New", Courier, monospace;
+    font:12px "Courier New", Courier, monospace;
     color:#999;
     width: 480;
 }
@@ -80,14 +80,20 @@ body{
 }
 
 #c img{
-    padding-top: 160px;
+    padding-top: 168px;
     max-width: 100%;
     max-height: 100vh;
     height: 705px;
     height: auto;
     display: block;
 }
-
+#work img{
+    max-width:600px;
+    width: auto;
+    height: auto;
+    float:left;
+    padding-bottom: 21px;
+}
 #content a{
     text-decoration: none;
 }

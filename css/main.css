@@ -92,6 +92,14 @@ body{
     padding-bottom: 21px;
 }
 
+#work img{
+    max-width:600px;
+    width: auto;
+    height: auto;
+    float:left;
+    padding-bottom: 21px;
+}
+
 #content a{
     text-decoration: none;
     width: 200px;
