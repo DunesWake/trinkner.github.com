@@ -80,6 +80,11 @@ body{
     text-decoration: none; 
 }
 
+#c img{
+    	clear:both;
+        height: 905px;
+}
+
 #content img{
     	clear:both;
         height: 900px;
