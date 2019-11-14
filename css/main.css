@@ -8,7 +8,6 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 body{
     font:12px "Courier New", Courier,monospace;
     color:#999;
-
 }
 
 #body a{
@@ -30,7 +29,6 @@ body{
 /* HEADER -------------------------------------------*/
 
 #header ul{
-    margin-left: none;
     padding-bottom: 30px;
     clear:both;
     height:32px;

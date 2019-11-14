@@ -30,7 +30,6 @@ body{
 /* HEADER -------------------------------------------*/
 
 #header ul{
-    margin-left: none;
     padding-bottom: 189px;
     clear:both;
     height:32px;
@@ -82,7 +81,7 @@ body{
 
 #c img{
     	clear:both;
-        height: 1100px;
+        height: 1000px;
 }
 
 #content img{
