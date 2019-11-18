@@ -53,24 +53,22 @@ body{
 
 /*below was #999*/
 #header ul li a:hover{
-    border-bottom:4px solid #AfA;
+    border-bottom:4px solid #DDD;
     text-decoration:none;
 }
 
 #header .active{
-    border-bottom:4px solid #999;
-    border-bottom-color: #AfA;
+    border-bottom:4px solid #e8ff3f;
 }
 
 /* CONTENT -------------------------------------------*/
 
 #content {
-        display: block;
-    	clear:both;
-        height: 20%;
-    	float:left;
-        width:400px;
-
+    display: block;
+    clear:both;
+    height: 20%;
+    float:left;
+    width:400px;
 }
 
 #paragraph h2 a{
@@ -81,16 +79,17 @@ body{
     padding-bottom: 0px;
     text-decoration: none; 
 }
-#c img{
-    	clear:both;
-        height: 705px;
-    	float:left;
+#c img{	
+    clear:both;    
+    height: 705px;
+   	float:left;
+    image-orientation: from-image;
 }
 
 #content img{
-    	clear:both;
-        height: 705px;
-    	float:left;
+    clear:both;
+    height: 705px;
+    float:left;
     padding-bottom: 21px;
 }
 
@@ -130,7 +129,7 @@ body{
 
 #paragraph{
     display: block;
-    width: 420px;
+    width: 400px;
 }
 
 #paragraph a{
