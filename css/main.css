@@ -50,8 +50,10 @@ body{
     margin-right:23px;
     text-decoration: none;
 }
+
+/*below was #999*/
 #header ul li a:hover{
-    border-bottom:5px solid #999;
+    border-bottom:4px solid #AfA;
     text-decoration:none;
 }
 
