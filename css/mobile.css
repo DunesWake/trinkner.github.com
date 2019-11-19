@@ -51,13 +51,13 @@ body{
     text-decoration: none;
 }
 #header ul li a:hover{
-    border-bottom:5px solid #999;
+    border-bottom:4px solid #999;
     text-decoration:none;
 }
 
 #header .active{
     border-bottom:4px solid #999;
-    border-bottom-color: #AfA;
+    border-bottom-color: #BFB;
 }
 
 /* CONTENT -------------------------------------------*/

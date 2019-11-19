@@ -59,9 +59,11 @@ body{
 
 #header .active{
     border-bottom:4px solid #e8ff3f;
+        text-decoration:none;
+
 }
 
-/* CONTENT -------------------------------------------*/
+/* CONTENT -------------------------e8ff3f------------------*/
 
 #content {
     display: block;
