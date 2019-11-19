@@ -50,14 +50,17 @@ body{
     margin-right:23px;
     text-decoration: none;
 }
+
+/*below was #999*/
 #header ul li a:hover{
-    border-bottom:4px solid #999;
+    border-bottom:4px solid #DDD;
     text-decoration:none;
 }
 
 #header .active{
-    border-bottom:4px solid #999;
-    border-bottom-color: #BFB;
+    border-bottom:4px solid #e8ff3f;
+        text-decoration:none;
+
 }
 
 /* CONTENT -------------------------------------------*/
