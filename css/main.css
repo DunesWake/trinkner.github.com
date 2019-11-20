@@ -29,7 +29,7 @@ body{
 /* HEADER -------------------------------------------*/
 
 #header ul{
-    padding-bottom: 30px;
+    padding-bottom: 15px;
     clear:both;
     height:32px;
     float:left;
@@ -71,6 +71,7 @@ body{
     height: 20%;
     float:left;
     width:400px;
+    padding-bottom: 1px;
 }
 
 #paragraph h2 a{
