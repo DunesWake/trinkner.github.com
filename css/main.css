@@ -95,14 +95,21 @@ body{
     height: 705px;
     float:left;
     padding-bottom: 21px;
+    image-orientation: from-image;
+
+    
 }
 
 #work img{
-    max-width:600px;
+        clear:both;
+
+    max-width:860px;
     width: auto;
     height: auto;
     float:left;
     padding-bottom: 21px;
+    image-orientation: from-image;
+
 }
 
 #content a{
