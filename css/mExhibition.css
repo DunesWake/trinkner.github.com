@@ -75,7 +75,9 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
     font-size:15px;
     
 }
-
+#work {
+    width:400px;
+}
 #work img{
     clear:both;
     max-width:500px;
