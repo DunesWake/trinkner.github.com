@@ -8,6 +8,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 body{
     font:12px "Courier New", Courier,monospace;
     color:#999;
+    margin-left:21px;
     width: 6000px;
 }
 
@@ -23,9 +24,6 @@ body{
     text-decoration: none; 
 }
 
-#body{
-    margin-left:21px;
-}
 
 /* HEADER -------------------------------------------*/
 
@@ -136,8 +134,7 @@ body{
 }
 
 #work img{
-        clear:both;
-
+    clear:both;
     max-width:1000px;
     width: auto;
     height: auto;

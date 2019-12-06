@@ -8,7 +8,8 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 body{
     font:12px "Courier New", Courier,monospace;
     color:#999;
-    width: 6000px;
+    width:550px;
+    margin-left:21px;
 }
 
 #body a{
@@ -20,12 +21,11 @@ body{
     color:chartreuse;
     padding: 40px 0px 0px 0px; 
     color: #000;
+    font-size: 12px;
     text-decoration: none; 
 }
 
-#body{
-    margin-left:21px;
-}
+
 
 /* HEADER -------------------------------------------*/
 
@@ -67,18 +67,20 @@ body{
 
 /* CONTENT -------------------------e8ff3f------------------*/
 
-#content {
+#contentState {
     display: block;
     clear:both;
     float:left;
-        width:550px;
-
+    width:300px;
+    padding-bottom: 1px;
+    color:#111;
+    font-size:13px;
     
 }
+#work {
+    width:400px;
+}
 
-#content a{
-    text-decoration: none;
-    color: #555;
-        width:550px;
-
+#contentState a{
+    color:#111;    
 }

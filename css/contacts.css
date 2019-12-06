@@ -9,6 +9,8 @@ body{
     font:12px "Courier New", Courier,monospace;
     color:#999;
     width: 6000px;
+    margin-left:21px;
+
 }
 
 #body a{
@@ -21,10 +23,6 @@ body{
     padding: 40px 0px 0px 0px; 
     color: #000;
     text-decoration: none; 
-}
-
-#body{
-    margin-left:21px;
 }
 
 /* HEADER -------------------------------------------*/

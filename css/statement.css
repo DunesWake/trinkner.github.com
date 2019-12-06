@@ -9,6 +9,7 @@ body{
     font:12px "Courier New", Courier,monospace;
     color:#999;
     width: 6000px;
+    margin-left:21px;
 }
 
 #body a{
@@ -23,9 +24,7 @@ body{
     text-decoration: none; 
 }
 
-#body{
-    margin-left:21px;
-}
+
 
 /* HEADER -------------------------------------------*/
 

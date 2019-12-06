@@ -58,7 +58,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 
 #header .active{
     border-bottom:3.5px solid #e8ff3f;
-        text-decoration:none;
+    text-decoration:none;
 
 }
 
@@ -80,11 +80,11 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 #work img{
     clear:both;
-    max-width:540px;
+    max-width:549px;
     width: auto;
     height: auto;
     float:left;
-    padding-bottom: 23px;
+    padding-bottom: 21px;
     image-orientation: from-image;
 
 }
