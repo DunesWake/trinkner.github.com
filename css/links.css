@@ -15,7 +15,7 @@ body{
     color:#333;
 }
 
-#header h1 a{
+#header h1{
     display:block;
     color:chartreuse;
     padding: 40px 0px 0px 0px; 
@@ -23,8 +23,27 @@ body{
     text-decoration: none; 
 }
 
+
+#body a{
+    color:#333;
+}
+
+#header p{
+    display:block;
+    padding: 40px 0px 0px 0px; 
+    color: #000; 
+    font-size: 12px;
+    text-decoration: none; 
+}
+#tit {
+    display:block;
+    color: #000; 
+    font-size: 12px;
+    text-decoration: none; 
+}
+
 #body{
-    margin-left:21px;
+    margin-left:395px;
 }
 
 /* HEADER -------------------------------------------*/
@@ -36,7 +55,6 @@ body{
     float:left;
     list-style-type: none;
 }
-
 #listDiv.ul {
     text-align: left;
 }
@@ -48,22 +66,18 @@ body{
 
 #header ul li a{
     line-height:12px;
-    margin-right:23px;
-    text-decoration: none;
-}
+    margin-right:40px;
+    margin-left:10px;}
 
 /*below was #999*/
 #header ul li a:hover{
-    border-bottom:3.5px solid #CCC;
     text-decoration:none;
 }
 
 #header .active{
-    border-bottom:3.5px solid #e8ff3f;
         text-decoration:none;
 
 }
-
 
 /* CONTENT -------------------------e8ff3f------------------*/
 

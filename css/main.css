@@ -8,7 +8,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 body{
     font:12px "Courier New", Courier,monospace;
     color:#999;
-    margin-left:21px;
+    margin-left:395px;
     width: 6000px;
 }
 
@@ -16,11 +16,30 @@ body{
     color:#333;
 }
 
-#header h1 a{
+#header h1{
     display:block;
     color:chartreuse;
     padding: 40px 0px 0px 0px; 
     color: #000;
+    text-decoration: none; 
+}
+
+
+#body a{
+    color:#333;
+}
+
+#header p{
+    display:block;
+    padding: 40px 0px 0px 0px; 
+    color: #000; 
+    font-size: 12px;
+    text-decoration: none; 
+}
+#tit {
+    display:block;
+    color: #000; 
+    font-size: 12px;
     text-decoration: none; 
 }
 
@@ -46,18 +65,17 @@ body{
 
 #header ul li a{
     line-height:12px;
-    margin-right:23px;
-    text-decoration: none;
+    margin-right:40px;
+    margin-left:10px;
+
 }
 
 /*below was #999*/
 #header ul li a:hover{
-    border-bottom:3.5px solid #CCC;
     text-decoration:none;
 }
 
 #header .active{
-    border-bottom:3.5px solid #e8ff3f;
         text-decoration:none;
 
 }
@@ -67,11 +85,12 @@ body{
 
 #content {
     display: block;
-    clear:both;
     height: 20%;
     float:left;
     width:400px;
     padding-bottom: 1px;
+    padding-left: 21px;
+    padding-top: 0px;
     
 }
 
@@ -117,10 +136,17 @@ body{
     text-decoration: none; 
 }
 #c img{	
-    clear:both;    
     height: 705px;
    	float:left;
+    margin-left: 11px;
     image-orientation: from-image;
+}
+#c {
+    display: inline;
+}
+
+#cont {
+clear:both;
 }
 
 #content img{
@@ -135,11 +161,15 @@ body{
 
 #work img{
     clear:both;
+    max-height:800px;
     max-width:1000px;
+
     width: auto;
     height: auto;
     float:left;
     padding-bottom: 21px;
+    padding-left: 11px;
+
     image-orientation: from-image;
 
 }
