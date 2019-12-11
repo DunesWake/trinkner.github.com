@@ -94,5 +94,7 @@ body{
 }
 
 #contentState a{
-    color:#111;    
+    color:#111;   
+        text-decoration: none;
+
 }

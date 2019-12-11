@@ -91,6 +91,7 @@ body{
     padding-bottom: 1px;
     padding-left: 21px;
     padding-top: 0px;
+    font-size: 12.2px;
     
 }
 
@@ -138,6 +139,8 @@ body{
 #c img{	
     height: 705px;
    	float:left;
+        padding-top: 5px;
+
     margin-left: 11px;
     image-orientation: from-image;
 }
@@ -153,6 +156,7 @@ clear:both;
     clear:both;
     height: 705px;
     float:left;
+
     padding-bottom: 21px;
     image-orientation: from-image;
 
@@ -188,13 +192,13 @@ clear:both;
 #contact {
     display:inline-block;    
     padding-right: 50px; 
-        font-size: 13px;
+        font-size: 5px;
 
 }
 
 #contact2 {
     display:inline-block;
-        font-size: 13px;
+        font-size: 12.2px;
 
 }
 
