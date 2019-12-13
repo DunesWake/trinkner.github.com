@@ -65,8 +65,8 @@ body{
 
 #header ul li a{
     line-height:12px;
-    margin-right:40px;
-    margin-left:10px;
+    margin-right:35px;
+    margin-left:19px;
 
 }
 
@@ -171,7 +171,6 @@ clear:both;
     width: auto;
     height: auto;
     float:left;
-    padding-bottom: 21px;
     padding-left: 11px;
 
     image-orientation: from-image;
@@ -219,4 +218,13 @@ clear:both;
     width: 300px;
     text-decoration: none;
 
+}
+#contentShow {
+    display: block;
+    width:250px;
+    padding-bottom: 1px;
+    clear:both;
+    color:#111;
+    font-size:12.2px;
+    
 }
