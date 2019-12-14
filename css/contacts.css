@@ -55,6 +55,7 @@ body{
     float:left;
     list-style-type: none;
 }
+
 #listDiv.ul {
     text-align: left;
 }
@@ -66,8 +67,10 @@ body{
 
 #header ul li a{
     line-height:12px;
-    margin-right:40px;
-    margin-left:10px;}
+    margin-right:35px;
+    margin-left:19px;
+
+}
 
 /*below was #999*/
 #header ul li a:hover{
@@ -78,8 +81,7 @@ body{
         text-decoration:none;
 
 }
-
-
+    
 /* CONTENT -------------------------e8ff3f------------------*/
 
 #contact {

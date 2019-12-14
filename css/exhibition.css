@@ -33,12 +33,12 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 
 /* HEADER -------------------------------------------*/
 
+
 #header ul{
-    padding-bottom: 12px;
+    padding-bottom: 15px;
     clear:both;
     height:32px;
     float:left;
-    
     list-style-type: none;
 }
 
@@ -49,15 +49,13 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 #header ul li{
     float:left;
     margin-top:9px;
-    
 }
 
 #header ul li a{
     line-height:12px;
-    margin-right:31px;
+    margin-right:35px;
     margin-left:19px;
 
-    
 }
 
 /*below was #999*/
@@ -67,7 +65,6 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 
 #header .active{
         text-decoration:none;
-        
 
 }
 

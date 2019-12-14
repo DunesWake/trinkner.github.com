@@ -28,6 +28,7 @@ body{
 
 /* HEADER -------------------------------------------*/
 
+
 #header ul{
     padding-bottom: 15px;
     clear:both;
@@ -47,18 +48,17 @@ body{
 
 #header ul li a{
     line-height:12px;
-    margin-right:23px;
-    text-decoration: none;
+    margin-right:35px;
+    margin-left:19px;
+
 }
 
 /*below was #999*/
 #header ul li a:hover{
-    border-bottom:3.5px solid #CCC;
     text-decoration:none;
 }
 
 #header .active{
-    border-bottom:3.5px solid #e8ff3f;
         text-decoration:none;
 
 }
