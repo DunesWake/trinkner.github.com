@@ -85,7 +85,9 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 #work img{
     clear:both;
-    max-width:800px;
+    max-width:700px;
+        max-height:600px;
+
     float:left;
     padding-bottom: 8px;
     margin-left: 11px;
