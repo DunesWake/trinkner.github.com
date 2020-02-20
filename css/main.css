@@ -8,7 +8,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 body{
     font:12px "Courier New", Courier,monospace;
     color:#999;
-    margin-left:15px;
+    margin-left:336px;
     width: 6000px;
 }
 
@@ -221,7 +221,7 @@ clear:both;
 }
 #contentShow {
     display: block;
-    width:190px;
+    width:250px;
     padding-bottom: 1px;
     clear:both;
     color:#111;
