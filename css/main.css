@@ -68,8 +68,13 @@ body{
 
 }
 
+#icon {
+    color: #000; 
+    font-size: 12px;
+    text-decoration: none; 
+}
+
 #name {
-    display:block;
     color: #000; 
     font-size: 12px;
     text-decoration: none; 
@@ -121,7 +126,9 @@ body{
 #showcase img{
     float:left;
     max-height:800px;
-    max-width:1000px;
+    max-width:936px;
     padding-bottom: 1px;
+    padding-left: 21px;
+
     image-orientation: from-image;
 }
