@@ -148,10 +148,6 @@ body{
     display: inline;
 }
 
-#cont {
-clear:both;
-}
-
 #content img{
     clear:both;
     height: 705px;
@@ -163,19 +159,7 @@ clear:both;
     
 }
 
-#work img{
-    clear:both;
-    max-height:800px;
-    max-width:1000px;
 
-    width: auto;
-    height: auto;
-    float:left;
-    padding-left: 11px;
-
-    image-orientation: from-image;
-
-}
 
 #content a{
     text-decoration: none;
@@ -191,7 +175,7 @@ clear:both;
 #contact {
     display:inline-block;    
     padding-right: 50px; 
-        font-size: 5px;
+        font-size: 12.2px;
 
 }
 
@@ -219,12 +203,22 @@ clear:both;
     text-decoration: none;
 
 }
-#contentShow {
+
+#showcase {
     display: block;
     width:250px;
     padding-bottom: 1px;
     clear:both;
     color:#111;
     font-size:12.2px;
-    
+}
+
+#showcase img{
+    clear:both;
+    max-height:800px;
+    max-width:1000px;
+    float:left;
+    padding-left: 11px;
+    image-orientation: from-image;
+
 }
