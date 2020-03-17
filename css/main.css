@@ -108,7 +108,10 @@ body{
 }
 #showcaseLong {
     padding-bottom: 1px;
-    display: block;
+    padding-bottom: 1px;
+    padding-top: 43px;
+    clear:both;
+    color:#111;
     margin-left:2vw;
 }
 

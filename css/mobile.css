@@ -6,7 +6,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 
 body{
-    font:16px "arial";
+    font:13px "arial";
     width: 100vw;
     padding-top: 25px;
 }
@@ -72,12 +72,10 @@ body{
 #contact {
     display:inline-block;    
     padding-right: 50px; 
-    font-size: 15.2px;
 }
 
 #contact2 {
     display:inline-block;
-    font-size: 15.2px;
 }
 
 #links a{
@@ -104,22 +102,19 @@ body{
     padding-top: 43px;
     clear:both;
     color:#111;
-    font-size:16px;
     margin-left:2vw;
 
 }
 #showcaseLong {
     padding-bottom: 1px;
     display: block;
-    font-size:16px;
     margin-left:2vw;
 }
 
 #showcase img{
     float:left;
     max-width:97vw;
-        max-height:97vw;
-
+    max-height:97vw;
     padding-bottom: 1px;
     padding-right: 1vw;
 
