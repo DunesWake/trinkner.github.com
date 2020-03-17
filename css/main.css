@@ -6,11 +6,9 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 
 body{
-    font:16px "arial", Courier,monospace;
-    line-height: 19px;
-    margin-left:336px;
+    font:16px "arial";
     width: 100vw;
-    font-weight: lighter;
+    padding-top: 25px;
 }
 
 
@@ -18,27 +16,16 @@ body{
     color:#333;
 }
 
-#header h1{
-    display:block;
-    color:chartreuse;
-    padding: 40px 0px 0px 0px; 
-    color: #000;
-    text-decoration: none; 
+/* HEADER -------------------------------------------*/
+
+#header {
+    margin-left:2vw;
 }
 
 #header p{
     display:block;
-    padding: 40px 0px 0px 0px; 
     color: #000; 
     text-decoration: none; 
-}
-
-/* HEADER -------------------------------------------*/
-
-#header {
-    padding-bottom: 96px;
-    margin-left:2vw;
-
 }
 
 #header ul{
@@ -49,21 +36,13 @@ body{
     list-style-type: none;
 }
 
-#listDiv.ul {
-    text-align: left;
-}
-
 #header ul li{
     float:left;
-    margin-top:9px;
 }
 
 #header ul li a{
     line-height:12px;
     margin-right:15px;
-    margin-left:19px;
-    
-    
 }
 
 #header ul li a:hover{
@@ -74,15 +53,11 @@ body{
         text-decoration:none;
 }
 
-#icon {
-    color: #000; 
-    text-decoration: none; 
-}
-
 #name {
     color: #000; 
     text-decoration: none; 
 }
+
 #name:hover {
     color: #000; 
     text-decoration: line-through; 
@@ -125,8 +100,9 @@ body{
 }
 
 #showcase {
-    width:270px;
+    width:230px;
     padding-bottom: 1px;
+    padding-top: 43px;
     clear:both;
     color:#111;
     font-size:16px;
@@ -138,7 +114,6 @@ body{
     display: block;
     font-size:16px;
     margin-left:2vw;
-
 }
 
 #showcase img{
@@ -146,6 +121,5 @@ body{
     max-height:800px;
     max-width:936px;
     padding-bottom: 1px;
-    padding-left: 21px;
     image-orientation: from-image;
 }

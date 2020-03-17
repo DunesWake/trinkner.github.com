@@ -6,11 +6,9 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 
 body{
-    font:12px "Courier New", Courier,monospace;
-    color:#999;
-    width: 550px;
-    margin-left:21px;
-
+    font:16px "arial";
+    width: 100vw;
+    padding-top: 25px;
 }
 
 #body a{
@@ -66,107 +64,20 @@ body{
 
 /* CONTENT -------------------------e8ff3f------------------*/
 
-#content {
-    display: block;
-    clear:both;
-    height: 20%;
-    float:left;
-    width:400px;
-    padding-bottom: 1px;
-    
-}
 
-#contentShow {
-    display: block;
-    clear:both;
-    float:left;
-    width:300px;
-    padding-bottom: 1px;
-    color:#111;
-    font-size:15px;
-    
-}
-#contentLink {
-    display: block;
-    clear:both;
-    float:left;
-    padding-bottom: 1px;
-    color:#111;
-    font-size:15px;
-    
-}
-
-#contentState {
-    display: block;
-    clear:both;
-    float:left;
-    width:300px;
-    color:#111;
-    font-size:13px;
-    
-}
-#contentState a{
-    color:#111;    
-}
-
-#paragraph h2 a{
-    display:block;
-    color:#333;
-    color: #000; 
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    text-decoration: none; 
-}
-#c img{	
-    clear:both;    
-    height: 705px;
-   	float:left;
-    image-orientation: from-image;
-}
-
-#content img{
-    clear:both;
-    height: 705px;
-    float:left;
-    padding-bottom: 21px;
-    image-orientation: from-image;
-
-    
-}
-
-#work img{
-    clear:both;
-    max-width:1000px;
-    width: auto;
-    height: auto;
-    float:left;
-    padding-bottom: 21px;
-    image-orientation: from-image;
-
-}
-
-#content a{
+#hide{
     text-decoration: none;
-    width: 200px;
-    color: #555;
-
-}
-
-#contact w{
-    color:#999;
 }
 
 #contact {
     display:inline-block;    
     padding-right: 50px; 
-        font-size: 13px;
-
+    font-size: 15.2px;
 }
 
 #contact2 {
     display:inline-block;
-        font-size: 13px;
-
+    font-size: 15.2px;
 }
 
 #links a{
@@ -185,5 +96,32 @@ body{
 #paragraph a{
     width: 300px;
     text-decoration: none;
+}
 
+#showcase {
+    width:230px;
+    padding-bottom: 1px;
+    padding-top: 43px;
+    clear:both;
+    color:#111;
+    font-size:16px;
+    margin-left:2vw;
+
+}
+#showcaseLong {
+    padding-bottom: 1px;
+    display: block;
+    font-size:16px;
+    margin-left:2vw;
+}
+
+#showcase img{
+    float:left;
+    max-width:97vw;
+        max-height:97vw;
+
+    padding-bottom: 1px;
+    padding-right: 1vw;
+
+    image-orientation: from-image;
 }
