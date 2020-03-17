@@ -87,11 +87,6 @@ body{
     text-decoration: none; 
 }
 
-#paragraph{
-    display: block;
-    width: 500px;
-}
-
 #paragraph a{
     width: 300px;
     text-decoration: none;

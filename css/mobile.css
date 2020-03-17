@@ -9,23 +9,11 @@ body{
     font:13px "arial";
     width: 100vw;
     padding-top: 25px;
-}
-
-#body a{
     color:#333;
-}
-
-#header h1 a{
-    display:block;
-    color:chartreuse;
-    padding: 40px 0px 0px 0px; 
-    color: #000;
-    font-size: 12px;
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 /* HEADER -------------------------------------------*/
-
 
 #header ul{
     padding-bottom: 15px;
@@ -46,24 +34,20 @@ body{
 
 #header ul li a{
     line-height:12px;
-    margin-right:35px;
-    margin-left:19px;
+    margin-right:15px;
+    margin-left:1px;
 
 }
 
-/*below was #999*/
 #header ul li a:hover{
     text-decoration:none;
 }
 
 #header .active{
-        text-decoration:none;
-
+    text-decoration:none;
 }
 
-
 /* CONTENT -------------------------e8ff3f------------------*/
-
 
 #hide{
     text-decoration: none;
@@ -74,26 +58,12 @@ body{
     padding-right: 50px; 
 }
 
-#contact2 {
-    display:inline-block;
-}
-
 #links a{
     position: relative;
     color:#333;
     padding: 40px 0px 0px 0px; 
     color: #000; 
     text-decoration: none; 
-}
-
-#paragraph{
-    display: block;
-    width: 500px;
-}
-
-#paragraph a{
-    width: 300px;
-    text-decoration: none;
 }
 
 #showcase {
@@ -117,6 +87,4 @@ body{
     max-height:97vw;
     padding-bottom: 1px;
     padding-right: 1vw;
-
-    image-orientation: from-image;
 }
