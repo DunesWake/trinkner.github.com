@@ -6,7 +6,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 
 body{
-    font:30.3px "arial";
+    font:29.3px "arial";
     padding-top: 57px;
 }
 
@@ -57,7 +57,7 @@ body{
 
 #name {
     color: #000; 
-        text-decoration:none;
+    text-decoration:none;
 
 }
 
@@ -117,7 +117,7 @@ body{
 
 #showcase img{
     float:left;
-    max-width:96.5vw;
+    max-width:65.5vw;
     max-height:90vw;
     padding-bottom: 1px;
     image-orientation: from-image;
