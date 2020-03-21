@@ -6,14 +6,13 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 
 body{
-    font:16px "arial";
-    width: 100vw;
-    padding-top: 25px;
+    font:30.3px "arial";
+    padding-top: 57px;
 }
 
 
-#body a{
-    color:#333;
+#header a{
+    color:#888;
 }
 
 /* HEADER -------------------------------------------*/
@@ -25,15 +24,15 @@ body{
 #header p{
     display:block;
     color: #000; 
-    text-decoration: none; 
 }
 
 #header ul{
-    padding-bottom: 15px;
+    padding-bottom: 123px;
     clear:both;
     height:32px;
     float:left;
     list-style-type: none;
+
 }
 
 #header ul li{
@@ -43,24 +42,27 @@ body{
 #header ul li a{
     line-height:12px;
     margin-right:15px;
+        text-decoration:none;
+
 }
 
 #header ul li a:hover{
-    text-decoration:line-through;
+    color: #000; 
+
 }
 
 #header .active{
-        text-decoration:none;
+    text-decoration:none;
 }
 
 #name {
     color: #000; 
-    text-decoration: none; 
+        text-decoration:none;
+
 }
 
 #name:hover {
     color: #000; 
-    text-decoration: line-through; 
 }
 
 
@@ -93,13 +95,16 @@ body{
 }
 
 #showcase {
-    width:230px;
+    width:450px;
     padding-bottom: 1px;
     padding-top: 43px;
     clear:both;
     color:#111;
-    margin-left:2vw;
+    margin-left:2.2vw;
+}
 
+#showcase a {
+    text-decoration: none;
 }
 #showcaseLong {
     padding-bottom: 1px;
@@ -112,8 +117,8 @@ body{
 
 #showcase img{
     float:left;
-    max-height:800px;
-    max-width:936px;
+    max-width:96.5vw;
+    max-height:90vw;
     padding-bottom: 1px;
     image-orientation: from-image;
 }
