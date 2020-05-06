@@ -217,12 +217,12 @@ a:hover {
 
 /*highlight colour*/
 ::selection {
-	background: cornsilk;
+	background: cadetblue;
 	/* WebKit/Blink Browsers */
 }
 
 ::-moz-selection {
-	background: cornsilk;
+	background: cadetblue;
 	/* Gecko Browsers */
 }
 
