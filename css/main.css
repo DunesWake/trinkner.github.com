@@ -1,12 +1,12 @@
 /* BODY -------------------------------------------*/
 
 html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;	padding: 0;	border: 0;	outline: 0;	font-size: 100%;	background: #FBFBFB;
+	margin: 0;	padding: 0;	border: 0;	outline: 0;	font-size: 100%;	vertical-align: baseline;	background: transparent;
 	list-style:none;
 }
 
 body{
-    font:16.75px "fu-reg";
+    font:17px "curiar";
     padding-top: 57px;
 }
 
@@ -25,7 +25,7 @@ body{
     text-decoration: none;
 }
 #showcase .active:hover{
-    color:cadetblue;
+    color:#000;
     text-decoration: none;
 
 }
@@ -57,25 +57,26 @@ body{
 #header ul li a{
     line-height:12px;
     margin-right:15px;
-    text-decoration:none;
+        text-decoration:none;
 
 }
 
 #header ul li a:hover{
     color: #000; 
+
 }
 
 #header .active{
     text-decoration:none;
 }
 
-.name {
+#name {
     color: #000; 
     text-decoration:none;
 }
 
-.name:hover {
-    color: #888; 
+#name:hover {
+    color: #000; 
 }
 
 
@@ -83,7 +84,7 @@ body{
 
 #hide{
     text-decoration: none;
-} 
+}
 
 #contact {
     display:inline-block;    
@@ -112,7 +113,7 @@ body{
     padding-bottom: 1px;
     padding-top: 43px;
     clear:both;
-    margin-left:2vw;
+    margin-left:2.2vw;
 }
 
 #showcase a {
@@ -127,24 +128,9 @@ body{
 }
 
 #showcase img{
-    max-width:50.5vw;
-    max-height:	90vh;
+    float:left;
+    max-width:66.5vw;
+    max-height:43.3vh;
     padding-bottom: 1px;
     image-orientation: from-image;
-}
-
-.row img{
-	max-width:50.5vw;
-    max-height:	80vh;
-    padding-bottom: 1px;
-    image-orientation: from-image;
-}
-
-#left {
-	float: left;
-}
-
-#right {
-	float: right;
-	margin-right: 5px;
 }
