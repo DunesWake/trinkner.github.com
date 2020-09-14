@@ -6,39 +6,32 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 
 body{
-    font:17px "curiar";
-    padding-top: 57px;
+    margin-left:1vw;
+    color:#353530;
+    font-family: Lusitana-Regular; 
+    font-size:16px;
+    padding-top: 25px;
 }
 
 
 #header a{
-    color:#888;
-}
-
-#showcase .active{
-    color:#888;
+    color:#353530;
     text-decoration: none;
 }
 
-#showcase .active{
-    color:#888;
-    text-decoration: none;
-}
-#showcase .active:hover{
-    color:#000;
-    text-decoration: none;
+/* FONTS -------------------------------------------*/
 
+@font-face {
+    font-family: 'Lusitana-Regular';
+    src: url("../fonts/Lusitana/Lusitana-Regular.ttf"),
+    url("../fonts/Lusitana/Lusitana-Bold.ttf");
 }
+
 
 /* HEADER -------------------------------------------*/
 
-#header {
-    margin-left:2vw;
-}
-
 #header p{
     display:block;
-    color: #000; 
 }
 
 #header ul{
@@ -61,25 +54,6 @@ body{
 
 }
 
-#header ul li a:hover{
-    color: #000; 
-
-}
-
-#header .active{
-    text-decoration:none;
-}
-
-#name {
-    color: #000; 
-    text-decoration:none;
-}
-
-#name:hover {
-    color: #000; 
-}
-
-
 /* CONTENT -------------------------e8ff3f------------------*/
 
 #hide{
@@ -97,9 +71,8 @@ body{
 
 #links a{
     position: relative;
-    color:#333;
+    color:#000;
     padding: 40px 0px 0px 0px; 
-    color: #000; 
     text-decoration: none; 
 }
 
@@ -113,7 +86,6 @@ body{
     padding-bottom: 1px;
     padding-top: 43px;
     clear:both;
-    margin-left:2.2vw;
 }
 
 #showcase a {
@@ -124,13 +96,12 @@ body{
     padding-bottom: 1px;
     padding-top: 43px;
     clear:both;
-    margin-left:2vw;
 }
 
 #showcase img{
     float:left;
     max-width:66.5vw;
-    max-height:43.3vh;
+    max-height:46.3vh;
     padding-bottom: 1px;
     image-orientation: from-image;
 }
