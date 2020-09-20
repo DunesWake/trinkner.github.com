@@ -8,7 +8,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 body{
     margin-left:1vw;
     color:#353530;
-    font-family: Lusitana-Regular; 
+    font-family: Abhaya_libre; 
     font-size:16px;
     padding-top: 25px;
 }
@@ -25,6 +25,15 @@ body{
     font-family: 'Lusitana-Regular';
     src: url("../fonts/Lusitana/Lusitana-Regular.ttf"),
     url("../fonts/Lusitana/Lusitana-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Abhaya_libre';
+    src: url("../fonts/Abhaya_libre/AbhayaLibre-Regular.ttf"),
+    src: url("../fonts/Abhaya_libre/AbhayaLibre-ExtraBold.ttf"),
+    src: url("../fonts/Abhaya_libre/AbhayaLibre-Medium.ttf"),
+    src: url("../fonts/Abhaya_libre/AbhayaLibre-Regular.ttf"),
+    url("../fonts/Abhaya_libre/AbhayaLibre-Bold.ttf");
 }
 
 

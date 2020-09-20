@@ -6,45 +6,61 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, pre,a, abb
 }
 
 body{
-    font:14.5px "arial";
-    width: 100vw;
-    padding-top: 25px;
-    color:#333;
+    margin-left:7vw;
+    color:#353530;
+    font-family: Abhaya_libre; 
+    font-size:1.6em;
+    padding-top: 45px;
+}
+
+
+#header a{
+    color:#353530;
     text-decoration: none;
 }
 
+/* FONTS -------------------------------------------*/
+
+@font-face {
+    font-family: 'Lusitana-Regular';
+    src: url("../fonts/Lusitana/Lusitana-Regular.ttf"),
+    url("../fonts/Lusitana/Lusitana-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Abhaya_libre';
+    src: url("../fonts/Abhaya_libre/AbhayaLibre-Regular.ttf"),
+    src: url("../fonts/Abhaya_libre/AbhayaLibre-ExtraBold.ttf"),
+    src: url("../fonts/Abhaya_libre/AbhayaLibre-Medium.ttf"),
+    src: url("../fonts/Abhaya_libre/AbhayaLibre-Regular.ttf"),
+    url("../fonts/Abhaya_libre/AbhayaLibre-Bold.ttf");
+}
+
+
 /* HEADER -------------------------------------------*/
 
+#header p{
+    display:block;
+}
+
 #header ul{
-    padding-bottom: 15px;
+    padding-bottom: 123px;
     clear:both;
     height:32px;
     float:left;
     list-style-type: none;
-}
 
-#listDiv.ul {
-    text-align: left;
 }
 
 #header ul li{
     float:left;
-    margin-top:9px;
 }
 
 #header ul li a{
     line-height:12px;
-    margin-right:20px;
-    margin-left:1px;
+    margin-right:15px;
+        text-decoration:none;
 
-}
-
-#header ul li a:hover{
-    text-decoration:none;
-}
-
-#header .active{
-    text-decoration:none;
 }
 
 /* CONTENT -------------------------e8ff3f------------------*/
@@ -58,33 +74,43 @@ body{
     padding-right: 50px; 
 }
 
+#contact2 {
+    display:inline-block;
+}
+
 #links a{
     position: relative;
-    color:#333;
+    color:#000;
     padding: 40px 0px 0px 0px; 
-    color: #000; 
     text-decoration: none; 
 }
 
+#paragraph a{
+    width: 300px;
+    text-decoration: none;
+}
+
 #showcase {
-    width:230px;
+    width:450px;
     padding-bottom: 1px;
     padding-top: 43px;
     clear:both;
-    color:#111;
-    margin-left:2vw;
+}
 
+#showcase a {
+    text-decoration: none;
 }
 #showcaseLong {
     padding-bottom: 1px;
-    display: block;
-    margin-left:2vw;
+    padding-bottom: 1px;
+    padding-top: 43px;
+    clear:both;
 }
 
 #showcase img{
     float:left;
-    max-width:97vw;
-    max-height:97vw;
+    max-width:100vw;
+    max-height:96.3vh;
     padding-bottom: 1px;
-    padding-right: 1vw;
+    image-orientation: from-image;
 }
