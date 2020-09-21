@@ -1,0 +1,116 @@
+<html>
+
+<head>
+    <title>Solo Show</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style type="text/css" media="screen">
+        body {
+            margin-top: 2vh;
+            margin-left: 1vw;
+            color: #000;
+        }
+
+        a:link,
+        a:visited {
+            color: #551A8B;
+        }
+
+        ul {
+            list-style: circle;
+        }
+
+        canvas {
+            width: 568px;
+            height: 568px;
+            display: block;
+            position: fixed;
+            top: -50;
+            left: 75s;
+            z-index: -9999;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="menu">
+        <div class="container">
+
+            <p>SOLO SHOW<br>
+                <a href="http://www.pakuihardware.org/index.php?/about-this-site/"></a></p>
+
+            <p></p>
+            <ul>
+                <li><a href="http://soloshow.online/about.html" onclick="do_click();">ARTIST LIST</a></li>
+                <li><a href="http://soloshow.online/about.html" onclick="do_click();">ABOUT</a></li>
+                <li><a href="http://www.pakuihardware.org/index.php?/projects/exhibitions-/" onclick="do_click();">SUBMIT</a></li>
+            </ul>
+
+            <ul>
+                <li class="section-title">CHAPTERS</li>
+                <li><a href="http://soloshow.online/chapter1.html">an introduction</a></li>
+                <li><a href="http://soloshow.online/chapter1.html">a postnet folk fanfiction fairytalemythology (p.1)</a></li>
+                <li><a href="http://soloshow.online/chapter1.html"> a postnet folk fanfiction fairytalemythology (p.2)</a></li>
+                <li><a href="http://soloshow.online/chapter1.html"> Everything Must Be Rendered perfectly (p1)</a></li>
+                <li><a href="http://soloshow.online/chapter1.html"> Everything Must Be Rendered perfectly (p2)</a></li>
+                <li><a href="http://soloshow.online/chapter1.html"> Rather be your lover</a></li>
+                <li><a href="http://soloshow.online/chapter1.html"> Behind the Times</a></li>
+                <li><a href="http://soloshow.online/chapter1.html"> The love and hate of dreams</a></li>
+            </ul>
+
+            <ul>
+                <li class="section-title">UNIQUE:</li>
+                <li><a href="http://soloshow.online/chapter1.html">lookbook S/W 2020</a></li>
+                <li><a href="http://soloshow.online/chapter1.html">benefit:for Black-led initiatives</a></li>
+                <li><a href="http://soloshow.online/chapter1.html">press: basicinstinct | SHOGGOTH</a></li>
+                <li><a href="http://soloshow.online/chapter1.html">artist features ♡♡</a></li>
+                <li><a href="http://soloshow.online/chapter1.html">listen: STAYHOMECAST</a></li>
+                <li><a href="http://soloshow.online/chapter1.html">OhNoGaleriaXpeepeeXUndergroundFlower: Further down the drain...</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js';
+        import {OBJLoader2} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/OBJLoader2.js';
+
+        function main() {
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        var renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer.setSize(800, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+            
+        var model;
+        var light = new THREE.PointLight(0xffffff);
+        light.position.set(-100,-200,100);
+        scene.add(light);
+
+        {
+            var objLoader = new OBJLoader2();
+            objLoader.load('.//manifolg.obj', (root) => {  
+                root.updateMatrixWorld();
+                root.rotateX(6);
+                root.rotateY(2);
+        
+                model = root;
+                scene.add(model);
+
+            });
+        }
+
+        camera.position.z = 5;
+
+        var animate = function() {
+            requestAnimationFrame(animate);
+            model.rotation.x += 0.005;
+            model.rotation.y += 0.005;
+            
+            renderer.render(scene, camera);
+        };
+
+        animate();
+        }
+        main();
+        </script>
+</body></html>
