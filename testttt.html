@@ -1,0 +1,155 @@
+<html>
+
+<head>
+    <title>Solo Show</title>
+    <meta charset="utf-8">
+    <style type="text/css" media="screen">
+        body {
+            margin-top: 5vh;
+            margin-left: 16vw;
+            color: #000;
+            font-size: 17px;
+            color: #212529;
+        }
+
+        a:link,
+        a:visited {
+            color: #551A8B;
+        }
+
+        ul {
+            list-style: georgian;
+        }
+
+        canvas {
+            display: block;
+            position: fixed;
+            top: 60;
+            left: 75s;
+            z-index: -9999;
+        }
+
+        @font-face {
+            font-family: 'fso_revenge_of_zanyregular';
+            src: url('fsoreven-webfont.woff2') format('woff2'),
+                url('fsoreven-webfont.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="menu">
+        <a style="font-family:fso_revenge_of_zanyregular;font-size: 29px;color:#656A6B;">soloshow</a>
+        
+        <!--            <p>SOLO SHOW<br></p>-->
+
+        <ul>
+            <li><a target="_blank" href="http://soloshow.online/about.html">ARTIST LIST</a></li>
+            <li><a target="_blank" href="http://soloshow.online/about.html">ABOUT</a></li>
+            <li><a target="_blank" href="http://soloshow.online/submit.html">SUBMIT</a></li>
+        </ul>
+
+        <ul>
+            <li class="section-title">
+                CHAPTERS</li>
+            <li><strong>1_</strong><a target="_blank" href="http://soloshow.online/chapter1.html">
+                    <em>an introduction</em></a></li>
+            <li><strong>2.1_</strong><a target="_blank" href="http://soloshow.online/chapter21.html">
+                    <em>a postnet folk fanfiction fairytalemythology (p.1)</em></a></li>
+            <li><strong>2.2_</strong><a target="_blank" href="http://soloshow.online/chapter22.html">
+                    <em>a postnet folk fanfiction fairytalemythology (p.2)</em></a></li>
+            <li><strong>3.1_</strong><a target="_blank" href="http://soloshow.online/chapter3p1.html">
+                    <em>Everything Must Be Rendered perfectly (p1)</em></a></li>
+            <li><strong>3.2_</strong><a target="_blank" href="http://soloshow.online/chapter3p2.html">
+                    <em>Everything Must Be Rendered perfectly (p2)</em></a></li>
+            <li><strong>4_</strong><a target="_blank" href="http://soloshow.online/chapter4.html">
+                    <em>Rather be your lover</em></a></li>
+            <li><strong>5_</strong><a target="_blank" href="http://soloshow.online/chapter5.html">
+                    <em>Behind the Times</em></a></li>
+            <li><strong>6_</strong><a target="_blank" href="http://soloshow.online/chapter6.html">
+                    <em>The love and hate of dreams</em></a></li>
+        </ul>
+
+        <ul>
+            <li class="section-title">
+                UNIQUE:</li>
+            <li><a href="http://soloshow.online/lookbook.html">
+                    lookbook S/W 2020</a></li>
+            <li><a href="http://soloshow.online/benefit.html">
+                    benefit:for Black-led initiatives</a></li>
+            <li><a href="https://basicinstinct.exposed/SHOGGOTH_Giulia_Carpentieri_2020">
+                    press: basicinstinct | SHOGGOTH</a></li>
+            <li><a href="http://soloshow.online/features.html">
+                    artist features ♡♡</a></li>
+            <li><a href="https://readymag.com/u3840806441/stayhomecast/2/">
+                    listen: STAYHOMECAST</a></li>
+            <li><a href="http://soloshow.online/FDD.html">
+                    OhNoGaleriaXpeepeeXUndergroundFlower: Further down the drain...</a></li>
+        </ul>
+    </div>
+
+    <script type="module">
+        import * as THREE from 
+        'https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js';
+        import {OBJLoader2} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/OBJLoader2.js';
+        
+        var scene;
+        var camera;
+        var renderer;
+        var model;
+        var light;
+        var light1;
+        var light2;
+        var light3;
+        
+        init();
+        load();
+        anim();
+        
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({alpha: true});
+            renderer.setSize(800, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            
+            light = new THREE.PointLight(0xFFFFFF);
+            light.position.set(-100,-200,100);
+            scene.add(light);
+
+            
+            camera.position.z = 6.15;
+        }
+
+        function load(){
+            var objLoader = new OBJLoader2();
+            objLoader.load('.//manifolg.obj', (root) => {  
+                root.updateMatrixWorld();
+                root.rotateX(6);
+                root.rotateY(2);
+                
+        
+                model = root;
+                scene.add(model);
+
+            });
+        }
+
+        function anim(){
+            var animate = function() {
+                requestAnimationFrame(animate);
+                model.rotation.x += 0.003;
+                model.rotation.y += 0.003;
+
+                renderer.render(scene, camera);
+            };
+
+            animate();
+        }
+        </script>
+</body>
+
+</html>
