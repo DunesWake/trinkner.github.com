@@ -85,9 +85,7 @@
 	
 	var manager = new THREE.LoadingManager();
 	var loader = new OBJLoader2(manager);
-	loader.load('.//manifolg.obj', function(points) {
-		form0 = points;
-	});
+	loader.load('.//manifolg.obj', function(points) {form0 = points;});
 	manager.onLoad = function() {
 		init();
 		form0.updateMatrixWorld();
@@ -102,7 +100,6 @@
 		renderer = new THREE.WebGLRenderer({alpha: true});
 		renderer.setSize(800, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
-		
 		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		camera.position.z = 6.25;
 
