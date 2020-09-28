@@ -85,17 +85,8 @@
 	var manager = new THREE.LoadingManager();
 	var loader = new OBJLoader2(manager);
 	init();
-	
-	loader.load('.//forms/manifolg.obj', function(points) {
-		form0 = points;
-	});
-	manager.onLoad = function() {
-		form0.updateMatrixWorld();
-		form0.rotateX(6);
-		form0.rotateY(2);
-		scene.add(form0);
-		anim();
-	};
+	load();
+	// animate called in .onLoad
 	
 	function init() {
 		scene = new THREE.Scene();
@@ -111,6 +102,19 @@
 			(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		camera.position.z = 6.25;
 		
+	}
+	
+	function load() {
+		loader.load('.//forms/manifolg.obj', function(points) {
+			form0 = points;
+		});
+		manager.onLoad = function() {
+			form0.updateMatrixWorld();
+			form0.rotateX(6);
+			form0.rotateY(2);
+			scene.add(form0);
+			anim();
+		};
 	}
 	
 	function anim() {
