@@ -1,0 +1,133 @@
+<html>
+<head>
+	<title>Solo Show</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Solo Show is a decentralized group show of offsite works; founded during quarantine."/>
+	<link rel="shortcut icon" href="#">
+	<style>	
+		body {
+			margin-top: 5vh;
+			margin-left: 16vw;
+			font-size: 17px;
+			color: #212529;
+		}
+
+		#alias {
+			text-decoration: none;
+			font-family: zanyregular;
+			font-size: 29px;
+			color: #414141;
+		} 
+		
+		@font-face {
+			font-family: 'zanyregular';
+			src: url('.//fonts/fsoreven-webfont.woff') format('woff');
+		}
+
+		
+		a:link, a:visited {
+			color: #551A8B;
+		}
+		
+		ul {
+			list-style: georgian;
+		}
+		
+		/*3js*/
+		canvas {
+			position: fixed;
+			top: 70;
+			z-index: -9999;
+		}
+	</style>
+
+</head>
+
+<body>
+	<a id="alias" href="http://www.trinkner.xyz/test.html">soloshow</a>
+	<ul>
+		<li><a target="_blank" href="http://soloshow.online/about.html">ARTIST LIST</a></li>
+		<li><a target="_blank" href="http://soloshow.online/about.html">ABOUT</a></li>
+		<li><a target="_blank" href="http://soloshow.online/submit.html">SUBMIT</a></li>
+	</ul>
+	<ul>
+		<li class="section-title">CHAPTERS</li>
+		<li><b>1_</b><a   target="_blank" href="http://soloshow.online/chapter1.html"><em> an introduction</em></a></li>
+		<li><b>2.1_</b><a target="_blank" href="http://soloshow.online/chapter21.html"><em> a postnet folk fanfiction fairytalemythology (p.1)</em></a></li>
+		<li><b>2.2_</b><a target="_blank" href="http://soloshow.online/chapter22.html"><em> a postnet folk fanfiction fairytalemythology (p.2)</em></a></li>
+		<li><b>3.1_</b><a target="_blank" href="http://soloshow.online/chapter3p1.html"><em> Everything Must Be Rendered perfectly (p1)</em></a></li>
+		<li><b>3.2_</b><a target="_blank" href="http://soloshow.online/chapter3p2.html"><em> Everything Must Be Rendered perfectly (p2)</em></a></li>
+		<li><b>4_</b><a   target="_blank" href="http://soloshow.online/chapter4.html"><em> Rather be your lover</em></a></li>
+		<li><b>5_</b><a   target="_blank" href="http://soloshow.online/chapter5.html"><em> Behind the Times</em></a></li>
+		<li><b>6_</b><a   target="_blank" href="http://soloshow.online/chapter6.html"><em> The love and hate of dreams</em></a></li>
+	</ul>
+	<ul>
+		<li class="section-title">UNIQUE:</li>
+		<li><a target="_blank" href="http://soloshow.online/lookbook.html">lookbook S/W 2020</a></li>
+		<li><a target="_blank" href="http://soloshow.online/benefit.html">benefit:for Black-led initiatives</a></li>
+		<li><a target="_blank" href="https://basicinstinct.exposed/SHOGGOTH_Giulia_Carpentieri_2020">press: basicinstinct | SHOGGOTH</a></li>
+		<li><a target="_blank" href="http://soloshow.online/features.html">artist features ♡♡</a></li>
+		<li><a target="_blank" href="https://readymag.com/u3840806441/stayhomecast/2/">listen: STAYHOMECAST</a></li>
+		<li><a target="_blank" href="http://soloshow.online/FDD.html">OhNoGaleriaXpeepeeXUndergroundFlower: Further down the drain...</a></li>
+	</ul>
+</body>
+</html>
+
+<script type="module">
+	import * as THREE from './/js/three.module.js';
+	import {GLTFLoader} from './/js/GLTFLoader.js';
+	
+	var scene;
+	var renderer;
+	var camera;
+	var light0;
+	var form0;
+	var manager = new THREE.LoadingManager();
+	var loader = new GLTFLoader(manager);
+	init();
+	load();
+	// animate called in .onLoad
+	
+	function init() {
+		renderer = new THREE.WebGLRenderer({alpha: true});
+		renderer.setSize(800, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+		scene = new THREE.Scene();
+
+		light0 = new THREE.PointLight(0xFFFFFF);
+		light0.position.set(-100, -200, 100);
+		scene.add(light0);
+		
+		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		camera.position.z = 6.25;		
+	}
+	
+	function load() {
+		loader.load('.//forms/small.glb', function(points) {
+			form0 = points.scene;
+		});
+		manager.onLoad = function() {
+			form0.updateMatrixWorld();
+			form0.rotateX(6);
+			form0.rotateY(2);
+//			form0.translateY(2);
+			scene.add(form0);
+			anim();
+		};
+	}
+	
+	function anim() {
+		let animate = function() {
+			requestAnimationFrame(animate);
+			form0.rotation.x += 0.0029;
+			form0.rotation.y += 0.0029;
+			renderer.render(scene, camera);
+		};
+		animate();
+	}
+</script>
+		
+ 
+
+
