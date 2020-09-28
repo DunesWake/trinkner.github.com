@@ -82,21 +82,21 @@
 	var camera;
 	var light0;
 	var form0;
-	
 	var manager = new THREE.LoadingManager();
 	var loader = new OBJLoader2(manager);
+	init();
+	
 	loader.load('.//forms/manifolg.obj', function(points) {
 		form0 = points;
 	});
 	manager.onLoad = function() {
-		init();
 		form0.updateMatrixWorld();
 		form0.rotateX(6);
 		form0.rotateY(2);
 		scene.add(form0);
 		anim();
 	};
-
+	
 	function init() {
 		scene = new THREE.Scene();
 		renderer = new THREE.WebGLRenderer({alpha: true});
@@ -109,7 +109,7 @@
 		light0.position.set(-100, -200, 100);
 		scene.add(light0);
 	}
-
+	
 	function anim() {
 		let animate = function() {
 			requestAnimationFrame(animate);
