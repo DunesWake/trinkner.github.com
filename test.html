@@ -86,7 +86,9 @@
 	
 	var manager = new THREE.LoadingManager();
 	var loader = new OBJLoader2(manager);
-	loader.load('.//manifolg.obj', function(points) {form0 = points;});
+	loader.load('.//manifolg.obj', function(points) {
+		form0 = points;
+	});
 	manager.onLoad = function() {
 		init();
 		form0.updateMatrixWorld();
