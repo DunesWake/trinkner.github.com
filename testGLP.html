@@ -1,0 +1,110 @@
+<html>
+
+<head>
+	<title>Solo Show</title>
+	<meta charset="utf-8">
+	<style type="text/css" media="screen">
+		body {
+			margin-top: 30vh;
+			margin-left: 30vw;
+			font-size: 17px;
+			color: #212529;
+		}
+
+		a:link,
+		a:visited {
+			color: #551A8B;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		canvas {
+			display: block;
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			z-index: -9999;
+		}
+
+		@font-face {
+			font-family: 'fso_revenge_of_zanyregular';
+			src: url('fsoreven-webfont.woff2') format('woff2'),
+				url('fsoreven-webfont.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="menu">
+<!--
+		<p>clément trinkner</p>
+		<ul>
+			<li><a>cbtrinkner@gmail.com</a></li>
+			<li><a target="_blank" href="https://youtu.be/iEtjfU6e86s">http://www.youtube.com/watch?v=iEtjfU6e86s&feature=youtu.be</a></li>
+			<li><a target="_blank" href="https://youtu.be/MjLNhDP4v7U">http://www.youtube.com/watch?v=MjLNhDP4v7U&</a></li>
+		</ul>
+-->
+	</div>
+
+	<script type="module">
+		import * as THREE from './/js/three.module.js';
+		import {GLTFLoader} from './/js/GLTFLoader.js';
+		import {MaterialHandler} from ".//js/MaterialHandler.js";
+
+		var scene;
+		var camera;
+		var renderer;
+		var light;
+		var model;
+
+		init();
+
+		function init() {
+			scene = new THREE.Scene();
+			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+			renderer = new THREE.WebGLRenderer({alpha: true});
+
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			document.body.appendChild(renderer.domElement);
+
+			light = new THREE.PointLight(0xFFFFFF);
+			light.position.set(-100, -200, 100);
+			scene.add(light);
+
+			camera.position.z = 6.25;
+		}
+
+		var manager = new THREE.LoadingManager();
+		manager.onStart = function(url, itemsLoaded, itemsTotal) {};
+
+		var loader = new GLTFLoader(manager);
+		loader.load('.//forms/small.glb', function(object) {
+			model = object.scene;
+			model.MaterialHandler;
+		});
+
+		manager.onLoad = function() {
+			model.updateMatrixWorld();
+			model.rotateX(6);
+			model.rotateY(2);
+			scene.add(model);
+			anim();
+		};
+
+		function anim() {
+			var animate = function() {
+				requestAnimationFrame(animate);
+				model.rotation.x += 0.0029;
+				model.rotation.y += 0.0029;
+
+				renderer.render(scene, camera);
+			};
+
+			animate();
+		}
+	</script>
+</body></html>
