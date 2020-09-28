@@ -71,9 +71,9 @@
 </body>
 
 <script type="module">
-	import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js';
-	import {OBJLoader2} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/OBJLoader2.js';
-
+	import * as THREE from './/js/three.module.js';
+	import {OBJLoader2} from './/js/OBJLoader2.js';
+	
 	var scene;
 	var renderer;
 	var camera;
@@ -98,7 +98,7 @@
 	manager.onStart = function(url, itemsLoaded, itemsTotal) {};
 
 	var loader = new OBJLoader2(manager);
-	loader.load('manifolg.obj', function(points) {
+	loader.load('https://www.trinkner.xyz/manifolg.obj', function(points) {
 		form = points;
 	});
 
@@ -122,11 +122,5 @@
 	}
 </script>
 </html>
-
-
-
-
-
-
-
-
+		
+ 
