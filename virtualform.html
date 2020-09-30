@@ -64,7 +64,6 @@
     <div id="loader"><a>loading</a></div>
 </section>
 
-<script src=".//js/threex.windowresize.js"></script>
 <script type="module">
     const loadingScreen = document.getElementById( 'loading-screen' );
 	import * as THREE from './/js/three.module.js';
@@ -99,9 +98,7 @@
 		
 		cam0 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		cam0.position.z = 5.25;
-        
-        THREEx.WindowResize(renderer, cam0)
-	}
+       	}
     	
 	function load() {
         loadingScreen.classList.remove( 'fade-out' );
