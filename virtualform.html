@@ -1,0 +1,210 @@
+<html class="no-js" lang="en">
+    <head>
+        <title>virtual form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="proof of concept test site"/>
+        <link rel="shortcut icon" href="#">
+        <style>	
+            body {
+                position:fixed;
+                margin:0;
+                padding:0;
+                width: 100vw;
+                height: 100vw;
+            }
+            #rightMenu{
+                position: absolute; 
+                top:45vh;
+                right:2.5vw;
+            }
+            #leftMenu{
+                position: absolute; 
+                top:45vh;
+                left:2.5vw;
+            }
+            a {
+                font-size: 17px;
+                text-decoration: none;
+                color: #999;
+            }
+            canvas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: -9999;
+                margin:0;
+                padding:0;		
+            }
+            #loader {
+                display: absolute;
+                margin-top: 50vh;
+                margin-left: 50vw;
+
+            }            
+            #loading-screen {
+                position: absolute;
+                z-index: -9999;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vw;
+            }
+            #loading-screen.fade-out {opacity: 0;}
+            #loading-screen.fade-in  {opacity: 1;}
+        </style>
+    </head>
+    <body>
+        <div id="leftMenu">  </div>
+        <div id="rightMenu"> </div>
+    </body>
+</html>
+        
+<section id="loading-screen">
+    <div id="loader"><a>loading</a></div>
+</section>
+
+<script src=".//js/threex.windowresize.js"></script>
+<script type="module">
+    const loadingScreen = document.getElementById( 'loading-screen' );
+	import * as THREE from './/js/three.module.js';
+	import {GLTFLoader} from './/js/GLTFLoader.js';
+	var scene;
+	var renderer;
+	var manager = new THREE.LoadingManager();
+	var loader = new GLTFLoader(manager);
+    var files = [".//forms/3.glb", ".//forms/2.glb", ".//forms/small.glb"];
+    var curFile = 0;
+    var run = 0;
+    
+    var cam0;
+    var light0;
+	var form0;
+	init();
+	load();
+	// animate calls onLoad.
+	
+	function init() {
+        buttonCreate();
+        KeyControls();
+
+		renderer = new THREE.WebGLRenderer({alpha: true, antialias:false});
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+		scene = new THREE.Scene();
+
+            light0 = new THREE.PointLight(0xFFFFFF);
+            light0.position.set(-100, -200, 100);
+            scene.add(light0);
+		
+		cam0 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		cam0.position.z = 5.25;
+        
+        THREEx.WindowResize(renderer, cam0)
+	}
+    	
+	function load() {
+        loadingScreen.classList.remove( 'fade-out' );
+		loader.load(files[curFile], function(points) {
+			form0 = points.scene;
+		});
+		manager.onLoad = function() {
+            loadingScreen.classList.add( 'fade-out' );
+			form0.updateMatrixWorld();
+            form0.rotateX(6);
+            form0.rotateY(2); 
+            if (curFile == 2) {
+                form0.rotation.x +=3.1;
+                form0.rotation.y +=3.1;
+            }
+            if (curFile !=2) {
+                form0.rotation.x += 2;
+            }
+			scene.add(form0);
+            if (run == 0) anim(); run = 1;
+		};
+	}
+        
+	function anim() {
+		let animate = function() {
+			requestAnimationFrame(animate);
+			form0.rotation.x += 0.002;
+			form0.rotation.y += 0.002;
+			renderer.render(scene, cam0);
+		};
+        animate();
+	}
+       
+    function next(event) {
+        if(curFile < files.length - 1){
+            removeForm(form0);
+            curFile++; 
+            load();
+        }
+    }
+    
+    function back(event) {
+        if(curFile > 0){
+            removeForm(form0);
+            curFile--; 
+            load();
+        }
+    }
+    
+    function KeyControls() {
+        document.onkeydown = function(e) {
+            switch (e.keyCode) {
+                case 37:
+                    back();
+                    break;
+                case 39:
+                    next();
+                    break;
+            }
+        };
+    }
+    
+    function buttonCreate(){
+        var mnuItem1 = document.createElement("a");
+        mnuItem1.name = "next";
+        mnuItem1.href = "#";
+        mnuItem1.innerHTML = "next>";
+        mnuItem1.addEventListener("click", next);
+        rightMenu.appendChild(mnuItem1);
+        
+        var mnuItem = document.createElement("a");
+        mnuItem.name = "back";
+        mnuItem.href = "#";
+        mnuItem.innerHTML = "back";
+        mnuItem.addEventListener("click", back);
+        leftMenu.appendChild(mnuItem);
+    }
+    
+    function removeForm(object) {
+        var selectedObject = scene.getObjectByName(object.name);
+        scene.remove( selectedObject );
+    }
+
+</script>
+
+
+
+<!--
+        - an artist should beable to choose how the spectator interacts with form
+            - spin controls
+            - zoom controls
+            - static placement 
+        - shadows or no shadows
+        - a focus on form is paramount
+        - donations distributed equally
+        - control over alias settings
+        - simulate walking through a museum
+            - no control over order of the rooms
+            - sequential experience
+            - different orginization on refresh     
+                or: curated in specific orginization
+        - full texture control
+        - animation requests
+    
+-->
+		
