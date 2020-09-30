@@ -52,18 +52,15 @@
                 z-index: -9999;
                 margin:0;
                 padding:0;		
-            }
-            #loader {
-                display: fixed;
-                text-align: center;
-                width:100vw;
-            }       
+            }    
             
             #loading-screen {
                 position: fixed;
                 z-index: -9999;
                 top: 49%;
                 opacity:0;
+                text-align: center;
+                width:100vw;
             }
             #loading-screen.fade-in  {opacity: 1;}
         </style>
@@ -75,9 +72,7 @@
     </body>
 </html>
         
-<section id="loading-screen">
-    <div id="loader"><a>loading</a></div>
-</section>
+<section id="loading-screen"></section>
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
@@ -90,7 +85,7 @@
 	var scene;
 	var manager = new THREE.LoadingManager();
 	var loader = new GLTFLoader(manager);
-    var files = [".//forms/2.glb", ".//forms/anime.glb", ".//forms/small.glb"];
+    var files = [".//forms/2.glb", ".//forms/3.glb", ".//forms/anime.glb", ".//forms/small.glb"];
     var cur = 0;
     
     var cam0;
@@ -125,6 +120,11 @@
                 forms[i] = form;
             })
         }
+        
+        manager.onProgress = function ( item, loaded, total ) {
+            loadingScreen.innerHTML = (loaded - 1) + " / " + (total - 1);
+            console.log((loaded - 1) + " " + (total - 1) + " " + item);
+        };
             
         manager.onLoad = function() {
             loadingScreen.classList.remove( 'fade-in' );
@@ -235,5 +235,4 @@
         scene.remove( selectedObject );
     }
 </script>
-
-    
+  
