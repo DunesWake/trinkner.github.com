@@ -101,7 +101,7 @@
 	// animate + gui calls onLoad.
 	
 	function init() {
-		renderer = new THREE.WebGLRenderer({alpha: true, antialias:false});
+		renderer = new THREE.WebGLRenderer({alpha: true, antialias:true});
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 		scene = new THREE.Scene();
