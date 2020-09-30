@@ -61,6 +61,7 @@
                 opacity:0;
                 text-align: center;
                 width:100vw;
+                color: #999;
             }
             #loading-screen.fade-in  {opacity: 1;}
         </style>
@@ -72,7 +73,7 @@
     </body>
 </html>
         
-<section id="loading-screen"></section>
+<section id="loading-screen">loading</section>
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
@@ -120,9 +121,9 @@
                 forms[i] = form;
             })
         }
-        
+
         manager.onProgress = function ( item, loaded, total ) {
-            loadingScreen.innerHTML = (loaded - 1) + " / " + (total - 1);
+//            loadingScreen.innerHTML = (loaded - 1) + " / " + (total - 1);
             console.log((loaded - 1) + " " + (total - 1) + " " + item);
         };
             
@@ -235,4 +236,4 @@
         scene.remove( selectedObject );
     }
 </script>
-  
+
