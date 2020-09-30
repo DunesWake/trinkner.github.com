@@ -63,7 +63,7 @@
 <section id="loading-screen">
     <div id="loader"><a>loading</a></div>
 </section>
-
+<script src=".//js/threex.windowresize.js"></script>
 <script type="module">
     const loadingScreen = document.getElementById( 'loading-screen' );
 	import * as THREE from './/js/three.module.js';
@@ -87,18 +87,20 @@
         buttonCreate();
         KeyControls();
 
-		renderer = new THREE.WebGLRenderer({alpha: true, antialias:false});
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		document.body.appendChild(renderer.domElement);
-		scene = new THREE.Scene();
-
-            light0 = new THREE.PointLight(0xFFFFFF);
-            light0.position.set(-100, -200, 100);
-            scene.add(light0);
+	renderer = new THREE.WebGLRenderer({alpha: true, antialias:false});
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(renderer.domElement);
+	scene = new THREE.Scene();
 		
-		cam0 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		cam0.position.z = 5.25;
-       	}
+        light0 = new THREE.PointLight(0xFFFFFF);
+        light0.position.set(-100, -200, 100);
+	scene.add(light0);
+		
+	cam0 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+	cam0.position.z = 5.25;
+        
+        THREEx.WindowResize(renderer, cam0)
+	}
     	
 	function load() {
         loadingScreen.classList.remove( 'fade-out' );
@@ -182,26 +184,4 @@
         scene.remove( selectedObject );
     }
 
-</script>
-
-
-
-<!--
-        - an artist should beable to choose how the spectator interacts with form
-            - spin controls
-            - zoom controls
-            - static placement 
-        - shadows or no shadows
-        - a focus on form is paramount
-        - donations distributed equally
-        - control over alias settings
-        - simulate walking through a museum
-            - no control over order of the rooms
-            - sequential experience
-            - different orginization on refresh     
-                or: curated in specific orginization
-        - full texture control
-        - animation requests
-    
--->
-		
+</script>	
