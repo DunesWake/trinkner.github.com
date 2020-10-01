@@ -1,0 +1,16 @@
+    - an artist should beable to choose how the spectator interacts with form
+        - spin controls
+        - zoom controls
+        - static placement 
+    - shadows or no shadows
+    - a focus on form is paramount
+    - donations distributed equally
+    - control over alias settings
+    - simulate walking through a museum
+        - no control over order of the rooms
+        - sequential experience
+        - different orginization on refresh     
+            or: curated in specific orginization
+    - full texture control
+    - animation requests
+    - starts from rotation from scratch each time a form is viewed
