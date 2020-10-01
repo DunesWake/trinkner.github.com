@@ -77,7 +77,7 @@
 		};
 	}
     
-    	// animation frame call and rotation control
+	// frame call and increments rotation animation 
 	function anim() {
 		let animate = function() {
 			requestAnimationFrame(animate);
@@ -88,7 +88,7 @@
 		animate();
 	}
 
-	// sets form's initial rotation
+	// set form's initial rotational placement
 	function rotateStart() {
 		forms[cur].rotation.set(0, 0, 0);
 		forms[cur].rotateX(6);
