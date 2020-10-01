@@ -1,72 +1,83 @@
 <html class="no-js" lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Virtual Solidification</title>
-        <link rel="shortcut icon" href="#">
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">    
-        <link href=".//css/main.css" rel="stylesheet">
-    </head>
-    <div id="screenClick"></div>
-    <div id="loading-screen"></div>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Virtual Solidification</title>
+	<link rel="shortcut icon" href="#">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<link href=".//css/main.css" rel="stylesheet">
+</head>
+<div id="screenClick"></div>
+<div id="loading-screen"></div>
+
 </html>
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
-    const loadingScreen = document.getElementById( 'loading-screen' );
-    loadingScreen.classList.add( 'fade-in' ); 
+    
+    	// starts loading screen
+	const loadingScreen = document.getElementById('loading-screen');
+	loadingScreen.classList.add('fade-in');
+    
 	import * as THREE from './/js/three.module.js';
 	import {GLTFLoader} from './/js/GLTFLoader.js';
-    var manager = new THREE.LoadingManager();
+	var manager = new THREE.LoadingManager();
 	var loader = new GLTFLoader(manager);
-    var files = [".//forms/2.glb", ".//forms/3.glb", ".//forms/anime.glb", ".//forms/small.glb"];
-    var renderer;
+	var files = [".//forms/2.glb", ".//forms/3.glb", ".//forms/anime.glb", ".//forms/small.glb"];
+	var renderer;
 	var scene;
-    var cur = 0;
-    var cam0;
-    var light0;
-    var forms = []
+	var cur = 0;
+	var cam0;
+	var forms = [];
+    	var lights = [];
+
+
 	init();
 	load();
-	// animate calls onLoad.
-	
+	// anim() calls in load().onload()
+
+    
+    	// places lights and camera
+    	// creates renderer, resize, scene
 	function init() {
-		renderer = new THREE.WebGLRenderer({alpha: true, antialias:false});
+		renderer = new THREE.WebGLRenderer({alpha: true,antialias: false});
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 		scene = new THREE.Scene();
 
-        light0 = new THREE.PointLight(0xFFFFFF);
-        light0.position.set(-100, -200, 100);
-        scene.add(light0);
+		light0 = new THREE.PointLight(0xFFFFFF);
+		light0.position.set(-100, -200, 100);
+		scene.add(light0);
 		cam0 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		cam0.position.z = 5.25;
-        
-        THREEx.WindowResize(renderer, cam0)
+		THREEx.WindowResize(renderer, cam0)
 	}
-    	
+
+    	// loads requested files into forms[]
 	function load() {
-        for (let i = 0; i < files.length; i++) {
-            loader.load( files[i], function (entity) {
-                let form = entity.scene;
-                form.name = files[i];
-                form.updateMatrixWorld();
-                forms[i] = form;
-            })
-        }
-        manager.onProgress = function ( item, loaded, total ) {
-            loadingScreen.innerHTML = (loaded - 1) + "_" + (total - 1);
-            console.log((loaded - 1) + " " + (total - 1) + " " + item);
-        };  
-        manager.onLoad = function() {
-            loadingScreen.classList.remove( 'fade-in' );
-            buttonCreate();
-            KeyControls();
-            rotateStart();
-            scene.add(forms[cur]);
-            anim(); 
+		for (let i = 0; i < files.length; i++) {
+			loader.load(files[i], function(entity) {
+				let form = entity.scene;
+				form.name = files[i];
+				form.updateMatrixWorld();
+				forms[i] = form;
+			})
+		}
+		manager.onProgress = function(item, loaded, total) {
+			loadingScreen.innerHTML = (loaded - 1) + "/" + (total - 1);
+			console.log((loaded - 1) + " " + (total - 1) + " " + item);
+		};
+		manager.onLoad = function() {
+			loadingScreen.classList.remove('fade-in');
+			buttonCreate();
+			KeyControls();
+			rotateStart();
+			scene.add(forms[cur]);
+			anim();
 		};
 	}
-        
+    
+    	// animation frame call and rotation control
 	function anim() {
 		let animate = function() {
 			requestAnimationFrame(animate);
@@ -74,73 +85,79 @@
 			forms[cur].rotation.y += 0.002;
 			renderer.render(scene, cam0);
 		};
-        animate();
+		animate();
 	}
-    
-    // SETS FORM'S INITIAL ROTATION
-    function rotateStart() {
-        forms[cur].rotation.set(0,0,0);
-        forms[cur].rotateX(6);
-        forms[cur].rotateY(2);
-        if (forms[cur].name == ".//forms/anime.glb") {
-            forms[cur].rotation.x +=3.03;
-            forms[cur].rotation.y +=3.03;
-        } else if (forms[cur].name == ".//forms/small.glb"){
-            forms[cur].rotation.x +=3.03;
-            forms[cur].rotation.y +=3.03;
-        } else {
-            forms[cur].rotation.x += 2;
-        }
-    }
-    
-    // REMOVES FROM SCENE, REMAINS IN FORMS[] 
-    function removeForm(object) {
-        var selectedObject = scene.getObjectByName(object.name);
-        scene.remove( selectedObject );
-    }
-    
-    // ARROW KEY OBJECT CHANGE
-    function KeyControls() {
-        document.onkeydown = function(e) {
-            var n = 0;
-            switch (e.keyCode) {
-                case 37:
-                    if (cur != 0) n = -1;
-                    break;
-                case 39:
-                    if(cur != files.length - 1) n = 1;
-                    break;
-            }
-            if(n != 0){
-                removeForm(forms[cur]);
-                cur += n;
-                rotateStart();
-                scene.add(forms[cur])
-            }  
-        };
-    }
-        
-    // CLICK ANY PLACE ON SCREEN
-    function buttonCreate(){
-        var clicker = document.createElement("button");
-        clicker.addEventListener("click", click);
-        screenClick.appendChild(clicker);
-    }
-    
-    // SCREEN CLICK OBJECT CHANGE
-    var incr;
-    var dir = true; // true = right, false = left
-    function click(event) {
-        if(cur == files.length - 1){
-            dir = false;
-            incr = -1;
-        } else if (cur == 0) {
-            dir = true;
-            incr = 1;
-        }
-        removeForm(forms[cur]);
-        cur += incr;
-        scene.add(forms[cur])
-        rotateStart();
-    }
+
+	// sets form's initial rotation
+	function rotateStart() {
+		forms[cur].rotation.set(0, 0, 0);
+		forms[cur].rotateX(6);
+		forms[cur].rotateY(2);
+		if (forms[cur].name == ".//forms/anime.glb") {
+			forms[cur].rotation.x += 3.03;
+			forms[cur].rotation.y += 3.03;
+		} else if (forms[cur].name == ".//forms/small.glb") {
+			forms[cur].rotation.x += 3.03;
+			forms[cur].rotation.y += 3.03;
+		} else {
+			forms[cur].rotation.x += 2;
+		}
+	}
+
+	// removes from scene, remains in form[]
+	function removeForm(object) {
+		var selectedObject = scene.getObjectByName(object.name);
+		scene.remove(selectedObject);
+	}
+	
+	// screen click event listener
+	function buttonCreate() {
+		var clicker = document.createElement("button");
+		clicker.addEventListener("click", click);
+		screenClick.appendChild(clicker);
+	}
+
+	// screen's on click event
+	var incr;
+	var dir = true; // false = -1 , true = +1
+	function click(event) {
+		if (cur == files.length - 1) {
+			dir = false;
+			incr = -1;
+		} else if (cur == 0) {
+			dir = true;
+			incr = 1;
+		}
+		removeForm(forms[cur]);
+		cur += incr;
+		scene.add(forms[cur])
+		rotateStart();
+	}
+
+	// WASD and arrow keys  on click events
+	function KeyControls() {
+		document.onkeydown = function(e) {
+			var n = 0;
+			switch (e.keyCode) {
+				case 65:
+					if (cur != 0) n = -1;
+					break;
+				case 68:
+					if (cur != files.length - 1) n = 1;
+					break;
+				case 37:
+					if (cur != 0) n = -1;
+					break;
+				case 39:
+					if (cur != files.length - 1) n = 1;
+					break;
+			}
+			if (n != 0) {
+				removeForm(forms[cur]);
+				cur += n;
+				rotateStart();
+				scene.add(forms[cur])
+			}
+		};
+	}
 </script>
