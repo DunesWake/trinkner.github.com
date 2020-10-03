@@ -41,6 +41,10 @@ body{
 #header p{
     display:block;
 }
+#poem {
+    margin-left: 40vw;
+    display:block;
+}
 
 #header ul{
     padding-bottom: 123px;
@@ -90,7 +94,6 @@ body{
 }
 
 #showcase {
-    width:450px;
     padding-bottom: 1px;
     padding-top: 43px;
     clear:both;
@@ -107,6 +110,7 @@ body{
 }
 
 #showcase img{
+    display: block;
     float:left;
     max-width:66.5vw;
     max-height:46.3vh;
