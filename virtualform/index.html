@@ -46,9 +46,7 @@
 	var lights = [];
 	var forms = [];
 	
-	// -- ▼ MAIN ------------------------------------------------------------------------------------>
-	load();
-	
+	// -- ▼ MAIN ------------------------------------------------------------------------------------>	
 	// starts program, calls init() when completed
 	splashMenu();
 	
@@ -63,6 +61,7 @@
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 		scene = new THREE.Scene();
+		load();
 		
 		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
 		scene.add(lights[0]);
