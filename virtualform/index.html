@@ -47,6 +47,8 @@
 	var forms = [];
 	
 	// -- ▼ MAIN ------------------------------------------------------------------------------------>
+	load();
+	
 	// starts program, calls init() when completed
 	splashMenu();
 	
@@ -55,7 +57,6 @@
 	function init() {
 		splashScreen.remove();
 		loadingScreen.classList.add('fade-in');
-		load();
 		// anim() calls in load().onload()
 		
 		renderer = new THREE.WebGLRenderer({alpha: true, antialias: false});
