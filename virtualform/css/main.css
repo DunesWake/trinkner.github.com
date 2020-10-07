@@ -45,6 +45,24 @@ canvas {
     padding:0;		
 }    
 
+#splash-screen {
+	font-size: 1.03em;
+    position: fixed;
+    z-index: 0;
+    top: 44.5%;
+    opacity:1;
+    text-align: center;
+    width:100vw;
+    color: #999;
+}
+
+button {
+	font-size: 1.03em;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
 #loading-screen {
     position: fixed;
     z-index: -9999;
