@@ -10,31 +10,33 @@
 <div id="screenClick"></div>
 <div id="splash-screen"></div>
 <div id="loading-screen"></div>
-
 </html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>-->
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
-    
-    // starts loading screen
+	const splashScreen  = document.getElementById('splash-screen' );
 	const loadingScreen = document.getElementById('loading-screen');
-	loadingScreen.classList.add('fade-in');
-	const splashScreen = document.getElementById('splash-screen');
 
 	import * as THREE from './/js/three.module.js';
 	import {GLTFLoader} from './/js/GLTFLoader.js';
 	var manager = new THREE.LoadingManager();
 	var loader = new GLTFLoader(manager);
 	
-	// form load list
+	// spash menu vars
 	var menuBtn = [];
 	var rotate = true;
 	var audio = true;
-	var control = true;
-	var english = ["off", "on", "rotation", "audio", "automated cycling"]
-	var german = ["aus", "auf", "drehung", "klang", "automatisierter zyklus"]
-	var french = ["de", "sur", "tourner", "du son", "cycle automatisé"]
-	var files = [".//forms/2.glb", ".//forms/3.glb"];
+	var automate = false;
+	var english =["0", "1", "rotation ", "audio ", "automated cycling "];
+	var german = ["0", "1", "drehung ", "klang ", "automatisierter zyklus "];
+	var french = ["0", "1", "tourner ", "du son ", "cycle automatisé "];
+	var langs = [english,german,french];
+	var curLang = 0;
+
+
+	// form load list, render vars
+	var files = [".//forms/2.glb", ".//forms/small.glb"];
 	var clickDir;
 	var renderer;
 	var scene;
@@ -42,17 +44,20 @@
 	var cam = [];
 	var lights = [];
 	var forms = [];
-	splashMenu(english);
 	
 	// -- ▼ MAIN ------------------------------------------------------------------------------------>
+	// starts program, calls init() when completed
+	splashMenu();
+	
     // places light and camera
 	// creates renderer, resize, scene
-	function init(cur) {
+	function init() {
 		splashScreen.remove();
+		loadingScreen.classList.add('fade-in');
 		load();
 		// anim() calls in load().onload()
 		
-		renderer = new THREE.WebGLRenderer({alpha: true,antialias: false});
+		renderer = new THREE.WebGLRenderer({alpha: true, antialias: false});
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 		scene = new THREE.Scene();
@@ -65,7 +70,7 @@
 		THREEx.WindowResize(renderer, cam[0])
 	}
 
-    	// loads requested files into forms[]
+	// loads requested files into forms[]
 	function load() {
 		for (let i = 0; i < files.length; i++) {
 			loader.load(files[i], function(entity) {
@@ -90,16 +95,18 @@
 	
 	// set form's initial rotational placement
 	function formSet() {
-		for (let i = 0; i < lights.length; i++) {
-                	scene.remove(lights[i])
-        }
+		for (let i = 0; i < lights.length; i++) 
+        	scene.remove(lights[i])
+		
 		forms[cur].rotation.set(0, 0, 0);
 		forms[cur].rotateX(6);
 		forms[cur].rotateY(2);
 		if (forms[cur].name == ".//forms/anime.glb") {
+			scene.add(lights[0]);
 			forms[cur].rotation.x += 3.03;
 			forms[cur].rotation.y += 3.03;
 		} else if (forms[cur].name == ".//forms/small.glb") {
+			scene.add(lights[0]);
 			forms[cur].rotation.x += 3.03;
 			forms[cur].rotation.y += 3.03;
 		} else {
@@ -108,7 +115,7 @@
 		}
 	}
     
-    	// frame call and increments rotation animation 
+	// frame call and increments rotation animation 
 	function anim() {
 		let animate = function() {
 			requestAnimationFrame(animate);
@@ -116,7 +123,6 @@
 				forms[cur].rotation.x += 0.002;
 				forms[cur].rotation.y += 0.002;
 			}
-//            forms[cur].material.opacity = 0.5;
 			renderer.render(scene, cam[0]);
 		};
 		animate();
@@ -132,52 +138,31 @@
 	// removes from scene, remains in form[]
 	function removeForm(object) {
 		var selectedObject = scene.getObjectByName(object.name);
-        scene.remove(forms[cur]);
+        	scene.remove(forms[cur]);
 	}
 	
 	// screen click event listener
 	function buttonCreate() {
 		var clicker = document.createElement("button");
-		clicker.addEventListener("click", sClick);
+		clicker.addEventListener("click", function(){
+			if (cur == files.length - 1) clickDir = -1;
+			else if (cur == 0)           clickDir = +1;
+			removeForm(forms[cur])
+			cur += clickDir;
+			scene.add(forms[cur])
+			formSet();
+		});
 		screenClick.appendChild(clicker);
 	}
-
-	// screen's on click event
-	function sClick(event) {		
-		if (cur == files.length - 1) clickDir = -1;
-		else if (cur == 0)           clickDir =  1;
-		
-		removeForm(forms[cur])
-		cur += clickDir;
-		scene.add(forms[cur])
-		formSet();
-	}
-    
-    function fadeOut(object) {
-        object.traverse((node) => {
-            if (node.isMesh) {
-                gsap.to( node.material, .5, { opacity : 0, onComplete: removeForm(object)} );
-            }
-        });
-    }
-    function fadeIn(object) {
-        object.traverse((node) => {
-            if (node.isMesh) {
-                TweenMax.to( node.material, .5, {opacity : 1});
-            }
-        });
-    }
 
 	// WASD and arrow keys  on click events
 	function KeyControls() {
 		document.onkeydown = function(e) {
-		        var n = 0;
-		        if (e.keyCode == 37) {
-			    	if (cur != 0) n = -1;
-			}
-		        if (e.keyCode == 39) {
-				if (cur != files.length - 1) n = 1;
-			}
+			var n = 0;
+			if (e.keyCode == 37) 
+				if (cur != 0) n = -1;
+			if (e.keyCode == 39) 
+				if (cur != files.length - 1) n = +1;
 			if (n != 0) {
 				removeForm(forms[cur]);
 				cur += n;
@@ -187,65 +172,60 @@
 		}	
 	}
 	// -- ▼ SPLASH MENU --------------------------------------------------------------------------------->
-	function splashMenu(lang) {
+	function splashMenu() {
 		while(splashScreen.firstChild) {
 			splashScreen.removeChild(splashScreen.firstChild);
 		}		
 		// LANGUAGE
-		menuBtn[0] = insertMenuBtn("english", true);
+		menuBtn[0] = insertMenuBtn("english", curLang == 0);
 		menuBtn[0].onclick = () => menuBtn[0]=togLang(0);
 		insertMenuSlash();
-		menuBtn[1] = insertMenuBtn("deutsche", false);
+		menuBtn[1] = insertMenuBtn("deutsche", curLang == 1);
 		menuBtn[1].onclick = () => menuBtn[1]=togLang(1);
 		insertMenuSlash();
-		menuBtn[2] = insertMenuBtn("française", false);
+		menuBtn[2] = insertMenuBtn("française", curLang == 2);
 		menuBtn[2].onclick = () => menuBtn[2]=togLang(2);
 		insertMenuSlash();
 		insertMenuNewLine();
 
 		// ROTATION
-		menuBtn[3] = insertMenuBtn(lang[2], true);
+		insertMenuName(langs[curLang][2]);
+		menuBtn[3] = insertMenuBtn(langs[curLang][0], !rotate);
+		menuBtn[3].onclick = () => togRotate(3);
 		insertMenuSlash();
-		menuBtn[4] = insertMenuBtn(lang[0], false);
-		menuBtn[4].onclick = () => menuBtn[4]=togRotate(4);
-		insertMenuSlash();
-		menuBtn[5] = insertMenuBtn(lang[1], true);
-		menuBtn[5].onclick = () => menuBtn[5]=togRotate(5);
-		insertMenuSlash();
-		insertMenuNewLine();
-
-		// AUDIO
-		menuBtn[6] = insertMenuBtn(lang[3], true);
-		insertMenuSlash();
-		menuBtn[7] = insertMenuBtn(lang[0], false);
-		menuBtn[7].onclick = () => menuBtn[7]=togAudio(7);
-		insertMenuSlash();
-		menuBtn[8] = insertMenuBtn(lang[1], true);
-		menuBtn[8].onclick = () => menuBtn[8]=togAudio(8);
-		insertMenuSlash();
-		insertMenuNewLine();
-
-		// AUTOMATED CONTROL
-		menuBtn[9] = insertMenuBtn(lang[4], true);
-		insertMenuSlash();
-		menuBtn[10] = insertMenuBtn(lang[0], true);
-		menuBtn[10].onclick = () => menuBtn[10]=togControl(10);
-		insertMenuSlash();
-		menuBtn[11] = insertMenuBtn(lang[1], false);
-		menuBtn[11].onclick = () => menuBtn[11]=togControl(11);
+		menuBtn[4] = insertMenuBtn(langs[curLang][1], rotate);
+		menuBtn[4].onclick = () => togRotate(4);
 		insertMenuSlash();
 		
 		// EXIT MENU
-		menuBtn[12] = insertMenuBtn(">", true);
-		menuBtn[12].onclick = () => init(this);
-
+		menuBtn[9] = insertMenuBtn(">", true);
+		menuBtn[9].onclick = () => init();
+	}
+	
+	function togLang(cur) {
+		if (cur == 0) curLang = 0;
+		if (cur == 1) curLang = 1;
+		if (cur == 2) curLang = 2;
+		splashMenu();
+	}
+	function togRotate(cur) {
+		if (cur == 3) rotate = false;
+		if (cur == 4) rotate = true;
+		splashMenu();
+	}
+	
+	function insertMenuName(text) {
+		var btn = document.createElement("BUTTON"); 
+		btn.style.color = "#111";
+		btn.innerHTML = text;  		
+		splashScreen.appendChild(btn);
+		insertMenuSlash();
 	}
 	function insertMenuBtn(text, active) {
 		var btn = document.createElement("BUTTON"); 
-		btn.innerHTML = text;  		
 		if (active) btn.style.color = "#111";
-		else btn.style.color = "#BBB";
-
+		else        btn.style.color = "#BBB";
+		btn.innerHTML = text;  		
 		splashScreen.appendChild(btn);
 		return btn;
 	}
@@ -257,88 +237,5 @@
 	function insertMenuNewLine() {
 		var nl = document.createElement("br");  
 		splashScreen.appendChild(nl);
-	}
-	var off = "rgb(187, 187, 187)";
-	var on = "rgb(17, 17, 17)";
-	function togLang(cur) {
-		if (cur == 0) {
-			splashMenu(english);
-			if (menuBtn[1].style.color == on
-			   || menuBtn[2].style.color == on) {
-				menuBtn[1].style.color = off;
-				menuBtn[2].style.color = off;
-				menuBtn[cur].style.color = on;
-			}		
-		}
-		if (cur == 1) {
-			splashMenu(german);
-			if (menuBtn[0].style.color == on
-			   || menuBtn[2].style.color == on) {
-				menuBtn[0].style.color = off;
-				menuBtn[2].style.color = off;
-				menuBtn[cur].style.color = on;
-			}		
-		}
-		if (cur == 2) {
-			splashMenu(french);
-			if (menuBtn[0].style.color == on
-			   || menuBtn[1].style.color == on) {
-				menuBtn[0].style.color = off;
-				menuBtn[1].style.color = off;
-				menuBtn[cur].style.color = on;
-			}		
-		}
-		return menuBtn[cur];
-	}
-	function togRotate(cur) {
-		if (cur == 4) {
-			if (menuBtn[5].style.color == on) {
-				menuBtn[5].style.color = off;
-				menuBtn[cur].style.color = on;
-			}	
-			rotate = false;
-		}
-		if (cur == 5) {
-			if (menuBtn[4].style.color == on) {
-				menuBtn[4].style.color = off;
-				menuBtn[cur].style.color = on;
-			}		
-			rotate = true;
-		}
-		return menuBtn[cur];
-	}
-	function togAudio(cur) {
-		if (cur == 7) {
-			if (menuBtn[8].style.color == on) {
-				menuBtn[8].style.color = off;
-				menuBtn[cur].style.color = on;
-			}	
-			audio = false;
-		}
-		if (cur == 8) {
-			if (menuBtn[7].style.color == on) {
-				menuBtn[7].style.color = off;
-				menuBtn[cur].style.color = on;
-			}		
-			audio = true;
-		}
-		return menuBtn[cur];
-	}
-	function togControl(cur) {
-		if (cur == 10) {
-			if (menuBtn[11].style.color == on) {
-				menuBtn[11].style.color = off;
-				menuBtn[cur].style.color = on;
-			}	
-			control = false;
-		}
-		if (cur == 11) {
-			if (menuBtn[10].style.color == on) {
-				menuBtn[10].style.color = off;
-				menuBtn[cur].style.color = on;
-			}		
-			control = true;
-		}
-		return menuBtn[cur];
 	}
 </script>
