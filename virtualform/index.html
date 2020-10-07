@@ -27,16 +27,17 @@
 	var menuBtn = [];
 	var rotate = true;
 	var audio = true;
-	var automate = false;
-	var english =["0", "1", "rotation ", "audio ", "automated cycling "];
+	var control = false;
+	var english = ["0", "1", "rotation ", "audio ", "automated cycling "];
 	var german = ["0", "1", "drehung ", "klang ", "automatisierter zyklus "];
 	var french = ["0", "1", "tourner ", "du son ", "cycle automatisé "];
-	var langs = [english,german,french];
+	var chinese = ["0", "1", "旋转 ", "du son ", "cycle automatisé "];
+	var langs = [english,german,french,chinese];
 	var curLang = 0;
 
 
 	// form load list, render vars
-	var files = [".//forms/2.glb", ".//forms/small.glb"];
+	var files = [".//forms/small.glb", ".//forms/2.glb"];
 	var clickDir;
 	var renderer;
 	var scene;
@@ -101,11 +102,7 @@
 		forms[cur].rotation.set(0, 0, 0);
 		forms[cur].rotateX(6);
 		forms[cur].rotateY(2);
-		if (forms[cur].name == ".//forms/anime.glb") {
-			scene.add(lights[0]);
-			forms[cur].rotation.x += 3.03;
-			forms[cur].rotation.y += 3.03;
-		} else if (forms[cur].name == ".//forms/small.glb") {
+		if (forms[cur].name == ".//forms/small.glb") {
 			scene.add(lights[0]);
 			forms[cur].rotation.x += 3.03;
 			forms[cur].rotation.y += 3.03;
@@ -138,7 +135,7 @@
 	// removes from scene, remains in form[]
 	function removeForm(object) {
 		var selectedObject = scene.getObjectByName(object.name);
-        	scene.remove(forms[cur]);
+        scene.remove(forms[cur]);
 	}
 	
 	// screen click event listener
@@ -172,54 +169,50 @@
 		}	
 	}
 	// -- ▼ SPLASH MENU --------------------------------------------------------------------------------->
+	// rebuilds each time a variable is changed
 	function splashMenu() {
+		// removes everything to start from scratch
 		while(splashScreen.firstChild) {
 			splashScreen.removeChild(splashScreen.firstChild);
 		}		
 		// LANGUAGE
 		menuBtn[0] = insertMenuBtn("english", curLang == 0);
-		menuBtn[0].onclick = () => menuBtn[0]=togLang(0);
+		menuBtn[0].onclick = () => togLang(0);
 		insertMenuSlash();
 		menuBtn[1] = insertMenuBtn("deutsche", curLang == 1);
-		menuBtn[1].onclick = () => menuBtn[1]=togLang(1);
+		menuBtn[1].onclick = () => togLang(1);
 		insertMenuSlash();
 		menuBtn[2] = insertMenuBtn("française", curLang == 2);
-		menuBtn[2].onclick = () => menuBtn[2]=togLang(2);
+		menuBtn[2].onclick = () => togLang(2);
+		insertMenuSlash();
+		menuBtn[3] = insertMenuBtn("中文", curLang == 3);
+		menuBtn[3].onclick = () => togLang(3);
 		insertMenuSlash();
 		insertMenuNewLine();
 
 		// ROTATION
-		insertMenuName(langs[curLang][2]);
-		menuBtn[3] = insertMenuBtn(langs[curLang][0], !rotate);
-		menuBtn[3].onclick = () => togRotate(3);
+		insertMenuBtn(langs[curLang][2], true);
 		insertMenuSlash();
-		menuBtn[4] = insertMenuBtn(langs[curLang][1], rotate);
+		menuBtn[4] = insertMenuBtn(langs[curLang][0], !rotate);
 		menuBtn[4].onclick = () => togRotate(4);
 		insertMenuSlash();
+		menuBtn[5] = insertMenuBtn(langs[curLang][1], rotate);
+		menuBtn[5].onclick = () => togRotate(5);
+		insertMenuSlash();
 		
-		// EXIT MENU
+		// EXIT 
 		menuBtn[9] = insertMenuBtn(">", true);
 		menuBtn[9].onclick = () => init();
 	}
 	
 	function togLang(cur) {
-		if (cur == 0) curLang = 0;
-		if (cur == 1) curLang = 1;
-		if (cur == 2) curLang = 2;
+		curLang = cur;
 		splashMenu();
 	}
 	function togRotate(cur) {
-		if (cur == 3) rotate = false;
-		if (cur == 4) rotate = true;
+		if (cur == 4) rotate = false;
+		if (cur == 5) rotate = true;
 		splashMenu();
-	}
-	
-	function insertMenuName(text) {
-		var btn = document.createElement("BUTTON"); 
-		btn.style.color = "#111";
-		btn.innerHTML = text;  		
-		splashScreen.appendChild(btn);
-		insertMenuSlash();
 	}
 	function insertMenuBtn(text, active) {
 		var btn = document.createElement("BUTTON"); 
