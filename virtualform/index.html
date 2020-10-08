@@ -120,10 +120,6 @@
     	// frame call and increments rotation animation 
 	function anim() {
 		renderer.setAnimationLoop( function () {
-			if (rotate) {
-				forms[cur].rotation.x += 0.002;
-				forms[cur].rotation.y += 0.002;
-			}
 			renderer.render( scene, cam[0] );
 		} );
 //		let animate = function() {
