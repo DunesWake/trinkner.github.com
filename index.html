@@ -6,16 +6,20 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 	<link href=".//css/main.css" rel="stylesheet">
 </head>
-    
+<body>
 <div id="screenClick"></div>
 <div id="splash-screen"></div>
 <div id="loading-screen"></div>
+<div id="vr-btn"></div>
+</body>
+
 </html>
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
 	const splashScreen  = document.getElementById('splash-screen' );
 	const loadingScreen = document.getElementById('loading-screen');
+	const vrs = document.getElementById('vr-btn');
 
 	import { VRButton } from './js/VRButton.js';
 	import * as THREE from './js/three.module.js';
@@ -48,6 +52,7 @@
 // -- ▼ MAIN ------------------------------------------------------------------------------------>
    
     	// starts program, calls init() when completed
+			vrs.appendChild( VRButton.createButton( renderer ) );
 	splashMenu();
     
     	// places light and camera
@@ -55,11 +60,14 @@
 	function init() {
 		splashScreen.remove(); 
 	    	loadingScreen.classList.add('fade-in');
+
+		
 	    
 		renderer = new THREE.WebGLRenderer({alpha: true});
 		renderer.setSize(window.innerWidth, window.innerHeight);
 	    	renderer.setPixelRatio( window.devicePixelRatio * 3 );
 		renderer.xr.enabled = true;
+
 
 		document.body.appendChild(renderer.domElement);
 		scene = new THREE.Scene
@@ -190,10 +198,6 @@
 		menuBtn[3].onclick = () => {curLang = 3; splashMenu();}
 		insertMenuSlash();
 		insertMenuNewLine();
-		
-		splashScreen.appendChild( VRButton.createButton( renderer ) );
-		insertMenuNewLine();
-
 
 		// ROTATION
 	    	insertMenuBtn(langs[curLang][2], 1);
