@@ -6,20 +6,24 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 	<link href=".//css/main.css" rel="stylesheet">
 </head>
-    
+<body>
 <div id="screenClick"></div>
 <div id="splash-screen"></div>
 <div id="loading-screen"></div>
+<div id="vr-btn"></div>
+</body>
+
 </html>
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
 	const splashScreen  = document.getElementById('splash-screen' );
 	const loadingScreen = document.getElementById('loading-screen');
+	const vrs = document.getElementById('vr-btn');
 
-	import { VRButton } from './/js/VRButton.js';
-	import * as THREE from './/js/three.module.js';
-	import {GLTFLoader} from './/js/GLTFLoader.js';
+	import { VRButton } from './js/VRButton.js';
+	import * as THREE from './js/three.module.js';
+	import {GLTFLoader} from './js/GLTFLoader.js';
 	var manager = new THREE.LoadingManager();
 	var loader  = new GLTFLoader(manager);
 	
@@ -35,7 +39,7 @@
 	var curLang = 3;
 
 	// render vars
-	var files = [".//forms/small.glb", ".//forms/2.glb"];
+	var files = ["./forms/small.glb", "./forms/2.glb"];
 	var clickDir;
 	var renderer;
 	var scene;
@@ -48,6 +52,7 @@
 // -- ▼ MAIN ------------------------------------------------------------------------------------>
    
     	// starts program, calls init() when completed
+			vrs.appendChild( VRButton.createButton( renderer ) );
 	splashMenu();
     
     	// places light and camera
@@ -55,11 +60,14 @@
 	function init() {
 		splashScreen.remove(); 
 	    	loadingScreen.classList.add('fade-in');
+
+		
 	    
 		renderer = new THREE.WebGLRenderer({alpha: true});
 		renderer.setSize(window.innerWidth, window.innerHeight);
 	    	renderer.setPixelRatio( window.devicePixelRatio * 3 );
 		renderer.xr.enabled = true;
+
 
 		document.body.appendChild(renderer.domElement);
 		scene = new THREE.Scene
@@ -100,7 +108,7 @@
 		forms[cur].rotation.set(0, 0, 0);
 		forms[cur].rotateX(6);
 		forms[cur].rotateY(2);
-		if (forms[cur].name == ".//forms/small.glb") {
+		if (forms[cur].name == "./forms/small.glb") {
 			scene.add(lights[0]);
 			forms[cur].rotation.x += 3.03;
 			forms[cur].rotation.y += 3.03;
@@ -190,10 +198,6 @@
 		menuBtn[3].onclick = () => {curLang = 3; splashMenu();}
 		insertMenuSlash();
 		insertMenuNewLine();
-		
-		splashScreen.appendChild( VRButton.createButton( renderer ) );
-		insertMenuNewLine();
-
 
 		// ROTATION
 	    	insertMenuBtn(langs[curLang][2], 1);
