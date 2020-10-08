@@ -16,16 +16,10 @@
 			import { BoxLineGeometry } from './js/BoxLineGeometry.js';
 			import { VRButton } from './js/VRButton.js';
 
-
-			var clock = new THREE.Clock();
-
 			var container;
-			var camera, scene, raycaster, renderer;
+			var camera, scene, renderer;
 
 			var room;
-
-			var controller, controllerGrip, tempMatrix = new THREE.Matrix4();
-			var INTERSECTED;
 
 			init();
 			animate();
@@ -81,12 +75,10 @@
 
 				}
 
-				raycaster = new THREE.Raycaster();
 
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer = new THREE.WebGLRenderer({alpha: true});
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				renderer.outputEncoding = THREE.sRGBEncoding;
 				renderer.xr.enabled = true;
 				container.appendChild( renderer.domElement );
 
