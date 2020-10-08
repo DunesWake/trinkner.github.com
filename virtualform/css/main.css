@@ -46,10 +46,9 @@ canvas {
 }    
 
 #splash-screen {
-	font-size: 1.03em;
     position: fixed;
     z-index: 0;
-    top: 44.5%;
+	top:42vh;
     opacity:1;
     text-align: center;
     width:100vw;
@@ -57,7 +56,6 @@ canvas {
 }
 
 button {
-	font-size: 1.03em;
     background: transparent;
     border: none;
     outline: none;
