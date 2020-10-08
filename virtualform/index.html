@@ -53,8 +53,7 @@
    
     	// starts program, calls init() when completed
 	vrs.appendChild( VRButton.createButton( renderer ) );
-//	splashMenu();
-	init();
+	splashMenu();
     
     	// places light and camera
 	// creates renderer, resize, scene
@@ -63,9 +62,8 @@
 	    	loadingScreen.classList.add('fade-in');
 
 		renderer = new THREE.WebGLRenderer({alpha: true});
-	    	renderer.setPixelRatio( window.devicePixelRatio);
 		renderer.setSize(window.innerWidth, window.innerHeight);
-		renderer.outputEncoding = THREE.sRGBEncoding;
+	    	renderer.setPixelRatio( window.devicePixelRatio * 3 );
 		renderer.xr.enabled = true;
 		document.body.appendChild(renderer.domElement);
 		
@@ -76,10 +74,6 @@
 	    
 		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
 	    	load(); 
-		
-		renderer.setAnimationLoop( function () {
-			renderer.render( scene, cam[0] );
-		} );
 	    	//anim() calls in load().onLoad()
 	}
     	// loads requested files into forms[]
@@ -122,9 +116,15 @@
 	}
     	// frame call and increments rotation animation 
 	function anim() {
-		renderer.setAnimationLoop( function () {
+		renderer.setAnimationLoop( render );
+		
+	}
+	function render() {
+			if (rotate) {
+				forms[cur].rotation.x += 0.002;
+				forms[cur].rotation.y += 0.002;
+			}
 			renderer.render( scene, cam[0] );
-		} );
 //		let animate = function() {
 //			requestAnimationFrame(animate);
 //			if (rotate) {
