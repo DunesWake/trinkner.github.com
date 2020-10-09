@@ -18,12 +18,12 @@
 	// spash menu vars
 	var menuBtn = [];
 	var rotate = true;
-	var audio = true;
-	var english = ["about	", "yes", "rotation "];
-	var german =  ["Über", "aus", "drehung "];
-	var french =  ["sur", "1", "tourner "];
-	var chinese = ["关于", "联络人", "旋转 "];
-	var langs = [english,german,french,chinese];
+	var vr = false;
+	var english = ["about	", "yes", "rotation ", "virtual reality"];
+	var german =  ["Über", "aus", "drehung ", "virtuelle Realität"];
+	var french =  ["sur", "1", "tourner ", "réalité virtuelle"];
+	var chinese = ["关于", "联络人", "旋转 ", "虚拟现实"];
+	var langs =   [english,german,french,chinese];
 	var curLang = 3;
     
 // -- ▼ MAIN ------------------------------------------------------------------------------------>
@@ -60,6 +60,17 @@
 		menuBtn[11] = insertMenuBtn("1", rotate);
 		menuBtn[11].onclick = () => {rotate = true; splashMenu();}
 		insertMenuSlash();
+		insertMenuNewLine();
+			
+		// VR
+		insertMenuBtn(langs[curLang][3], 1);
+		insertMenuSlash(); 
+		menuBtn[12] = insertMenuBtn("0", !vr);
+		menuBtn[12].onclick = () => {vr = false; splashMenu();}
+		insertMenuSlash();
+		menuBtn[13] = insertMenuBtn("1", vr);
+		menuBtn[13].onclick = () => {vr = true; splashMenu();}
+		insertMenuSlash();
 
 		// EXIT 
 		menuBtn[9] = insertMenuBtn(">", true);
@@ -92,6 +103,7 @@
 	}
 	function runProgram(){
 		sessionStorage.setItem("rotate", "" + rotate);
+		sessionStorage.setItem("vr", "" + vr);
 		window.location.href="render.html";
 	}
 </script>

@@ -24,6 +24,7 @@
 	
 	// spash menu vars
 	var rotate = sessionStorage.getItem('rotate');
+	var vr = sessionStorage.getItem('vr');
 
 	// render vars
 	var files = ["./forms/small.glb", "./forms/2.glb"];
@@ -61,13 +62,21 @@
 
 		cam[0] = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		cam[0].position.z = 5.25;
-		scene.add(cam[0]);
+			
+		const cameraHolder = new Group();
+		if (vr){
+			cameraHolder.add(cam[0]);
+			cameraHolder.position.set(0, 0, 0);
+			scene.add(cameraHolder);
+		} else {
+			scene.add(cam[0]);
+		}
 		THREEx.WindowResize(renderer, cam[0])
 	    
 		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
 	   	load(); 
-		document.body.appendChild( VRButton.createButton( renderer ) );
-
+		if (vr == "true")
+			document.body.appendChild( VRButton.createButton( renderer ) );
 	    	//anim() calls in load().onLoad()
 	}
     	// loads files into forms[]
