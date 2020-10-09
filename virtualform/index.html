@@ -20,8 +20,10 @@
 	var rotate = true;
 	var vr = false;
 	var oldURL = document.referrer;
-	if (oldURL == ("http://www.trinkner.xyz/virtualform/"))
-		vr = true;
+	console.log(oldURL);
+//	if (oldURL == ("http://www.trinkner.xyz/virtualform/")){
+//		vr = true;
+//	}
 	var english = ["about	", "yes", "rotation ", "virtual reality"];
 	var german =  ["Über", "aus", "drehung ", "virtuelle Realität"];
 	var french =  ["sur", "1", "tourner ", "réalité virtuelle"];
@@ -75,7 +77,7 @@
 		menuBtn[13].onclick = () => {
 			vr = true; 
 			if (!window.location.href.includes("https"))
-				location.replace(window.location.href.replace("http:", "https:"));
+//				location.replace(window.location.href.replace("http:", "https:"));
 			splashMenu();}
 		insertMenuSlash();
 
