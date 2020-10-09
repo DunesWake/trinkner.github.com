@@ -9,7 +9,8 @@
 <body>
 <div id="screenClick"></div>
 <div id="loading-screen"></div>
-
+</body>
+</html>
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
@@ -19,8 +20,6 @@
 	import * as THREE from './js/three.module.js';
 	import {GLTFLoader} from './js/GLTFLoader.js';
 	import { VRButton } from './js/VRButton.js';
-	var manager = new THREE.LoadingManager();
-	var loader  = new GLTFLoader(manager);
 	
 	// spash menu vars
 	var rotate = sessionStorage.getItem('rotate');
@@ -28,6 +27,8 @@
 
 	// render vars
 	var files = ["./forms/small.glb", "./forms/2.glb"];
+	var manager = new THREE.LoadingManager();
+	var loader  = new GLTFLoader(manager);
 	var cur = 0;
 	var clickDir;
 	var renderer;
@@ -38,13 +39,12 @@
 	var forms = [];
 	var loaded = false;
 	   
-    // starts program, calls init() when completed
-	//	vrs.appendChild( VRButton.createButton( renderer ) );
+    	// starts program, calls init() when completed
 	loadingScreen.classList.add('fade-in');
-    init();
+    	init();
 	anim();
 
-    // places light and camera
+    	// places light and camera
 	// creates renderer, resize, scene
 	function init() {
 		container = document.createElement( 'div' );
@@ -52,7 +52,7 @@
 		
 		renderer = new THREE.WebGLRenderer({});
 		renderer.setSize(window.innerWidth, window.innerHeight);
-	    renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
+	    	renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
 	
  		renderer.xr.enabled = true;
 		container.appendChild( renderer.domElement );
@@ -75,9 +75,7 @@
 	    
 		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
 	   	load(); 
-		if (vr == "true")
-			document.body.appendChild( VRButton.createButton( renderer ) );
-	    	//anim() calls in load().onLoad()
+		if (vr == "true") document.body.appendChild( VRButton.createButton( renderer ) );
 	}
     	// loads files into forms[]
 	function load() {
@@ -176,5 +174,3 @@
 		}	
 	} 
 </script>
-</body>
-</html>
