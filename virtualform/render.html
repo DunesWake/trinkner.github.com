@@ -53,7 +53,6 @@
 		renderer = new THREE.WebGLRenderer({});
 		renderer.setSize(window.innerWidth, window.innerHeight);
 	    	renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
-	
  		renderer.xr.enabled = true;
 		container.appendChild( renderer.domElement );
 		
@@ -63,19 +62,19 @@
 		cam[0] = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		cam[0].position.z = 5.25;
 			
+		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
+	   	load(); 
+		
 		const cameraHolder = new THREE.Group();
 		if (vr){
 			cameraHolder.add(cam[0]);
 			cameraHolder.position.set(0, 0, 0);
 			scene.add(cameraHolder);
-		} else {
-			scene.add(cam[0]);
-		}
-		THREEx.WindowResize(renderer, cam[0])
-	    
-		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
-	   	load(); 
+		} else scene.add(cam[0]);
+		
 		if (vr == "true") document.body.appendChild( VRButton.createButton( renderer ) );
+		THREEx.WindowResize(renderer, cam[0])
+
 	}
     	// loads files into forms[]
 	function load() {
@@ -116,24 +115,13 @@
 		}
 	}
     	// frame call and increments rotation animation 
-	function anim() {
-		renderer.setAnimationLoop( render );
-	}
+	function anim() {renderer.setAnimationLoop( render );}
 	function render() {
 		if (rotate == "true" && loaded == true) {
 			forms[cur].rotation.x += 0.002;
 			forms[cur].rotation.y += 0.002;
 		}
 		renderer.render( scene, cam[0]);
-//		let animate = function() {
-//			requestAnimationFrame(animate);
-//			if (rotate) {
-//				forms[cur].rotation.x += 0.002;
-//				forms[cur].rotation.y += 0.002;
-//			}
-//			renderer.render(scene, cam[0]);
-//		};
-//		animate();
 	}
 	
 // -- ▼ HELPERS --------------------------------------------------------------------------------->
