@@ -19,11 +19,6 @@
 	var menuBtn = [];
 	var rotate = true;
 	var vr = false;
-	var oldURL = document.referrer;
-	console.log(oldURL);
-	if (oldURL == ("http://www.trinkner.xyz/virtualform/")){
-		vr = true;
-	}
 	var english = ["about	", "yes", "rotation ", "virtual reality"];
 	var german =  ["Über", "aus", "drehung ", "virtuelle Realität"];
 	var french =  ["sur", "1", "tourner ", "réalité virtuelle"];
@@ -33,7 +28,7 @@
     
 // -- ▼ MAIN ------------------------------------------------------------------------------------>
    
-    	// starts program, calls init() when completed
+    // starts program, calls init() when completed
 	splashMenu();
 
 	// rebuilds from scratch, each time a variable is changed
@@ -60,10 +55,10 @@
 	    	insertMenuBtn(langs[curLang][2], 1);
 		insertMenuSlash(); 
 		menuBtn[10] = insertMenuBtn("0", !rotate);
-		menuBtn[10].onclick = () => {rotate = false; splashMenu();}
+		menuBtn[10].onclick = () => {rotate = false; splashMenu(); }
 		insertMenuSlash();
 		menuBtn[11] = insertMenuBtn("1", rotate);
-		menuBtn[11].onclick = () => {rotate = true; splashMenu();}
+		menuBtn[11].onclick = () => {rotate = true; splashMenu();  }
 		insertMenuSlash();
 		insertMenuNewLine();
 			
@@ -71,20 +66,10 @@
 		insertMenuBtn(langs[curLang][3], 1);
 		insertMenuSlash(); 
 		menuBtn[12] = insertMenuBtn("0", !vr);
-		menuBtn[12].onclick = () => {vr = false; splashMenu();}
+		menuBtn[12].onclick = () => {vr = false; splashMenu(); }
 		insertMenuSlash();
 		menuBtn[13] = insertMenuBtn("1", vr);
-		menuBtn[13].onclick = () => {
-			vr = true; 
-
-				var oldURL = document.referrer;
-	console.log(oldURL);
-	if (oldURL == ("http://www.trinkner.xyz/virtualform/")){
-		vr = true;
-	}
-			//			if (!window.location.href.includes("https"))
-////				location.replace(window.location.href.replace("http:", "https:"));
-			splashMenu();}
+		menuBtn[13].onclick = () => { vr = true; splashMenu(); }
 		insertMenuSlash();
 
 		// EXIT 

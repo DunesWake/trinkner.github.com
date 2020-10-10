@@ -10,24 +10,22 @@
 <div id="screenClick"></div>
 <div id="loading-screen"></div>
 
-
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
-	const splashScreen  = document.getElementById('splash-screen' );
 	const loadingScreen = document.getElementById('loading-screen');
-
+	
 	import * as THREE from './js/three.module.js';
 	import {GLTFLoader} from './js/GLTFLoader.js';
 	import { VRButton } from './js/VRButton.js';
-	var manager = new THREE.LoadingManager();
-	var loader  = new GLTFLoader(manager);
 	
 	// spash menu vars
 	var rotate = sessionStorage.getItem('rotate');
 	var vr = sessionStorage.getItem('vr');
 
 	// render vars
-	var files = ["./forms/small.glb", "./forms/2.glb"];
+	var files = ["./forms/small2.glb", "./forms/small.glb"];
+	var manager = new THREE.LoadingManager();
+	var loader  = new GLTFLoader(manager);
 	var cur = 0;
 	var clickDir;
 	var renderer;
@@ -39,8 +37,9 @@
 	var loaded = false;
 	   
     // starts program, calls init() when completed
-	//	vrs.appendChild( VRButton.createButton( renderer ) );
 	loadingScreen.classList.add('fade-in');
+	loadingScreen.innerHTML = "loading"; // (loaded - 1) + " " + (total - 1)
+	
     init();
 	anim();
 
@@ -52,35 +51,28 @@
 		
 		renderer = new THREE.WebGLRenderer({});
 		renderer.setSize(window.innerWidth, window.innerHeight);
-	    renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
-	
+		renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
  		renderer.xr.enabled = true;
 		container.appendChild( renderer.domElement );
 		
 		scene = new THREE.Scene
 		scene.background = new THREE.Color( 0xffffff );
-
 		cam[0] = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		cam[0].position.z = 5.25;
-			
+		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
+		
+		// sets up camera for vr, if toggled
 		const cameraHolder = new THREE.Group();
-		if (vr){
+		if (vr == "true"){
+			document.body.appendChild( VRButton.createButton( renderer ) );
 			cameraHolder.add(cam[0]);
 			cameraHolder.position.set(0, 0, 0);
 			scene.add(cameraHolder);
-		} else {
-			scene.add(cam[0]);
-		}
-		THREEx.WindowResize(renderer, cam[0])
-	    
-		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
+		} else scene.add(cam[0]);
+		THREEx.WindowResize(renderer, cam[0]);
 	   	load(); 
-		if (vr == "true"){
-			document.body.appendChild( VRButton.createButton( renderer ) );
-	    	//anim() calls in load().onLoad()
-		}
 	}
-    	// loads files into forms[]
+    // loads files into forms[]
 	function load() {
 		for (let i = 0; i < files.length; i++) {
 			loader.load(files[i], function(entity) {
@@ -89,11 +81,12 @@
 			})
 		}
 		manager.onProgress = function(item, loaded, total) {
-			loadingScreen.innerHTML = "loading";
-//			loadingScreen.innerHTML = "loading " + (loaded - 1) + "/" + (total - 1);
 			console.log((loaded - 1) + " " + (total - 1) + " " + item);
 		};
 		manager.onLoad = function() {
+			while(loadingScreen.firstChild) {
+				loadingScreen.removeChild(loadingScreen.firstChild);
+			}	
 			loadingScreen.classList.remove('fade-in');
 			startScreenClick();
 			startKeyControls();
@@ -101,12 +94,12 @@
 			loaded = true;
 		};
 	}
-    	// set form's initial rotational placement
+    // set form's initial rotational placement
 	function formSet() {
 		for (let i = 0; i < lights.length; i++) 
         		scene.remove(lights[i])
 
-	    	scene.add(forms[cur]);
+		scene.add(forms[cur]);
 		forms[cur].rotation.set(0, 0, 0);
 		forms[cur].rotateX(6);
 		forms[cur].rotateY(2);
@@ -119,26 +112,16 @@
 			forms[cur].rotation.x += 2;
 		}
 	}
-    	// frame call and increments rotation animation 
-	function anim() {
-		renderer.setAnimationLoop( render );
-	}
+    // frame call and increments rotation animation 
+	function anim() {renderer.setAnimationLoop( render );}
 	function render() {
 		if (rotate == "true" && loaded == true) {
 			forms[cur].rotation.x += 0.002;
 			forms[cur].rotation.y += 0.002;
 		}
 		renderer.render( scene, cam[0]);
-//		let animate = function() {
-//			requestAnimationFrame(animate);
-//			if (rotate) {
-//				forms[cur].rotation.x += 0.002;
-//				forms[cur].rotation.y += 0.002;
-//			}
-//			renderer.render(scene, cam[0]);
-//		};
-//		animate();
 	}
+	
 	
 // -- ▼ HELPERS --------------------------------------------------------------------------------->
     
@@ -164,7 +147,7 @@
 		});
 		screenClick.appendChild(clicker);
 	}
-	// WASD and arrow keys  on click events
+	// arrow keys on click events
 	function startKeyControls() {
 		document.onkeydown = function(e) {
 			var n = 0;
