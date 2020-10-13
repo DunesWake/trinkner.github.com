@@ -23,9 +23,10 @@
 	var vr = sessionStorage.getItem('vr');
 
 	// render vars
-	var files = ["./forms/small2.glb", "./forms/small.glb"];
+	var files = ["./forms/small.glb", "./forms/900x634.jpg", "./forms/506x900.png", "./forms/small2.glb"];
 	var manager = new THREE.LoadingManager();
-	var loader  = new GLTFLoader(manager);
+	var loaderGLB = new GLTFLoader(manager);
+	var loaderJPG = new THREE.TextureLoader(manager);
 	var cur = 0;
 	var clickDir;
 	var renderer;
@@ -36,14 +37,14 @@
 	var forms = [];
 	var loaded = false;
 	   
-    // starts program, calls init() when completed
+    	// starts program, calls init() when completed
 	loadingScreen.classList.add('fade-in');
 	loadingScreen.innerHTML = "loading"; // (loaded - 1) + " " + (total - 1)
 	
    	init();
 	anim();
 
-    // places light and camera
+    	// places light and camera
 	// creates renderer, resize, scene
 	function init() {
 		container = document.createElement( 'div' );
@@ -58,8 +59,13 @@
 		scene = new THREE.Scene
 		scene.background = new THREE.Color( 0xffffff );
 		cam[0] = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		cam[0].position.z = 5.25;
-		lights[0] = createLight(-100, -200, 100, 0xFFFFFF);
+		cam[0].position.z = 5;
+		
+		// default 
+		lights[0] = createLight(-100, -200, 100, 0xFFFFFF, 1);
+		
+		// static image 
+		lights[1] = new THREE.AmbientLight(0xffffff);
 		
 		// sets up camera for vr, if toggled
 		const cameraHolder = new THREE.Group();
@@ -72,13 +78,34 @@
 		THREEx.WindowResize(renderer, cam[0]);
 	   	load(); 
 	}
-    // loads files into forms[]
+	
+	
+    	// loads files into forms[]
 	function load() {
 		for (let i = 0; i < files.length; i++) {
-			loader.load(files[i], function(entity) {
-				forms[i] = entity.scene;
+			if (files[i].includes(".glb") || files[i].includes(".gltf")){
+				loaderGLB.load(files[i], function(entity) {
+					forms[i] = entity.scene;
+					forms[i].name = files[i];
+				})
+			}
+			if (files[i].includes(".jpg") || files[i].includes(".png")){
+				var img = new THREE.MeshLambertMaterial({
+					map: loaderJPG.load(files[i])
+				});
+				var dims = files[i].replace("./forms/", "");
+				dims = dims.replace(".jpg", "");
+				dims = dims.split("x");
+				if (parseInt(dims[0]) > parseInt(dims[1])) {
+					var plane = new THREE.Mesh(new THREE.PlaneGeometry(3.5, 3.5*(parseInt(dims[0])/parseInt(dims[1]))),img);
+				} else {
+					var plane = new THREE.Mesh(new THREE.PlaneGeometry(6, 6*(parseInt(dims[0])/parseInt(dims[1]))),img);
+				}
+				plane.overdraw = true;
+				forms[i] = plane;
 				forms[i].name = files[i];
-			})
+
+			}
 		}
 		manager.onProgress = function(item, loaded, total) {
 			console.log((loaded - 1) + " " + (total - 1) + " " + item);
@@ -94,28 +121,37 @@
 			loaded = true;
 		};
 	}
-    // set form's initial rotational placement
+	
+	
+    	// set form's initial rotational placement
 	function formSet() {
 		for (let i = 0; i < lights.length; i++) 
         		scene.remove(lights[i])
 
 		scene.add(forms[cur]);
 		forms[cur].rotation.set(0, 0, 0);
-		forms[cur].rotateX(6);
-		forms[cur].rotateY(2);
 		if (forms[cur].name == "./forms/small.glb") {
 			scene.add(lights[0]);
+			forms[cur].rotateX(6);
+			forms[cur].rotateY(2);
 			forms[cur].rotation.x += 3.03;
 			forms[cur].rotation.y += 3.03;
+		}
+		if (forms[cur].name.includes(".jpg") || forms[cur].name.includes(".png")) {
+			scene.add(lights[1]);
 		} else {
 			scene.add(lights[0]);
-			forms[cur].rotation.x += 2;
+			forms[cur].rotateX(6);
+			forms[cur].rotateY(2);
+			forms[cur].rotation.x += 0;
 		}
 	}
-    // frame call and increments rotation animation 
-	function anim() {renderer.setAnimationLoop( render );}
+	
+	
+   	// frame call and increments rotation animation 
+	function anim() { renderer.setAnimationLoop( render ); }
 	function render() {
-		if (rotate == "true" && loaded == true) {
+		if (rotate == "true" && loaded == true && isNotImage()) {
 			forms[cur].rotation.x += 0.002;
 			forms[cur].rotation.y += 0.002;
 		}
@@ -125,16 +161,25 @@
 	
 // -- ▼ HELPERS --------------------------------------------------------------------------------->
     
+	function isNotImage(){
+		if (forms[cur].name.indexOf(".jpg") === -1 && forms[cur].name.indexOf(".png") === -1)
+			return true;
+		else return false;
+	}
 	function createLight(x,y,z,color, intensity) {
 		var light = new THREE.PointLight(color, intensity);
 		light.position.set(x, y, z);
 		return light;
 	}
+	
+	
 	// removes from scene, remains in form[]
 	function removeForm(object) {
 		var selectedObject = scene.getObjectByName(object.name);
         	scene.remove(forms[cur]);
 	}
+	
+	
 	// screen click event listener
 	function startScreenClick() {
 		var clicker = document.createElement("button");
@@ -147,6 +192,8 @@
 		});
 		screenClick.appendChild(clicker);
 	}
+	
+	
 	// arrow keys on click events
 	function startKeyControls() {
 		document.onkeydown = function(e) {
