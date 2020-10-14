@@ -7,13 +7,13 @@
 	<link href=".//css/main.css" rel="stylesheet">
 </head>
 <body>
-<div id="splash-screen"></div>
+<div id="about-screen"></div>
 </body>	
 </html>
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
-	const splashScreen  = document.getElementById('splash-screen' );
+	const splashScreen  = document.getElementById('about-screen' );
 	
 	// spash menu vars
 	var menuBtn = [];
@@ -35,54 +35,38 @@
 
 	// rebuilds from scratch, each time a variable is changed
 	function splashMenu() {
-		while(splashScreen.firstChild) {
+		while(splashScreen.firstChild) 
 			splashScreen.removeChild(splashScreen.firstChild);
-		}	
 		
 		// LANGUAGE
-		menuBtn[0] = insertMenuBtn( "english"   , curLang == 0);
+		menuBtn[0] = insertMenuBtn( "about"   , 0);
 		menuBtn[0].onclick = () => { curLang = 0; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[1] = insertMenuBtn( "deutsche"  , curLang == 1);
-		menuBtn[1].onclick = () => { curLang = 1; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[2] = insertMenuBtn( "française" , curLang == 2);
-		menuBtn[2].onclick = () => { curLang = 2; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[5] = insertMenuBtn( "中文"       , curLang == 5);
-		menuBtn[5].onclick = () => { curLang = 5; splashMenu(); }
-		insertMenuSlash();
+		insertMenuSlash(" / ");
+		insertMenuSlash(
+			"this platform is currently in alpha developement."   
+			);
+		insertMenuNewLine(2);
+		insertMenuSlash(" / ");
+		insertMenuSlash(
+			"created in opposition to the current landscape of digital showcase formats, in hopes of contributing to conversations towards the exploration, and or canonization, of viewing digital forms on the web"   
+			);
+		insertMenuSlash(" / ");
+		insertMenuNewLine(2);
+		insertMenuSlash(" / ");
+		insertMenuSlash(
+			"720 352 4643"   
+			);
 		insertMenuNewLine(1);
-
-		// ROTATION
-	    insertMenuBtn( langs[curLang][1], 1 );
-		insertMenuSlash(); 
-		menuBtn[10] = insertMenuBtn( "0", !rotate);
-		menuBtn[10].onclick = () => { rotate = false; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[11] = insertMenuBtn( "1",  rotate);
-		menuBtn[11].onclick = () => { rotate = true; splashMenu(); }
-		insertMenuSlash();
-		insertMenuNewLine(1);
-			
-		// VR
-		insertMenuBtn(langs[curLang][2], 1);
-		insertMenuSlash(); 
-		menuBtn[12] = insertMenuBtn( "0", !vr);
-		menuBtn[12].onclick = () => {vr = false; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[13] = insertMenuBtn( "1",  vr);
-		menuBtn[13].onclick = () => { vr = true; splashMenu(); }
-		insertMenuSlash();
-
-		// EXIT 
-		menuBtn[8] = insertMenuBtn( ">", true);
-		menuBtn[8].onclick = () => runProgram();
+		insertMenuSlash(" / ");
+		insertMenuSlash(
+			"for file sales, and printing services, flat and dimensional"   
+			);
 		
 		// ABOUT
 		insertMenuNewLine(3);
-		menuBtn[9] = insertMenuBtn( langs[curLang][0], 0);
-		menuBtn[9].onclick = () => {runAbout()}
+		menuBtn[9] = insertMenuBtn( "click here to close tab", 0);
+		menuBtn[9].onclick = () => {window.close();}
+
 	}
 	function insertMenuBtn(text, active) {
 		var btn = document.createElement("BUTTON"); 
@@ -93,9 +77,9 @@
 		splashScreen.appendChild(btn);
 		return btn;
 	}
-	function insertMenuSlash() {
+	function insertMenuSlash(input) {
 		var sep = document.createElement("a");   
-		sep.innerHTML = "/";                  
+		sep.innerHTML = input;                  
 		splashScreen.appendChild(sep);
 	}
 	function insertMenuNewLine(lines) {
@@ -109,7 +93,5 @@
 		sessionStorage.setItem("vr", "" + vr);
 		window.location.href="render.html";
 	}
-	function runAbout(){
-		window.open("about.html", '_blank');
-	}
+
 </script>
