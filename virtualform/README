@@ -1,16 +1,16 @@
 Virtual Visual Viewer
 
-current build features
+completed build features
   images 
   3d models  
   VR (no WebXR Token yet)
   multi language menu 
+  about page
   
 TODO:
   flesh out vr/ get webxr token
   image resize compatability with mobile
   zoom on images
-  about page
   AR implementation
 
 https://www.trinkner.xyz/virtualform/
