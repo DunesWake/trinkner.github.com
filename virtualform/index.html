@@ -82,7 +82,7 @@
 		// ABOUT
 		insertMenuNewLine(3);
 		menuBtn[9] = insertMenuBtn( langs[curLang][0], 0);
-		menuBtn[9].onclick = () => {runAbout()}
+		menuBtn[9].onclick = () => runAbout();
 	}
 	function insertMenuBtn(text, active) {
 		var btn = document.createElement("BUTTON"); 
@@ -110,6 +110,7 @@
 		window.location.href="render.html";
 	}
 	function runAbout(){
-		window.open("about.html", '_blank');
+		sessionStorage.setItem("curLang", "" + curLang);
+		window.location.href="about.html";
 	}
 </script>

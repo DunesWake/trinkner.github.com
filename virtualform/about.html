@@ -19,19 +19,42 @@
 	var menuBtn = [];
 	var rotate = true;
 	var vr = false;
-	var english = ["about", "rotation ", "virtual reality"];
-	var german =  ["Über", "drehung ", "virtuelle Realität"];
-	var french =  ["sur", "tourner ", "réalité virtuelle"];
-	var viatnamese = ["trong khoảng", "quay ", "thực tế ảo"];
-	var japanese = ["約", "回転する", "バーチャルリアリティ"];
-	var chinese = ["关于", "旋转 ", "虚拟现实"];
+	var english = ["about", 
+				   "this platform is currently in alpha developement.", 
+				   "created in opposition to the current landscape of digital showcase formats, in hopes of contributing to conversations towards the exploration, and or canonization, of viewing digital forms on the web",
+				   "for file sales, and printing services, flat and dimensional"
+				  ];
+	var german =  ["Über", 
+				   "diese plattform befindet sich derzeit in der Alpha-Entwicklung.", 
+				   "im Gegensatz zur aktuellen Landschaft digitaler Schaufensterformate erstellt, in der Hoffnung, zu Gesprächen über die Erforschung und / oder Heiligsprechung der Anzeige digitaler Formulare im Web beizutragen",
+					"für Dateiverkäufe und Druckdienste, flach und dimensional"
+				  ];
+	var viatnamese = [];
+	var japanese = [];
+	var french =  ["sur", 
+				   "cette plateforme est actuellement en développement alpha.", 
+				   "Conçu pour correspondre à l'état actuel des formats d'affichage numérique et pour promouvoir le dialogue pour explorer ou normaliser l'affichage des formulaires numériques sur le Web",
+				   "pour la vente de fichiers et les services d'impression, plats et dimensionnels"
+				  ];
+	var chinese = ["关于", 
+				   "该平台目前处于开发阶段.", 
+				   "旨在与数字展示格式的当前现状相对应，旨在促进对话，以探索或规范化在网络上查看数字形式",
+				   "用于文件销售和打印服务（平面和尺寸）"
+				  ];
 	var langs =   [english,german,french,viatnamese,japanese,chinese];
-	var curLang = 5;
+	var curLang = 0;
     
 // -- ▼ MAIN ------------------------------------------------------------------------------------>
    
     // starts program, calls init() when completed
+	
+	if (sessionStorage['curLang']){
+		 curLang = parseInt(sessionStorage.getItem('curLang'));
+		console.log(curLang);
+
+	}	
 	splashMenu();
+
 
 	// rebuilds from scratch, each time a variable is changed
 	function splashMenu() {
@@ -39,17 +62,13 @@
 			splashScreen.removeChild(splashScreen.firstChild);
 		
 		// LANGUAGE
-		menuBtn[0] = insertMenuBtn( "about"   , 0);
-		menuBtn[0].onclick = () => { curLang = 0; splashMenu(); }
+		insertMenuSlash(langs[curLang][0]);
 		insertMenuSlash(" / ");
-		insertMenuSlash(
-			"this platform is currently in alpha developement."   
-			);
+		insertMenuSlash(langs[curLang][1]);
 		insertMenuNewLine(2);
 		insertMenuSlash(" / ");
-		insertMenuSlash(
-			"created in opposition to the current landscape of digital showcase formats, in hopes of contributing to conversations towards the exploration, and or canonization, of viewing digital forms on the web"   
-			);
+		insertMenuSlash(langs[curLang][2]);
+
 		insertMenuSlash(" / ");
 		insertMenuNewLine(2);
 		insertMenuSlash(" / ");
@@ -58,14 +77,13 @@
 			);
 		insertMenuNewLine(1);
 		insertMenuSlash(" / ");
-		insertMenuSlash(
-			"for file sales, and printing services, flat and dimensional"   
-			);
+		insertMenuSlash(langs[curLang][3]);
+
 		
 		// ABOUT
 		insertMenuNewLine(3);
-		menuBtn[9] = insertMenuBtn( "click here to close tab", 0);
-		menuBtn[9].onclick = () => {window.close();}
+		menuBtn[9] = insertMenuBtn( "<- <-", 1);
+		menuBtn[9].onclick = () => runMenu();
 
 	}
 	function insertMenuBtn(text, active) {
@@ -88,10 +106,8 @@
 			splashScreen.appendChild(nl);
 		}
 	}
-	function runProgram(){
-		sessionStorage.setItem("rotate", "" + rotate);
-		sessionStorage.setItem("vr", "" + vr);
-		window.location.href="render.html";
+	function runMenu(){
+		window.location.href="index.html";
 	}
 
 </script>
