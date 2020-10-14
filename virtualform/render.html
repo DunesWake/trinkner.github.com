@@ -99,7 +99,7 @@
 				var dimstr = files[i].replace("./forms/", "");
 				dimstr = dimstr.replace(".jpg", "");
 				dimstr = dimstr.split("x");
-				var dims = [parseInt(dims[0]), parseInt(dims[1])];
+				var dims = [parseInt(dimstr[0]), parseInt(dimstr[1])];
 				if (parseInt(dims[0]) > parseInt(dims[1])) {
 					var plane = new THREE.Mesh(new THREE.PlaneGeometry(3.5, 3.5*(dims[0]/dims[1])),img);
 				} else {
