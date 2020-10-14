@@ -5,5 +5,12 @@ current build features
   3d models  
   VR (no WebXR Token yet)
   multi language menu 
+  
+TODO:
+  flesh out vr/ get webxr token
+  image resize compatability with mobile
+  zoom on images
+  about page
+  AR implementation
 
 https://www.trinkner.xyz/virtualform/
