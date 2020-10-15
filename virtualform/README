@@ -12,5 +12,6 @@ TODO:
   image resize compatability with mobile
   zoom on images
   AR implementation
+  implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
 
 https://www.trinkner.xyz/virtualform/
