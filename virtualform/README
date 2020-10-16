@@ -9,7 +9,7 @@ TODO: higher
   
 TODO: lower
   support Gifs / video (https://github.com/MaciejWWojcik/three-plain-animator)
-  AR implementation
+  AR implementation (https://github.com/google-ar/three.ar.js)
   acquire webxr token
   zoom on images ? maybe
 
