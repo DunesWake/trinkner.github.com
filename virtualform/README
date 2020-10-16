@@ -1,25 +1,25 @@
-**ABSTRACT**: created in opposition to the current landscape
+created in opposition to the current landscape
 of digital showcase formats, in hopes of contributing to
 the conversation towards the exploration, and or canonization,
 of viewing digital forms on the web.
+  https://www.trinkner.xyz/virtualform/
 
-completed build features
-  images 
-  3d models  
-  VR (no WebXR Token yet)
-  multi language menu 
-  about page
   
 TODO: higher
   vr camera / lighting
   http https switching for vr
   image/form resize compatability with mobile
   implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
-
 TODO: lower
   support Gifs / video
   AR implementation
   acquire webxr token
   zoom on images ? maybe
 
-https://www.trinkner.xyz/virtualform/
+current build features
+  images 
+  3d models  
+  VR (no WebXR Token yet)
+  multi language menu 
+  about page
+  
