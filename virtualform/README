@@ -6,6 +6,7 @@ TODO: higher
   http https switching for vr
   image/form resize compatability with mobile
   implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
+  
 TODO: lower
   support Gifs / video
   AR implementation
