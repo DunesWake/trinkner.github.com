@@ -17,7 +17,7 @@
 	
 	// session storage
 	var curLang = 5;
-	if (sessionStorage['curLang']) curLang = sessionStorage.getItem('curLang');
+	if (sessionStorage['curLang']) curLang = parseInt(sessionStorage.getItem('curLang'));
 	
 	// spash menu vars
 	var btns = [];
