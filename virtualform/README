@@ -7,12 +7,15 @@ completed build features
   multi language menu 
   about page
   
-TODO:
+TODO: higher
   http https switching for vr
-  flesh out vr/ get webxr token
   image/form resize compatability with mobile
-  zoom on images ? maybe
-  AR implementation
   implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
+
+TODO: lower
+  support Gifs / video
+  AR implementation
+  flesh out vr/ get webxr token
+  zoom on images ? maybe
 
 https://www.trinkner.xyz/virtualform/
