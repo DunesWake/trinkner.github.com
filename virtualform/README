@@ -9,7 +9,7 @@ completed build features
   
 TODO:
   flesh out vr/ get webxr token
-  image resize compatability with mobile
+  image/form resize compatability with mobile
   zoom on images
   AR implementation
   implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
