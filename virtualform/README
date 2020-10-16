@@ -11,7 +11,7 @@ TODO:
   http https switching for vr
   flesh out vr/ get webxr token
   image/form resize compatability with mobile
-  zoom on images
+  zoom on images ? maybe
   AR implementation
   implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
 
