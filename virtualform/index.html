@@ -4,7 +4,7 @@
 	<title>Virtual Solidification</title>
 	<link rel="shortcut icon" href="#">
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-	<link href=".//css/main.css" rel="stylesheet">
+	<link href="./css/main.css" rel="stylesheet">
 </head>
 <body>
 <div id="splash-screen"></div>
@@ -13,10 +13,14 @@
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
-	const splashScreen  = document.getElementById('splash-screen' );
+	const splashScreen = document.getElementById('splash-screen');
+	
+	// session storage
+	var curLang = 5;
+	if (sessionStorage['curLang']) curLang = sessionStorage.getItem('curLang');
 	
 	// spash menu vars
-	var menuBtn = [];
+	var btns = [];
 	var rotate = true;
 	var vr = false;
 	var english = ["about", "rotation ", "virtual reality"];
@@ -26,7 +30,6 @@
 	var japanese = ["約", "回転する", "バーチャルリアリティ"];
 	var chinese = ["关于", "旋转 ", "虚拟现实"];
 	var langs =   [english,german,french,viatnamese,japanese,chinese];
-	var curLang = 5;
     
 // -- ▼ MAIN ------------------------------------------------------------------------------------>
    
@@ -35,57 +38,48 @@
 
 	// rebuilds from scratch, each time a variable is changed
 	function splashMenu() {
-		while(splashScreen.firstChild) {
-			splashScreen.removeChild(splashScreen.firstChild);
-		}	
+		while(splashScreen.firstChild) 
+			splashScreen.removeChild(splashScreen.firstChild);	
 		
 		// LANGUAGE
-		menuBtn[0] = insertMenuBtn( "english"   , curLang == 0);
-		menuBtn[0].onclick = () => { curLang = 0; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[1] = insertMenuBtn( "deutsche"  , curLang == 1);
-		menuBtn[1].onclick = () => { curLang = 1; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[2] = insertMenuBtn( "française" , curLang == 2);
-		menuBtn[2].onclick = () => { curLang = 2; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[5] = insertMenuBtn( "中文"       , curLang == 5);
-		menuBtn[5].onclick = () => { curLang = 5; splashMenu(); }
-		insertMenuSlash();
+		btns[0] = insertBtn( "english"   , curLang === 0);
+		btns[0].onclick = () => { curLang = 0; splashMenu(); }
+		insertSlash();
+		btns[1] = insertBtn( "deutsche"  , curLang === 1);
+		btns[1].onclick = () => { curLang = 1; splashMenu(); }
+		insertSlash();
+		btns[2] = insertBtn( "française" , curLang === 2);
+		btns[2].onclick = () => { curLang = 2; splashMenu(); }
+		insertSlash();
+		btns[5] = insertBtn( "中文"       , curLang === 5);
+		btns[5].onclick = () => { curLang = 5; splashMenu(); }
+		insertSlash();
 		insertMenuNewLine(1);
 
-		// ROTATION
-	    insertMenuBtn( langs[curLang][1], 1 );
-		insertMenuSlash(); 
-		menuBtn[10] = insertMenuBtn( "0", !rotate);
-		menuBtn[10].onclick = () => { rotate = false; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[11] = insertMenuBtn( "1",  rotate);
-		menuBtn[11].onclick = () => { rotate = true; splashMenu(); }
-		insertMenuSlash();
-		insertMenuNewLine(1);
-			
 		// VR
-		insertMenuBtn(langs[curLang][2], 1);
-		insertMenuSlash(); 
-		menuBtn[12] = insertMenuBtn( "0", !vr);
-		menuBtn[12].onclick = () => {vr = false; splashMenu(); }
-		insertMenuSlash();
-		menuBtn[13] = insertMenuBtn( "1",  vr);
-		menuBtn[13].onclick = () => { vr = true; splashMenu(); }
-		insertMenuSlash();
-
+		insertBtn(langs[curLang][2], 1);
+		insertSlash(); 
+		btns[10] = insertBtn( "0", !vr);
+		btns[10].onclick = () => {vr = false; splashMenu(); }
+		insertSlash();
+		btns[11] = insertBtn( "1",  vr);
+		btns[11].onclick = () => { vr = true; splashMenu(); }
+		insertSlash();
 		// EXIT 
-		menuBtn[8] = insertMenuBtn( ">", true);
-		menuBtn[8].onclick = () => runProgram();
-		
-		// ABOUT
+		btns[8] = insertBtn( ">", true);
+		btns[8].onclick = () => runProgram();
 		insertMenuNewLine(3);
-		menuBtn[9] = insertMenuBtn( langs[curLang][0], 0);
-		menuBtn[9].onclick = () => runAbout();
+
+		// ABOUT
+		btns[9] = insertBtn( langs[curLang][0], 0);
+		btns[9].onclick = () => runAbout();
 	}
-	function insertMenuBtn(text, active) {
-		var btn = document.createElement("BUTTON"); 
+    
+    
+// -- ▼ HELPERS --------------------------------------------------------------------------------->
+
+	function insertBtn(text, active) {
+		var btn = document.createElement("button"); 
 	    	btn.innerHTML = text;  		
 		if (active) 
 		    btn.style.color = "#111";
@@ -93,7 +87,7 @@
 		splashScreen.appendChild(btn);
 		return btn;
 	}
-	function insertMenuSlash() {
+	function insertSlash() {
 		var sep = document.createElement("a");   
 		sep.innerHTML = "/";                  
 		splashScreen.appendChild(sep);
@@ -107,10 +101,11 @@
 	function runProgram(){
 		sessionStorage.setItem("rotate", "" + rotate);
 		sessionStorage.setItem("vr", "" + vr);
-		window.location.href="render.html";
+		sessionStorage.setItem("curLang", "" + curLang);
+		window.location.href = "render.html";
 	}
 	function runAbout(){
 		sessionStorage.setItem("curLang", "" + curLang);
-		window.location.href="about.html";
+		window.location.href = "about.html";
 	}
 </script>
