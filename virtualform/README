@@ -8,6 +8,7 @@ completed build features
   about page
   
 TODO: higher
+  vr camera / lighting
   http https switching for vr
   image/form resize compatability with mobile
   implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
