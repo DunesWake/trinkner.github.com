@@ -27,7 +27,7 @@
 	if (sessionStorage['vr']) vr = sessionStorage.getItem('vr');
 
 	// render vars
-	var files = ["./forms/small.glb", "./forms/900x634.jpg", "./forms/506x900.png", "./forms/small2.glb"];
+	var files = ["./forms/small.glb", "./forms/600x900.jpg"];
 	var manager = new THREE.LoadingManager();
 	var loaderGLB  = new GLTFLoader(manager);
 	var loaderJPG = new THREE.TextureLoader(manager);
@@ -43,7 +43,7 @@
 	   
     	// starts program, calls init() when completed
 	loadingScreen.classList.add('fade-in');
-	loadingScreen.innerHTML = "loading"; 
+	loadingScreen.innerHTML = "loading.."; 
     	init();
 	anim();
 
@@ -146,9 +146,7 @@
 			forms[cur].rotation.y += 3.03;
 		} else {
 			scene.add(lights[0]);
-			forms[cur].rotateX(6);
-			forms[cur].rotateY(2);
-			forms[cur].rotation.x += 0;
+			forms[cur].position.set(0, 0, -3);
 		}
 	}
 	
