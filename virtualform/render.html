@@ -9,8 +9,7 @@
 <body>
 <div id="screenClick"></div>
 <div id="loading-screen"></div>
-</body>
-</html>
+</body></html>
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
@@ -27,7 +26,7 @@
 	if (sessionStorage['vr']) vr = sessionStorage.getItem('vr');
 
 	// render vars
-	var files = ["./forms/small.glb", "./forms/600x900.jpg"];
+	var files = ["./forms/small.glb", "./forms/small2.glb", "./forms/600x900.jpg"];
 	var manager = new THREE.LoadingManager();
 	var loaderGLB  = new GLTFLoader(manager);
 	var loaderJPG = new THREE.TextureLoader(manager);
@@ -43,7 +42,7 @@
 	   
     	// starts program, calls init() when completed
 	loadingScreen.classList.add('fade-in');
-	loadingScreen.innerHTML = "loading.."; 
+	loadingScreen.innerHTML = "loading"; 
     	init();
 	anim();
 
@@ -90,6 +89,9 @@
 				loaderGLB.load(files[i], function(entity) {
 					forms[i] = entity.scene;
 					forms[i].name = files[i];
+				},
+				function (xhr) {
+					loadingScreen.innerHTML = (xhr.loaded / xhr.total) * 100 + '%' + "<br>" + files[i];
 				})
 			}
 			if (files[i].includes(".jpg") || files[i].includes(".png")){
