@@ -17,20 +17,26 @@
 	
 	import * as THREE from './js/three.module.js';
 	import {GLTFLoader} from './js/GLTFLoader.js';
+	import {DRACOLoader}from './js/DRACOLoader.js';
 	import { VRButton } from './js/VRButton.js';
+
+	//file vars
+	var files = ["./forms/small.glb", "./forms/600x900.jpg"];
 	
-	// spash menu vars will rotate if no var given
-	var rotate = "true";
-	if (sessionStorage['rotate']) rotate = sessionStorage.getItem('rotate');
-	var vr = "false"
-	if (sessionStorage['vr']) vr = sessionStorage.getItem('vr');
+	//loading vars
+	var manager = new THREE.LoadingManager();
+	var dracoLoader = new DRACOLoader(manager);
+	dracoLoader.setDecoderPath( './js/draco/gltf/' );
+	var loader = new GLTFLoader(manager);
+	loader.setDRACOLoader( dracoLoader );
+	var loaderJPG = new THREE.TextureLoader(manager);
+	var loadProg = {};
+	var cur = 0;
 
 	// render vars
-	var files = ["./forms/small.glb", "./forms/680x900.jpg"];
-	var manager = new THREE.LoadingManager();
-	var loaderGLB  = new GLTFLoader(manager);
-	var loaderJPG = new THREE.TextureLoader(manager);
-	var cur = 0;
+	// spash menu vars will rotate if no var given
+	var rotate = "true"; if (sessionStorage['rotate']) rotate = sessionStorage.getItem('rotate');
+	var vr = "false";    if (sessionStorage['vr']) vr = sessionStorage.getItem('vr');
 	var clickDir;
 	var renderer;
 	var container;
@@ -86,18 +92,15 @@
 	function load() {
 		for (let i = 0; i < files.length; i++) {
 			if (files[i].includes(".glb") || files[i].includes(".gltf")){
-				loaderGLB.load(files[i], function(entity) {
-					forms[i] = entity.scene;
+				loader.load( files[i], function ( gltf ) {
+					forms[i] = gltf.scene;
 					forms[i].name = files[i];
-				},
-				function (xhr) {
-					loadingScreen.innerHTML = (xhr.loaded / xhr.total) * 100 + '%' + "<br>" + files[i];
-				})
+				});
 			}
 			if (files[i].includes(".jpg") || files[i].includes(".png")){
 				var img = new THREE.MeshLambertMaterial({
 					map: loaderJPG.load(files[i])
-				});
+				});				   
 				
 				// retreives dimensions from file name
 				var dimstr = files[i].replace("./forms/", "");
@@ -146,13 +149,20 @@
 			forms[cur].rotateY(2);
 			forms[cur].rotation.x += 3.03;
 			forms[cur].rotation.y += 3.03;
+		}else if (forms[cur].name == "./forms/wish.glb") {
+			scene.add(lights[0]);			
+			forms[cur].scale.set( 0.02, 0.02, 0.02 );
+			forms[cur].rotateX(6);
+			forms[cur].rotateY(2);
+			forms[cur].rotation.x += 3.03;
+			forms[cur].rotation.y += 3.03;
 		} else {
 			scene.add(lights[0]);
 			forms[cur].position.set(0, 0, -3);
 		}
 	}
 	
-	
+
     // frame call and increments rotation animation 
 	function anim() {renderer.setAnimationLoop( render );}
 	function render() {
