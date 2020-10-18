@@ -2,7 +2,6 @@ created in opposition to the current landscape of digital showcase formats.
 
   
 TODO: higher
-  implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
   conceptual writting and or proposals, one in the same
   image/form resize compatability with mobile
   
@@ -18,7 +17,7 @@ TODO: vr todo if feeling like it
 
 current build features
   images 
-  3d models  
+  3d models (draco loader)
   VR (no WebXR Token yet)
   multi language menu 
   about page
