@@ -2,10 +2,11 @@ created in opposition to the current landscape of digital showcase formats.
 
   
 TODO: higher
+  implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
+
   vr camera / lighting
   http https switching for vr
   image/form resize compatability with mobile
-  implement draco (https://threejs.org/docs/#examples/en/loaders/DRACOLoader)
   
 TODO: lower
   support Gifs / video (https://github.com/MaciejWWojcik/three-plain-animator)
