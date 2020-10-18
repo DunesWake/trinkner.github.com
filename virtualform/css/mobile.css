@@ -37,7 +37,7 @@ body {
 #about-screen {
     position: fixed;
     z-index: 0;
-    top:42vh;
+    top:4vh;
     opacity:1;
     text-align: left;
     width: 52vw;

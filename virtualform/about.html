@@ -5,6 +5,8 @@
 	<link rel="shortcut icon" href="#">
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 	<link href=".//css/main.css" rel="stylesheet">
+    	<link href="css/main.css" rel="stylesheet">
+    	<link href="css/mobile.css" rel="stylesheet" media="(max-width:500px)">
 </head>
 <body>
 <div id="about-screen"></div>
@@ -27,7 +29,7 @@
 	var german =  ["Über", 
 			"diese plattform befindet sich derzeit in der Alpha-Entwicklung.", 
 			"im Gegensatz zur aktuellen Landschaft digitaler Schaufensterformate erstellt, in der Hoffnung, zu Gesprächen über die Erforschung und / oder Heiligsprechung der Anzeige digitaler Formulare im Web beizutragen",
-			"für Dateiverkäufe und Druckdienste, flach und dimensional"
+			    "für Dateiverkäufe und Druckdienste, flach und dimensional"
 			];
 	var viatnamese = [];
 	var japanese = [];
@@ -62,30 +64,33 @@
 			splashScreen.removeChild(splashScreen.firstChild);
 		
 		// LANGUAGE
-		insertMenuSlash(langs[curLang][0]);
-		insertMenuSlash(" / ");
-		insertMenuSlash(langs[curLang][1]);
+		insertMenuText(langs[curLang][0]);
+		insertMenuText(" / ");
+		insertMenuText(langs[curLang][1]);
 		insertMenuNewLine(2);
-		insertMenuSlash(" / ");
-		insertMenuSlash(langs[curLang][2]);
-
-		insertMenuSlash(" / ");
+	    
+		insertMenuText(" / ");
+		insertMenuText(langs[curLang][2]);
+		insertMenuText(" / ");
 		insertMenuNewLine(2);
-		insertMenuSlash(" / ");
-		insertMenuSlash(
-			"720 352 4643"   
-			);
+	    
+		insertMenuText(" / ");
+		insertMenuText("720 352 4643");
 		insertMenuNewLine(1);
-		insertMenuSlash(" / ");
-		insertMenuSlash(langs[curLang][3]);
+		insertMenuText(" / ");
+		insertMenuText(langs[curLang][3]);
 
 		
 		// ABOUT
 		insertMenuNewLine(3);
-		menuBtn[9] = insertMenuBtn( "<- <-", 1);
+		menuBtn[9] = insertMenuBtn( "<", 1);
 		menuBtn[9].onclick = () => runMenu();
 
 	}
+    
+    
+// -- ▼ HELPERS --------------------------------------------------------------------------------->
+
 	function insertMenuBtn(text, active) {
 		var btn = document.createElement("BUTTON"); 
 	    	btn.innerHTML = text;  		
@@ -95,7 +100,7 @@
 		splashScreen.appendChild(btn);
 		return btn;
 	}
-	function insertMenuSlash(input) {
+	function insertMenuText(input) {
 		var sep = document.createElement("a");   
 		sep.innerHTML = input;                  
 		splashScreen.appendChild(sep);
