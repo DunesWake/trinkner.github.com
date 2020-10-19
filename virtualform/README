@@ -20,8 +20,8 @@ TODO: vr todo if feeling like it
   http https switching for vr
 
 current build features
-  images 
-  3d models (draco loader)
+  images (.jpg & .png)
+  3d models (.glb & .gltf & .drc(draco loader)
   VR (no WebXR Token yet)
   multi language menu 
   about page
