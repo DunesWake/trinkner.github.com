@@ -11,6 +11,7 @@ TODO: lower
   support Gifs / video (https://github.com/MaciejWWojcik/three-plain-animator)
   AR implementation (https://github.com/google-ar/three.ar.js)
   zoom on images ? maybe
+  optimize meshes before compression (https://github.com/zeux/meshoptimizer#installing-gltfpack)
   
 TODO: vr todo if feeling like it
   acquire webxr token
