@@ -14,6 +14,7 @@ TODO: lower
   optimize meshes before compression (https://github.com/zeux/meshoptimizer#installing-gltfpack)
   
 TODO: vr todo if feeling like it
+  https://threejsfundamentals.org/threejs/lessons/threejs-webvr.html
   acquire webxr token
   vr camera / lighting
   http https switching for vr
