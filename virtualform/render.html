@@ -7,7 +7,7 @@
 	<link type="text/css" href="./css/main.css" rel="stylesheet">
 </head>
 <body>
-<div id="screenClick"></div>
+<div id="ScreenClick"></div>
 <div id="loading-screen"></div>
 </body>
 </html>
@@ -21,14 +21,16 @@
 	
 	// file / loading vars
 	var files = ["./forms/bench.glb", "./forms/rock.jpg"];
+	var loading = {};
 	var cur = 0;
 	var clickDir = 0;
-	var manager = new THREE.LoadingManager();
-	var dracoLoader = new DRACOLoader(manager); dracoLoader.setDecoderPath('./js/draco/gltf/');
-	var loaderGLB   = new GLTFLoader( manager); loaderGLB.setDRACOLoader( dracoLoader );
-	var loaderJPG = new THREE.TextureLoader(manager);
 	var loadingScreen = document.getElementById('loading-screen');
 	var loaded = false;
+	var manager = new THREE.LoadingManager();
+	var loaderJPG = new THREE.TextureLoader(manager);
+	var dracoLoader = new DRACOLoader(manager); dracoLoader.setDecoderPath('./js/draco/gltf/');
+	var loaderGLB = new GLTFLoader(manager); loaderGLB.setDRACOLoader( dracoLoader );
+	dracoLoader.preload();
 
 	// render vars
 	var rotate = "true"; if (sessionStorage['rotate']) rotate = sessionStorage.getItem('rotate');
@@ -42,10 +44,10 @@
 	
 	// start
 	loadingScreen.classList.add('fade-in');
-	loadingScreen.innerHTML = "initializing"; 
+	loadingScreen.innerHTML = "loading"; 
     	init();
 	function init() {
-		renderer = new THREE.WebGLRenderer({ precision: "highp" });
+		renderer = new THREE.WebGLRenderer({ antialias: "true", precision: "highp" });
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
  		renderer.xr.enabled = true;
@@ -73,20 +75,25 @@
 	}
 	
 	
-    	// loads files into forms[]
+	// loads files into forms[]
 	function load() {
-		loadingScreen.innerHTML = "loading"; 
 		for (let i = 0; i < files.length; i++) {
 			if (files[i].includes(".glb") || files[i].includes(".gltf")){
 				loaderGLB.load( files[i], function (gltf) {
 					forms[i] = gltf.scene;
 					forms[i].name = files[i];
+				},(xhr) => {
+//					console.log(files[i] + " " + (xhr.loaded / xhr.total * 100).toFixed(1) + "%");
+					loading[files[i]] = (xhr.loaded / xhr.total * 100);
+					var done = 1;
+					for (var key in loading) if (loading[key] != 100) done = 0;
+					if (done === 1)loadingScreen.innerHTML = "uncompressing"; 
 				});
-			}
+			} 
 			if (files[i].includes(".jpg") || files[i].includes(".png")){
-				var img = new Image();
+				let img = new Image();
 				img.onload = function(){
-					var material = new THREE.MeshLambertMaterial({map:loaderJPG.load(files[i])});
+					let material = new THREE.MeshLambertMaterial({map:loaderJPG.load(files[i])});
 					if (this.height > this.width)
 						var plane = new THREE.PlaneGeometry(3.5, 3.5*(this.height/this.width));
 					else	var plane = new THREE.PlaneGeometry(  6,   6*(this.height/this.width));
@@ -96,11 +103,6 @@
 				img.src = files[i];				
 			}
 		}
-		// calls when one of the objects completes load
-		manager.onProgress = function( item, loaded, total) {
-			console.log((loaded - 1)+" "+(total - 1)+" "+item);
-		};
-		//calls when every file has finished download / load
 		manager.onLoad = function() {
 			loadingScreen.style.display = 'none';
 			startKeyControls();
@@ -111,7 +113,7 @@
 	}
 	
 	
-    	// set form's initial rotational placement
+	// set form's initial rotational placement
 	function formSet() {
 		for (let i = 0; i < lights.length; i++)
         		scene.remove(lights[i])
@@ -133,7 +135,7 @@
 	}
 
 	
-    	// frame call and increments rotation animation 
+	// frame call and increments rotation animation 
 	function anim() {renderer.setAnimationLoop( render );}
 	function render() {
 		if (rotate === "true" && loaded === true && !isImage()) {
@@ -156,18 +158,18 @@
 		else	return false;   
 	}
 	function createLight(x,y,z,color, intensity) {
-		var light = new THREE.PointLight(color, intensity);
+		let light = new THREE.PointLight(color, intensity);
 		light.position.set(x, y, z);
 		return light;
 	}
 	// remains in form[]
 	function removeForm(object) {
-		var selectedObject = scene.getObjectByName(object.name);
+		let selectedObject = scene.getObjectByName(object.name);
         	scene.remove(forms[cur]);
 	}
 	// screen click event listener
 	function startScreenClick() {
-		var clicker = document.createElement("button");
+		let clicker = document.createElement("button");
 		clicker.addEventListener("click", function(){
 			if (cur == files.length - 1) clickDir = -1;
 			else if (cur == 0)           clickDir = +1;
@@ -175,12 +177,12 @@
 			cur += clickDir;
 			formSet();
 		});
-		screenClick.appendChild(clicker);
+		ScreenClick.appendChild(clicker);
 	}
 	// WASD and arrow keys  on click events
 	function startKeyControls() {
 		document.onkeydown = function(e) {
-			var n = 0;
+			let n = 0;
 			if (e.keyCode == 37) if (cur != 0) n = -1;
 			if (e.keyCode == 39) if (cur != files.length - 1) n = +1;
 			if (n != 0) {
