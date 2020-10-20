@@ -82,8 +82,8 @@
 				loaderGLB.load( files[i], function (gltf) {
 					forms[i] = gltf.scene;
 					forms[i].name = files[i];
-				},(xhr) => {
-					console.log(files[i] + " " + (xhr.loaded / xhr.total * 100).toFixed(1) + "%");
+				},function (xhr) {
+					console.log(files[i] + " " + (xhr.loaded / xhr.total * 100) + "%");
 					loading[files[i]] = (xhr.loaded / xhr.total * 100);
 					var done = 1;
 					for (var key in loading) if (loading[key] != 100) done = 0;
