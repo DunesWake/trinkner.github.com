@@ -42,13 +42,12 @@
 	
 	// start
 	loadingScreen.classList.add('fade-in');
-	loadingScreen.innerHTML = "loading"; 
+	loadingScreen.innerHTML = 'loading'; 
     	init();
 	function init() {
 		renderer = new THREE.WebGLRenderer({ antialias: "true", precision: "highp" });
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
- 		renderer.xr.enabled = true;
 		
 		container = document.createElement( 'div' );
 		document.body.appendChild( container );
@@ -58,9 +57,9 @@
 		scene.background = new THREE.Color( 0xffffff );
 		cam[0] = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		cam[0].position.z = 5.25;
-		if (vr === "true") initVR();
-		else scene.add(cam[0]);
+		scene.add(cam[0]);
 		THREEx.WindowResize(renderer, cam[0]);
+		if (vr === "true") initVR();
 		
 		//default 
 		lights[0] = createLight(-100, -200, 100, 0xffffff);
@@ -83,7 +82,6 @@
 					forms[i] = gltf.scene;
 					forms[i].name = files[i];
 				},function (xhr) {
-					console.log(files[i] + " " + (xhr.loaded / loadTotal * 100) + "%");
 //					console.log(xhr.total); // use this to set loadTotal
 					loadCnt[files[i]] = (xhr.loaded / loadTotal * 100);
 					let done = 1;
@@ -105,7 +103,7 @@
 			}
 		}
 		manager.onLoad = function() {
-			loadingScreen.style.display = 'none';
+			loadingScreen.style.display = "none";
 			startKeyControls();
 			startScreenClick();
 			formSet();
@@ -155,18 +153,18 @@
 		light.position.set(x, y, z);
 		return light;
 	}
-	// remains in form[]
 	function removeForm(object) {
 		let selectedObject = scene.getObjectByName(object.name);
         	scene.remove(forms[cur]);
-	}
-	function initVR(){
-		document.body.appendChild(VRButton.createButton(renderer));
 	}
 	function isImage(){
 		if (forms[cur].name.includes(".jpg") || forms[cur].name.includes(".png"))
 			return true;
 		else	return false;   
+	}
+	function initVR(){
+ 		renderer.xr.enabled = true;
+		document.body.appendChild(VRButton.createButton(renderer));
 	}
 	// screen click event listener
 	function startScreenClick() {
