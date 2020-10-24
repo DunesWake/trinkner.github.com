@@ -76,6 +76,7 @@
 	
 	
 	// loads files into forms[]
+	var loadTotal = 13227244 // email me to understand why this has to be done
 	function load() {
 		for (let i = 0; i < files.length; i++) {
 			if (files[i].includes(".glb") || files[i].includes(".gltf")){
@@ -83,9 +84,9 @@
 					forms[i] = gltf.scene;
 					forms[i].name = files[i];
 				},function (xhr) {
-					console.log(files[i] + " " + (xhr.loaded / xhr.total * 100) + "%");
-					console.log(xhr.loaded / xhr.total * 100);
-					loading[files[i]] = (xhr.loaded / xhr.total * 100);
+					console.log(files[i] + " " + (xhr.loaded / loadTotal * 100) + "%");
+//					console.log(xhr.total); // use this to set loadTotal
+					loading[files[i]] = (xhr.loaded / loadTotal * 100);
 					var done = 1;
 					for (var key in loading) if (loading[key] != 100) done = 0;
 					if (done === 1)loadingScreen.innerHTML = "uncompressing"; 
