@@ -103,7 +103,16 @@ DRACOLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 				.then( onLoad )
 				.catch( onError );
 
-		}, onProgress, onError );
+		}, onProgress= function (e) {
+			var contentLength;
+			if (e.lengthComputable) {
+				contentLength = e.total;
+			} else {
+				contentLength = parseInt(e.target.getResponseHeader('x-decompressed-content-length'), 10);
+			}
+			progressIndicator.update(e.loaded / contentLength);
+		}, onError );
+		
 
 	},
 
