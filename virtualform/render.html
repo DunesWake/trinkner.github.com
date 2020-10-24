@@ -84,6 +84,7 @@
 					forms[i].name = files[i];
 				},function (xhr) {
 					console.log(files[i] + " " + (xhr.loaded / xhr.total * 100) + "%");
+					console.log(xhr.loaded / xhr.total * 100);
 					loading[files[i]] = (xhr.loaded / xhr.total * 100);
 					var done = 1;
 					for (var key in loading) if (loading[key] != 100) done = 0;
