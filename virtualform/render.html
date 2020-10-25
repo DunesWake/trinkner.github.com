@@ -48,10 +48,7 @@
 		renderer = new THREE.WebGLRenderer({ antialias: "true", precision: "highp" });
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
-		
-		container = document.createElement( 'div' );
-		container.appendChild( renderer.domElement );
-		document.body.appendChild( container );
+		document.body.appendChild(renderer.domElement);
 		
 		scene = new THREE.Scene
 		scene.background = new THREE.Color( 0xffffff );
@@ -73,17 +70,17 @@
 	
 	
 	// loads files into forms[]
-	var loadTotal = 13227244 // I know this is dirty, email me for explenation
 	function load() {
 		let loadCnt = {};
+		let loadTotal = 13227244 // I know this is dirty, email me for explenation
 		for (let i = 0, j = files.length; i < j; i++) {
 			if (files[i].includes(".glb") || files[i].includes(".gltf")){
 				loaderGLB.load( files[i], function (gltf) {
-					forms[i] =gltf.scene;
-					forms[i].name =files[i];
-				}, function (xhr) {
+					forms[i] = gltf.scene;
+					forms[i].name = files[i];
+				 }, function (xhr) {
 //					console.log(xhr.total); // use to set loadTotal
-					loadCnt[files[i]] =(xhr.loaded / loadTotal * 100);
+					loadCnt[files[i]] = (xhr.loaded / loadTotal * 100);
 					let done = 1;
 					for (let key in loadCnt) if (loadCnt[key] !== 100) done = 0;
 					if (done === 1) loadingScreen.innerHTML ="uncompressing"; 
@@ -104,7 +101,7 @@
 		}
 		// init controls/animation hear to avoid null array access
 		manager.onLoad = function() {
-			loadingScreen.style.display = "none";
+			loadingScreen.classList.remove('fade-in');
 			formSet();
 			startKeyControls();
 			startScreenClick();
@@ -148,7 +145,7 @@
 	
 // -- ▼ HELPERS --------------------------------------------------------------------------------->
 	
-	function createLight(x,y,z,color, intensity){
+	function createLight(x,y,z, color, intensity){
 		let light = new THREE.PointLight(color, intensity);
 		light.position.set(x, y, z);
 		return light;
@@ -158,13 +155,18 @@
         	scene.remove(forms[cur]);
 	}
 	function isImage(){
-		if (forms[cur].name.includes(".jpg") || forms[cur].name.includes(".png"))
-			return true;
-		else	return false;   
+		return (forms[cur].name.includes(".jpg") || forms[cur].name.includes(".png")) ? true : false;
 	}
 	function initVR(){
  		renderer.xr.enabled = true;
 		document.body.appendChild(VRButton.createButton(renderer));
+		
+		var user = new THREE.Group();
+		user.position.set(0,0,0);
+		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
+		camera.position.y = 1.6;
+		user.add( camera );
+		renderer.render( scene, user );
 	}
 	// screen click event listener
 	function startScreenClick(){
