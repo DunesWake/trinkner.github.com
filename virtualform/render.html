@@ -21,9 +21,9 @@
 	
 	// file / loading vars
 	var files = ["./forms/bench.glb", "./forms/rock.jpg"];
+	var loaded = false;
 	var cur = 0;
 	var loadingScreen = document.getElementById('loading-screen');
-	var loaded = false;
 	var manager = new THREE.LoadingManager();
 	var loaderJPG = new THREE.TextureLoader(manager);
 	var dracoLoader = new DRACOLoader(manager); dracoLoader.setDecoderPath('./js/draco/gltf/');
@@ -50,11 +50,11 @@
 		renderer.setPixelRatio( window.devicePixelRatio * 1.5 );
 		
 		container = document.createElement( 'div' );
-		document.body.appendChild( container );
 		container.appendChild( renderer.domElement );
+		document.body.appendChild( container );
 		
 		scene = new THREE.Scene
-		scene.background = new THREE.Color( 0xffffff );
+		scene.background = new THREE.Color( 0x3a3a3a );
 		cam[0] = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		cam[0].position.z = 5.25;
 		scene.add(cam[0]);
@@ -68,7 +68,6 @@
 		lights[1] = new THREE.AmbientLight(0xffffff);
 		
 		load(); 
-		anim();
 	}
 	
 	
@@ -76,17 +75,17 @@
 	var loadTotal = 13227244 // I know this is dirty, email me for explenation
 	function load() {
 		let loadCnt = {};
-		for (let i = 0; i < files.length; i++) {
+		for (let i = 0, j = files.length; i < j; i++) {
 			if (files[i].includes(".glb") || files[i].includes(".gltf")){
 				loaderGLB.load( files[i], function (gltf) {
-					forms[i] = gltf.scene;
-					forms[i].name = files[i];
-				},function (xhr) {
-//					console.log(xhr.total); // use this to set loadTotal
-					loadCnt[files[i]] = (xhr.loaded / loadTotal * 100);
+					forms[i] =gltf.scene;
+					forms[i].name =files[i];
+				}, function (xhr) {
+//					console.log(xhr.total); // use to set loadTotal
+					loadCnt[files[i]] =(xhr.loaded / loadTotal * 100);
 					let done = 1;
 					for (let key in loadCnt) if (loadCnt[key] !== 100) done = 0;
-					if (done === 1) loadingScreen.innerHTML = "uncompressing"; 
+					if (done === 1) loadingScreen.innerHTML ="uncompressing"; 
 				});
 			} 
 			if (files[i].includes(".jpg") || files[i].includes(".png")){
@@ -102,8 +101,10 @@
 				img.src = files[i];				
 			}
 		}
+		// init controls/animation hear to avoid null array access
 		manager.onLoad = function() {
 			loadingScreen.style.display = "none";
+			renderer.setAnimationLoop(render);
 			startKeyControls();
 			startScreenClick();
 			formSet();
@@ -114,7 +115,7 @@
 	
 	// set form's initial rotational placement
 	function formSet() {
-		for (let i = 0; i < lights.length; i++)
+		for (let i=0, j=lights.length; i<j; i++)
         		scene.remove(lights[i])
 		
 		scene.add(forms[cur]);
@@ -134,8 +135,7 @@
 	}
 
 	
-	// frame call and increments rotation animation 
-	function anim() {renderer.setAnimationLoop( render );}
+	// frame call and animation 
 	function render() {
 		if (rotate === "true" && loaded === true && !isImage()) {
 			forms[cur].rotation.x += 0.001;
