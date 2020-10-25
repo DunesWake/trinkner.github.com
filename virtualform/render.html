@@ -67,7 +67,8 @@
 		//static image 
 		lights[1] = new THREE.AmbientLight(0xffffff);
 		
-		load(); 
+		renderer.setAnimationLoop(render);
+		load();
 	}
 	
 	
@@ -104,10 +105,9 @@
 		// init controls/animation hear to avoid null array access
 		manager.onLoad = function() {
 			loadingScreen.style.display = "none";
-			renderer.setAnimationLoop(render);
+			formSet();
 			startKeyControls();
 			startScreenClick();
-			formSet();
 			loaded = true;
 		};
 	}
@@ -148,12 +148,12 @@
 	
 // -- ▼ HELPERS --------------------------------------------------------------------------------->
 	
-	function createLight(x,y,z,color, intensity) {
+	function createLight(x,y,z,color, intensity){
 		let light = new THREE.PointLight(color, intensity);
 		light.position.set(x, y, z);
 		return light;
 	}
-	function removeForm(object) {
+	function removeForm(object){
 		let selectedObject = scene.getObjectByName(object.name);
         	scene.remove(forms[cur]);
 	}
@@ -167,7 +167,7 @@
 		document.body.appendChild(VRButton.createButton(renderer));
 	}
 	// screen click event listener
-	function startScreenClick() {
+	function startScreenClick(){
 		let clickDir = 0;
 		let clicker = document.createElement("button");
 		clicker.addEventListener("click", function(){
@@ -180,7 +180,7 @@
 		ScreenClick.appendChild(clicker);
 	}
 	// WASD and arrow keys  on click events
-	function startKeyControls() {
+	function startKeyControls(){
 		document.onkeydown = function(e) {
 			let n = 0;
 			if (e.keyCode === 37) if (cur !== 0               ) n = -1;
