@@ -18,14 +18,26 @@ TODO: vr todo if feeling like it
   acquire webxr token ? is this even a thing?
   vr camera / lighting
   http https switching for vr
-
+  
+ANTICIPATED / POSSIBLE MENU FEATURES
+  render settings
+  about
+  mailing list subscribe
+  whats on view
+  previous shows
+  instructions
+  language
+  contact
+  press
+  manifesto 
+  donate / support ?
+  
 current build features
   3d models (.glb & .gltf & .drc(draco loader)
   VR (no WebXR Token yet)
   images (.jpg & .png)
   multi language menu 
   about page
-  
 
 https://www.trinkner.xyz/virtualform/
 
