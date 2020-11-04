@@ -2,13 +2,13 @@ created in opposition to the current landscape of digital showcase formats.
 
   
 TODO: higher
-  loading information display once set time is breached
   conceptual writting and or proposals, one in the same
   image/form resize compatability with mobile
-  brainstorm on project organization / furthering object oriented design
+  support video (https://stackoverflow.com/questions/59601156/load-video-using-three-js)
+  add info in vr button mentioning what may be wrong/ give option to turn off
   
 TODO: lower
-  support video (https://stackoverflow.com/questions/59601156/load-video-using-three-js)
+  brainstorm on project organization / furthering object oriented design
   AR implementation (https://github.com/google-ar/three.ar.js)
   zoom on images ? maybe
   optimize meshes before compression (https://github.com/zeux/meshoptimizer#installing-gltfpack)
