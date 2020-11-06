@@ -140,12 +140,13 @@
 	function formSet() {
 		for (let i=0, j=lights.length; i<j; i++)
         		scene.remove(lights[i])
-		if(files[cur].includes(".mp4" || ".ovg")){
-			video.currentTime = 0;
-		   	video.play();
-		} else {
-			video.pause();   
-		}
+		
+		//test with multiple videos, as that will most likley not work
+		if(video != null)
+			if(files[cur].includes(".mp4" || ".ovg")){
+				video.currentTime = 0;
+				video.play();
+			} else video.pause();   
 		
 
 		scene.add(forms[cur]);
