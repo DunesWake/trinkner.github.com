@@ -26,9 +26,11 @@
 	var loadingScreen = document.getElementById('loading-screen');
 	var manager = new THREE.LoadingManager();
 	var loaderJPG = new THREE.TextureLoader(manager);
-	var dracoLoader = new DRACOLoader(manager); dracoLoader.setDecoderPath('./js/draco/gltf/');
-	var loaderGLB = new GLTFLoader(manager); loaderGLB.setDRACOLoader( dracoLoader );
+	var dracoLoader = new DRACOLoader(manager); 
+	var loaderGLB = new GLTFLoader(manager); 
+	dracoLoader.setDecoderPath('./js/draco/gltf/');
 	dracoLoader.preload();
+	loaderGLB.setDRACOLoader( dracoLoader );
 
 	// render vars
 	var rotate = "true"; if (sessionStorage['rotate']) rotate = sessionStorage.getItem('rotate');
@@ -39,6 +41,8 @@
 	var cam = [];
 	var lights = [];
 	var forms = [];
+	var video;
+	
 	
 	// start
 	loadingScreen.classList.add('fade-in');
@@ -72,7 +76,7 @@
 	// loads files into forms[]
 	function load() {
 		let loadCnt = {};
-		let loadTotal = 13227244 // I know this is dirty, email me for explenation
+		let loadTotal = 13227244 // I know this is dirty, email me for an explenation
 		for (let i = 0, j = files.length; i < j; i++) {
 			if (files[i].includes(".glb") || files[i].includes(".gltf")){
 				loaderGLB.load( files[i], function (gltf) {
@@ -85,7 +89,7 @@
 					for (let key in loadCnt) if (loadCnt[key] !== 100) done = 0;
 					if (done === 1) loadingScreen.innerHTML ="uncompressing"; 
 				});
-			} 
+			}
 			if (files[i].includes(".jpg") || files[i].includes(".png")){
 				let img = new Image();
 				img.onload = function(){
@@ -97,6 +101,28 @@
 					forms[i].name = files[i];
 				}
 				img.src = files[i];				
+			}
+			if (files[i].includes(".ogv") || files[i].includes(".mp4")){				
+				video = document.createElement( 'video' );
+				video.loop = true;
+				video.playsinline = true;
+				video.crossOrigin = "anonymous"; 
+				video.style.display = "none";
+				video.id = "video";
+				video.src = files[i];
+				video.load(); // must call after setting/ changing source
+				video.addEventListener('loadedmetadata', function(e){
+					let texture = new THREE.VideoTexture( video );
+					texture.minFilter = THREE.LinearFilter;
+					texture.magFilter = THREE.LinearFilter;
+					texture.format = THREE.RGBFormat;
+					let screen = new THREE.PlaneGeometry(6, 6*(video.videoHeight/video.videoWidth));
+					let material = new THREE.MeshLambertMaterial({map:texture});	
+					
+					forms[i] = new THREE.Mesh(screen,material);
+					forms[i].name = files[i];
+				});
+						
 			}
 		}
 		// init controls/animation hear to avoid null array access
@@ -114,7 +140,14 @@
 	function formSet() {
 		for (let i=0, j=lights.length; i<j; i++)
         		scene.remove(lights[i])
+		if(files[cur].includes(".mp4" || ".ovg")){
+			video.currentTime = 0;
+		   	video.play();
+		} else {
+			video.pause();   
+		}
 		
+
 		scene.add(forms[cur]);
 		forms[cur].rotation.set(0, 0, 0);
 		if (isImage()) {
@@ -155,31 +188,30 @@
         	scene.remove(forms[cur]);
 	}
 	function isImage(){
-		return (forms[cur].name.includes(".jpg") || forms[cur].name.includes(".png")) ? true : false;
+		return (forms[cur].name.includes(".jpg") 
+			|| forms[cur].name.includes(".png")
+			|| forms[cur].name.includes(".ogv")
+			|| forms[cur].name.includes(".mp4"))? true : false;
 	}
 	function initVR(){
  		renderer.xr.enabled = true;
 		document.body.appendChild(VRButton.createButton(renderer));
-		
-		var user = new THREE.Group();
-		user.position.set(0,0,0);
-		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
-		camera.position.y = 1.6;
-		user.add( camera );
-		renderer.render( scene, user );
+	}
+	function formChange(n){
+		removeForm(forms[cur])
+		cur += n;
+		formSet();
 	}
 	// screen click event listener
 	function startScreenClick(){
-		let clickDir = 0;
-		let clicker = document.createElement("button");
-		clicker.addEventListener("click", function(){
-			if (cur === files.length - 1) clickDir = -1;
-			else if (cur === 0)           clickDir = +1;
-			removeForm(forms[cur])
-			cur += clickDir;
-			formSet();
+		let n = 0;
+		let click = document.createElement("button");
+		click.addEventListener("click", function(){
+			if (cur === files.length - 1) n = -1;
+			else if (cur === 0) n = 1;
+			formChange(n);
 		});
-		ScreenClick.appendChild(clicker);
+		ScreenClick.appendChild(click);
 	}
 	// WASD and arrow keys  on click events
 	function startKeyControls(){
@@ -187,11 +219,7 @@
 			let n = 0;
 			if (e.keyCode === 37) if (cur !== 0               ) n = -1;
 			if (e.keyCode === 39) if (cur !== files.length - 1) n = +1;
-			if (n !== 0) {
-				removeForm(forms[cur]);
-				cur += n;
-				formSet();
-			}
+			if (n !== 0) formChange(n);
 		}	
 	} 
 </script>	
