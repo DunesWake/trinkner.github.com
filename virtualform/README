@@ -2,9 +2,9 @@ created in opposition to the current landscape of digital showcase formats.
 
   
 TODO: higher
+  fix video support to support multiple videos/ make it not horrific
   conceptual writting and or proposals, one in the same
   image/form resize compatability with mobile
-  support video (https://stackoverflow.com/questions/59601156/load-video-using-three-js)
   add info in vr button mentioning what may be wrong/ give option to turn off
   
 TODO: lower
@@ -34,6 +34,7 @@ ANTICIPATED / POSSIBLE MENU FEATURES
   donate / support ?
   
 current build features
+  crummy video suport (.mp4) (https://stackoverflow.com/questions/59601156/load-video-using-three-js)
   3d models (.glb & .gltf & .drc(draco loader)
   VR (no WebXR Token yet)
   images (.jpg & .png)
