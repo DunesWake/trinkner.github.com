@@ -103,7 +103,8 @@
 	function runProgram(){
 		sessionStorage.setItem("vr", "" + vr);
 		sessionStorage.setItem("curLang", "" + curLang);
-		window.location.href = "render.html";
+		window.open('render.html', '_blank', 'toolbar=0,location=0,menubar=0');
+
 	}
 	function runAbout(){
 		sessionStorage.setItem("curLang", "" + curLang);
