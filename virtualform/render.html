@@ -169,6 +169,11 @@
 	
 	// frame call and animation 
 	function render() {
+		var time = new Date();
+		time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+		var time = (time.getHours() % 12 || 12) + ":" + time.getMinutes() ;
+		document.title = time;
+
 		if (rotate === "true" && loaded === true && !isImage() && !document.hidden) {
 			forms[cur].rotation.x += 0.001;
 			forms[cur].rotation.y += 0.001;
@@ -232,6 +237,7 @@
 		}	
 	}
 	function formChange(n){
+		window.scrollTo(0, 1);
 		removeForm(forms[cur])
 		cur += n;
 		renderer.setAnimationLoop(transRender);
