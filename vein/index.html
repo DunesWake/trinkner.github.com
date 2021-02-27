@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>Virtual Solidification</title>
 	<link rel="shortcut icon" href="#">
 	<meta name="viewport" content="minimal-ui, width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 	<link href="./css/main.css" rel="stylesheet">
@@ -14,10 +14,6 @@
 
 <script src=".//js/threex.windowresize.js"></script>
 <script type="module">
-	var time = new Date();
-	time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-	var time = (time.getHours() % 12 || 12) + ":" + time.getMinutes() + ':' + time.getMilliseconds();
-	document.title = time;
 	
 	//page html title live updates the time?
 	const splashScreen = document.getElementById('splash-screen');
