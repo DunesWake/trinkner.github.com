@@ -2,111 +2,13 @@
 <html class="no-js" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Virtual Solidification</title>
+	<title></title>
 	<link rel="shortcut icon" href="#">
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="minimal-ui, width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 	<link href="./css/main.css" rel="stylesheet">
 </head>
-<body>
-<div id="splash-screen"></div>
-</body>	
 </html>
 
-<script src=".//js/threex.windowresize.js"></script>
 <script type="module">
-	const splashScreen = document.getElementById('splash-screen');
-	
-	// session storage
-	var curLang = 0;
-	if (sessionStorage['curLang']) curLang = parseInt(sessionStorage.getItem('curLang'));
-	
-	// spash menu vars
-	var btns = [];
-	var autoSwitch = false;
-	var vr = false;
-	var english = ["contact", "rotation ", "virtual reality"];
-	var german =  ["Über", "drehung ", "virtuelle Realität"];
-	var french =  ["sur", "tourner ", "réalité virtuelle"];
-	var viatnamese = ["trong khoảng", "quay ", "thực tế ảo"];
-	var japanese = ["約", "回転する", "バーチャルリアリティ"];
-	var chinese = ["关于", "旋转 ", "虚拟现实"];
-	var langs =   [english,german,french,viatnamese,japanese,chinese];
-    
-// -- ▼ MAIN ------------------------------------------------------------------------------------>
-   
-    // starts program, calls init() when completed
-	splashMenu();
-
-	// rebuilds from scratch, each time a variable is changed
-	function splashMenu() {
-		while(splashScreen.firstChild) 
-			splashScreen.removeChild(splashScreen.firstChild);	
-		
-		// LANGUAGE
-		btns[0] = insertBtn( "english"   , curLang === 0);
-		btns[0].onclick = () => { curLang = 0; splashMenu(); }
-		insertSlash();
-		btns[1] = insertBtn( "deutsche"  , curLang === 1);
-		btns[1].onclick = () => { curLang = 1; splashMenu(); }
-		insertSlash();
-		btns[2] = insertBtn( "français" , curLang === 2);
-		btns[2].onclick = () => { curLang = 2; splashMenu(); }
-		insertSlash();
-		btns[5] = insertBtn( "中文"       , curLang === 5);
-		btns[5].onclick = () => { curLang = 5; splashMenu(); }
-		insertSlash();
-		insertMenuNewLine(1);
-		
-		// VR
-		insertBtn(langs[curLang][2], 1);
-		insertSlash();
-		btns[10] = insertBtn( "0", !autoSwitch);
-		btns[10].onclick = () => {autoSwitch = false; splashMenu(); }
-		insertSlash();
-		btns[11] = insertBtn( "1",  autoSwitch);
-		btns[11].onclick = () => { autoSwitch = true; splashMenu(); }
-		insertSlash();
-		
-		// EXIT 
-		btns[8] = insertBtn( ">", true);
-		btns[8].onclick = () => runProgram();
-		insertMenuNewLine(3);
-
-		// MANIFESTO
-		btns[9] = insertBtn( 'manifesto', 0);
-		btns[9].onclick = () => runAbout();
-	}
-    
-    
-// -- ▼ HELPERS --------------------------------------------------------------------------------->
-
-	function insertBtn(text, active) {
-		var btn = document.createElement("button"); 
-	    	btn.innerHTML = text;  		
-		if (active) 
-		    btn.style.color = "#111";
-		else btn.style.color = "#BBB";
-		splashScreen.appendChild(btn);
-		return btn;
-	}
-	function insertSlash() {
-		var sep = document.createElement("a");   
-		sep.innerHTML = "/";                  
-		splashScreen.appendChild(sep);
-	}
-	function insertMenuNewLine(lines) {
-		for (var i = 1; i <= lines; i++){
-			var nl = document.createElement("br");  
-			splashScreen.appendChild(nl);
-		}
-	}
-	function runProgram(){
-		sessionStorage.setItem("vr", "" + vr);
-		sessionStorage.setItem("curLang", "" + curLang);
-		window.location.href = "render.html";
-	}
-	function runAbout(){
-		sessionStorage.setItem("curLang", "" + curLang);
-		window.location.href = "about.html";
-	}
+	window.location = '/celestialplain'
 </script>
