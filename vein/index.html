@@ -23,7 +23,7 @@
 	const splashScreen = document.getElementById('splash-screen');
 	
 	// session storage
-	var curLang = 0;
+	var curLang = 1;
 	if (sessionStorage['curLang']) curLang = parseInt(sessionStorage.getItem('curLang'));
 	
 	// spash menu vars
@@ -111,6 +111,7 @@
 		btns[9].onclick = () => runAbout();
 		insertMenuNewLine(1);
 
+		sessionStorage.setItem("curLang", "" + curLang);
 	}
     
     
