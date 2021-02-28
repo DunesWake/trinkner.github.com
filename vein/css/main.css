@@ -42,11 +42,11 @@ mouseHide {
 	left: 50%;
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	margin: auto;
+	margin: 0;
 	opacity: 1;
 	text-align: center;
 	color: #999;
-	font-size: 1em;
+	font-size: .87em;
 }
 
 #about-screen {
