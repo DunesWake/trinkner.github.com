@@ -49,6 +49,11 @@
 			localStorage['students'] = 'clément trinkner <br> "song sounds different now;" <br> photogrammetric bench scan, processed in self written software package<br> 2021';
 		} 
 		else { scene.add(lights[0]); }
+		
+		var time = new Date();
+		time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+		var time = (time.getHours() % 12 || 12) + ":" + time.getMinutes() + ':' + time.getMilliseconds() ;
+		document.title = time;
 	}
 
 
@@ -186,11 +191,6 @@
 			console.log(forms[cur].rotation.x + " " + forms[cur].rotation.y);
 		}
 		renderer.render(scene, cam[0]);
-
-		var time = new Date();
-		time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-		var time = (time.getHours() % 12 || 12) + ":" + time.getMinutes()  + ' -http://127.0.0.1:53025/render.html';
-		document.title = time;
 	}
 	
 	
