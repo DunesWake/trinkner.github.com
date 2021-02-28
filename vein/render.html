@@ -95,7 +95,7 @@
 	
 	// start
 	loadingScreen.classList.add('fade-in');
-	loadingScreen.innerHTML = '<em>loading</em>'; 
+	loadingScreen.innerHTML = 'loading'; 
     	init();
 	
 	function init() {
@@ -138,7 +138,7 @@
 					loadCnt[files[i]] = (xhr.loaded / loadTotal * 100);
 					let done = 1;
 					for (let key in loadCnt) if (loadCnt[key] !== 100) done = 0;
-					if (done === 1) loadingScreen.innerHTML ="un<em>compressing</em>"; 
+					if (done === 1) loadingScreen.innerHTML ="uncompressing"; 
 				});
 			}
 			if (files[i].includes(".jpg") || files[i].includes(".png")){
