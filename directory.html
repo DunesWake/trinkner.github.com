@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+	<style>
+		body {
+/*			width: 100.0000001vw;*/
+/*			height: 500px;*/
+			font-size: .8em;
+		}
+		a {
+			width: 99vw;
+
+		}
+	</style>   
+</head>
+	<div id="body">
+	</div>
+</html>
+
+<script type="module">
+	var sep = document.createElement("a");   
+		sep.innerHTML = "/";                  
+		body.appendChild(sep);
+	
+	setInterval(function(){ 	
+		var s_data = localStorage['students'];
+		console.log(s_data); //value
+		sep.innerHTML = s_data;
+		body.append(sep);
+	}, 250)
+</script>
