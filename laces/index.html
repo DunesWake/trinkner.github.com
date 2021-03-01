@@ -97,18 +97,18 @@
 
 		// MANIFESTO
 		btns[9] = insertBtn(langs[curLang][1], 0);
-		btns[9].onclick = () => runAbout();
+		btns[9].onclick = () => window.location.href = "about.html";
 		insertMenuNewLine(1);
 
 		
 		// MANIFESTO
 		btns[9] = insertBtn(langs[curLang][2], 0);
-		btns[9].onclick = () => runAbout();
+		btns[9].onclick = () => window.location.href = "inSale.html";
 		insertMenuNewLine(1);
 		
 		// MANIFESTO
 		btns[9] = insertBtn(langs[curLang][3], 0);
-		btns[9].onclick = () => runAbout();
+		btns[9].onclick = () => window.location.href = "controlList.html";
 		insertMenuNewLine(1);
 
 		sessionStorage.setItem("curLang", "" + curLang);
@@ -157,10 +157,5 @@
 		
 //		window.open('render.html', '_blank', 'toolbar=0, location=0, top='+top+', left='+left+', menubar=0, menubar=no, scrollbars=no, resizable=yes, width=704, height=498');
 
-	}
-	function runAbout(){
-
-		sessionStorage.setItem("curLang", "" + curLang);
-		window.location.href = "about.html";
 	}
 </script>
