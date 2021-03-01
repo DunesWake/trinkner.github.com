@@ -10,6 +10,7 @@
 	
 <body>
 <div id="splash-screen"></div>
+<div id="splash"></div>
 </body>	
 </html>
 
@@ -39,7 +40,10 @@
 	var langs =   [english,german,french,chinese];
     
 // -- ▼ MAIN ------------------------------------------------------------------------------------>
-   
+   if (screen.availWidth < 700){
+	   document.getElementById('splash-screen').style.bottom = '0'	;
+	   document.getElementById('splash-screen').style.position = 'fixed'	;
+   }
 
     // starts program, calls init() when completed
 	splashMenu();
@@ -83,10 +87,6 @@
 
 		btns[12] = insertBtn( '<em>splashed blister, 2/27/21 - 5/27/21 / > /</em>', 1);
 		btns[12].onclick = () => runProgram();
-
-		if(screen.availWidth<700){
-			btns[12].onclick = () => runProgram();
-		}
 
 		insertSlash();
 		// EXIT 

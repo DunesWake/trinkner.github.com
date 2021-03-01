@@ -18,6 +18,10 @@ button {
 	text-align: right;
 }
 
+@media all and (min-width:0px) and (max-width: 824px) {
+  /* put your css styles in here */
+}
+
 #splash-screen {
 	position: fixed;
 	z-index: 0;
