@@ -24,7 +24,7 @@
 	const splashScreen = document.getElementById('splash-screen');
 	
 	// session storage
-	var curLang = 1;
+	var curLang = 0;
 	if (sessionStorage['curLang']) curLang = parseInt(sessionStorage.getItem('curLang'));
 	
 	// spash menu vars
@@ -32,7 +32,7 @@
 	var autoSwitch = false;
 	var vr = false;
 	var info = false;
-	var english = ["virtual reality", 'manifesto', 'purchases', 'control list'];
+	var english = ["virtual reality", 'manifesto', 'on sale', 'control list'];
 	var german =  ["virtuelle Realität", 'manifest', 'käuflich', 'kontrollen'];
 	var french =  ["réalité virtuelle", 'manifeste', 'achetable', 'contrôles'];
 	var chinese = ["虚拟现实", '宣言', '特价', '控制清单'];
@@ -81,7 +81,9 @@
 			insertMenuNewLine(1);
 //		}
 
-		btns[12] = insertBtn( 'splashed blister, 2/27/21 - 5/27/21', 1);
+		btns[12] = insertBtn( '<em>splashed blister, 2/27/21 - 5/27/21 / > /</em>', 1);
+		btns[12].onclick = () => runProgram();
+
 		if(screen.availWidth<700){
 			btns[12].onclick = () => runProgram();
 		}
@@ -91,7 +93,7 @@
 		btns[8] = insertBtn( ">", true);
 		btns[8].onclick = () => runProgram();
 		insertSlash();
-		insertMenuNewLine(5);
+		insertMenuNewLine(6);
 
 		// MANIFESTO
 		btns[9] = insertBtn(langs[curLang][1], 0);
@@ -118,6 +120,7 @@
 	function insertBtn(text, active) {
 		var btn = document.createElement("button"); 
 	    	btn.innerHTML = '<em>' + text + '</em>';  		
+	    	btn.innerHTML = text;  		
 		if (active) 
 		    btn.style.color = "#111";
 		else btn.style.color = "#BBB";
