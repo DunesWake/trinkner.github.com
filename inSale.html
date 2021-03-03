@@ -1,0 +1,111 @@
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Virtual Solidification</title>
+	<link rel="shortcut icon" href="#">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<link href="./css/main.css" rel="stylesheet">
+</head>
+<body>
+<div id="about-screen"></div>
+</body>	
+</html>
+
+<script src=".//js/threex.windowresize.js"></script>
+<script type="module">
+	const splashScreen  = document.getElementById('about-screen' );
+	
+	// spash menu vars
+	var menuBtn = [];
+	var rotate = true;
+	var vr = false;
+	var english = ["", 
+			"crystal hair is currently in alpha", 
+			"oppositionally written on the current scape of virtual aesthetic platforms, in hope of building conversation towards viewing virtual form on the nets"
+			];
+	var german =  ["Über", 
+			"diese plattform befindet sich derzeit in der Alpha-Entwicklung.", 
+			"im Gegensatz zur aktuellen Landschaft digitaler Schaufensterformate erstellt, in der Hoffnung, zu Gesprächen über die Erforschung und / oder Heiligsprechung der Anzeige digitaler Formulare im Web beizutragen",
+			    "für Dateiverkäufe und Druckdienste, flach und dimensional"
+			];
+	var viatnamese = [];
+	var japanese = [];
+	var french =  ["sur", 
+			"cette plateforme est actuellement en développement alpha.", 
+			"Conçu pour correspondre à l'état actuel des formats d'affichage numérique et pour promouvoir le dialogue pour explorer ou normaliser l'affichage des formulaires numériques sur le Web",
+			"pour la vente de fichiers et les services d'impression, plats et dimensionnels"
+			];
+	var chinese = ["关于", 
+			"该平台目前处于开发阶段.", 
+			"旨在与数字展示格式的当前现状相对应，旨在促进对话，以探索或规范化在网络上查看数字形式",
+			"用于文件销售和打印服务（平面和尺寸）"
+			];
+	var langs =   [english,german,french,viatnamese,japanese,chinese];
+	var curLang = 0;
+    
+// -- ▼ MAIN ------------------------------------------------------------------------------------>
+   
+    // starts program, calls init() when completed
+	
+	if (sessionStorage['curLang']){
+		 curLang = parseInt(sessionStorage.getItem('curLang'));
+		console.log(curLang);
+
+	}	
+	splashMenu();
+
+
+	// rebuilds from scratch, each time a variable is changed
+	function splashMenu() {
+		while(splashScreen.firstChild) 
+			splashScreen.removeChild(splashScreen.firstChild);
+		
+//		// ABOUT PAGE TEXT
+//		insertMenuText(langs[curLang][0]);
+//		insertMenuText(" / ");
+//		insertMenuText(langs[curLang][1]);
+//		insertMenuNewLine(2);
+//	    
+//		insertMenuText(" / ");
+//		insertMenuText(langs[curLang][2]);
+//		insertMenuText(" / ");
+//		insertMenuNewLine(2);
+//	    
+		insertMenuText(" TBA , contact clément trinkner with questions / ");
+		insertMenuText("720 352 4643");
+		insertMenuText(" / ");
+
+		// RETURN TO SPLASH MENU
+		menuBtn[9] = insertMenuBtn( "<", 1);
+		menuBtn[9].onclick = () => runMenu();
+
+	}
+    
+    
+// -- ▼ HELPERS --------------------------------------------------------------------------------->
+
+	function insertMenuBtn(text, active) {
+		var btn = document.createElement("BUTTON"); 
+	    	btn.innerHTML = text;  		
+		if (active) 
+		     btn.style.color = "#111";
+		else btn.style.color = "#BBB";
+		splashScreen.appendChild(btn);
+		return btn;
+	}
+	function insertMenuText(input) {
+		var sep = document.createElement("a");   
+		sep.innerHTML = input;                  
+		splashScreen.appendChild(sep);
+	}
+	function insertMenuNewLine(lines) {
+		for (var i = 1; i <= lines; i++){
+			var nl = document.createElement("br");  
+			splashScreen.appendChild(nl);
+		}
+	}
+	function runMenu(){
+		window.location.href="index.html";
+	}
+
+</script>

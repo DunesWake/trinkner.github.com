@@ -194,6 +194,11 @@
 			forms[cur].rotation.x += 0.001;
 			forms[cur].rotation.y += 0.001;
 			console.log(forms[cur].rotation.x + " " + forms[cur].rotation.y);
+
+			if (forms[cur].name === "./forms/bench.glb" && (forms[cur].rotation.x >= 0.89 && forms[cur].rotation.x <= 0.92)) {
+				forms[cur].rotation.x = 3.2;
+				forms[cur].rotation.y = 3.2;
+			}
 		}
 		renderer.render(scene, cam[0]);
 	}
