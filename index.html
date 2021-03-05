@@ -85,7 +85,7 @@
 //		if(screen.availWidth<700){
 			insertMenuNewLine(1);
 //		}
-		btns[12] = insertBtn( '<em>\\/ /splashed blister 2/27/21 - 5/27/21 / > /</em>', 1);
+		btns[12] = insertBtn( '<em>\\ //splashed blister 2/27/21 - 5/27/21 / > /</em>', 1);
 //		btns[12] = insertBtn( '<em>\\splashed blister, 2/27/21 - 5/27/21 / > /</em>', 1);
 		btns[12].onclick = () => runProgram();
 
@@ -93,6 +93,8 @@
 		// EXIT 
 		btns[8] = insertBtn( ">", true);
 		btns[8].onclick = () => runProgram();
+				insertSlash();
+
 		insertMenuNewLine(6);
 
 		// MANIFESTO
