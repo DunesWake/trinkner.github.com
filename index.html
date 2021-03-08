@@ -18,7 +18,7 @@
 <script type="module">
 	var time = new Date();
 	time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-	var time = (time.getHours() % 12 || 12) + ":" + time.getMinutes()  + ':' + time.getMilliseconds();
+	var time = (time.getMilliseconds() +":" + time.getSeconds() + ":" + time.getMinutes() +":" + time.getHours() % 12 || 12);
 	document.title = time;
 	
 	//page html title live updates the time?
