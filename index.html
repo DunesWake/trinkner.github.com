@@ -2,15 +2,14 @@
 <html class="no-js" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Virtual Solidification</title>
+	<title></title>
 	<link rel="shortcut icon" href="#">
-	<meta name="viewport", content="minimal-ui, width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-	<link href="./css/main.css" rel="stylesheet">
+	<meta name="viewport", width=device-width">
+	<link type="text/css" href="css/main.css" rel="stylesheet">
 </head>
 	
 <body>
 <div id="splash-screen"></div>
-<div id="splash"></div>
 </body>	
 </html>
 
@@ -25,7 +24,7 @@
 	const splashScreen = document.getElementById('splash-screen');
 	
 	// session storage
-	var curLang = 0;
+	var curLang = 1;
 	if (sessionStorage['curLang']) curLang = parseInt(sessionStorage.getItem('curLang'));
 	
 	// spash menu vars
@@ -33,7 +32,7 @@
 	var autoSwitch = false;
 	var vr = false;
 	var info = false;
-	var english = ["virtual reality", 'manifesto', 'in sale', 'control list'];
+	var english = ["virtual reality", 'manifesto', 'inquire', 'control list'];
 	var german =  ["virtuelle Realität", 'manifest', 'käuflich', 'kontrollen'];
 	var french =  ["réalité virtuelle", 'manifeste', 'achetable', 'contrôles'];
 	var chinese = ["虚拟现实", '宣言', '特价', '控制清单'];
@@ -52,7 +51,19 @@
 	function splashMenu() {
 		while(splashScreen.firstChild) 
 			splashScreen.removeChild(splashScreen.firstChild);	
-		
+			var time = new Date();
+		time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+		var t = (" " + time.getMilliseconds() + "<em>:</em>" + time.getSeconds() + "<em>:</em>" + time.getMinutes() + "<em>:</em>" + time.getHours() % 12 || 12);
+		btns[5] = insertBtn( t + "" , curLang === 3);
+		t.replace(" ", "");
+		if(screen.availWidth>700){
+			insertMenuNewLine(27);
+		}
+		if(screen.availWidth<700){
+			insertMenuNewLine(6);
+		}
+
+
 		// LANGUAGE
 		btns[0] = insertBtn( "english"   , curLang === 0);
 		btns[0].onclick = () => { curLang = 0; splashMenu(); }
@@ -60,16 +71,17 @@
 		btns[1] = insertBtn( "deutsche"  , curLang === 1);
 		btns[1].onclick = () => { curLang = 1; splashMenu(); }
 		insertSlash();
-//		if(screen.availWidth<700){
-			insertMenuNewLine(1);
-//		}
-		btns[2] = insertBtn( "français" , curLang === 2);
+		insertMenuNewLine(1);
+
+		btns[2] = insertBtn( "français"  , curLang === 2);
 		btns[2].onclick = () => { curLang = 2; splashMenu(); }
 		insertSlash();
 		btns[5] = insertBtn( "中文"       , curLang === 3);
 		btns[5].onclick = () => { curLang = 3; splashMenu(); }
 		insertSlash();
 		insertMenuNewLine(1);
+		
+
 		
 		
 //		// VR
@@ -88,8 +100,13 @@
 		btns[12] = insertBtn( '<em>2/27 - 5/27 splashed blister / > /</em>', 1);
 //		btns[12] = insertBtn( '<em>\\splashed blister, 2/27/21 - 5/27/21 / > /</em>', 1);
 		btns[12].onclick = () => runProgram();
+		// insertMenuNewLine(1);
+		// btns[12] = insertBtn( 'description / -', 0);
+		// btns[12] = insertBtn( ' / descritpion-', 0);
 		insertMenuNewLine(2);
 
+
+		
 		// MANIFESTO
 		btns[9] = insertBtn(langs[curLang][1], 0);
 		btns[9].onclick = () => window.location.href = "about.html";
@@ -105,6 +122,7 @@
 		btns[9] = insertBtn(langs[curLang][3], 0);
 		btns[9].onclick = () => window.location.href = "controlList.html";
 		insertMenuNewLine(1);
+		
 
 		sessionStorage.setItem("curLang", "" + curLang);
 	}
@@ -118,7 +136,7 @@
 	    	btn.innerHTML = text;  		
 		if (active) 
 		    btn.style.color = "#111";
-		else btn.style.color = "#BBB";
+		else btn.style.color = "#b9b9b9";
 		splashScreen.appendChild(btn);
 		return btn;
 	}
@@ -147,10 +165,10 @@
   		var top = (screen.height/2)-((screen.height*0.57638888888888)/2) - (screen.height*0.03125000);
 		var h1 = screen.height * 0.63078703703703703703703703703704;
 		var w1 = h1 * 1.0183486238532110091743119266055;
-		window.open('render.html', '_blank', 'toolbar=0, location=0, top=2, height='+screen.height+', width='+screen.width);
+		// window.open('render.html', '_blank', 'toolbar=0, location=0, top=17, left=3, height='+(screen.width*(9/16))+', width='+(screen.width-30));
 
 		
-//		window.open('render.html', '_blank', 'toolbar=0, location=0, top='+top+', left='+left+', menubar=0, menubar=no, scrollbars=no, resizable=yes, width=704, height=498');
+		window.open('render.html', '_blank', 'toolbar=0, location=0, top='+top+', left='+left+', menubar=0, menubar=no, scrollbars=no, resizable=yes, width=704, height=498');
 
 	}
 </script>
